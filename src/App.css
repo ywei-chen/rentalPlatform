@@ -1,0 +1,23 @@
+#root {
+  font-family: "Noto Sans TC", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  background-color: whitesmoke;
+  letter-spacing: 0.5ch;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+      display: flex;
+      flex-basis: auto;
+      justify-content: end;
+      margin: 0 20px;
+  }
+}
+
+.logoFocus {
+  width: 150px;
+  height: 30px;
+  margin-right: 10px;
+}
