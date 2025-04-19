@@ -88,33 +88,87 @@ const BottonGroup = ({ name }) => {
 }
 
 //Carousel
-const Carousel =() => {
+const Carousel =({source, title, content, img}) => {
   return (<>
-    <div className='container-lg py-5'>
-      <div className='row'>
-        <div className='col'>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div className="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div className="carousel-inner">
+        <div className="carousel-item active">
           <div className='border border-light-subtle rounded-2 h-100'>
-            <div className=''>
+            <div className='p-3 h-100'>
               <div className='img-right'>
-                  <img src="https://media.zenfs.com/ko/setn.com.tw/48d632b1cd98ca8c5e40ec12987dfd93" className='rounded-2 w-100' alt="" />
+                <img src={img} className='rounded-2 w-100' alt="" />
               </div>
-              <div className='newsFrom pb-2'>
-                <small>The Central News Agency 中央通訊社</small>
+              <div className='verflow-hidden text-start'>
+                <div className='pb-2'>
+                  <small>{source}</small>
+                </div>
+                <div className='pb-2'>
+                  <h5>{title}</h5>
+                </div>
+                <div className='pb-2'>
+                  <small>{content}</small>
+                </div>
               </div>
-              <div className='newsTitle pb-2'>
-                <h5>羽球 唯一希望楊博涵、劉廣珩男雙8強落敗 亞錦賽台灣出局</h5>
+            </div>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <div className='border border-light-subtle rounded-2 h-100'>
+            <div className='p-3 h-100'>
+              <div className='img-right'>
+                <img src={img} className='rounded-2 w-100' alt="" />
               </div>
-              <div className='newsContent'>
-                <small>"台灣2025年羽球亞錦賽最後希望、世界排名22的男雙組合楊博涵／劉廣珩11日晚間在男雙8強戰出戰，面對印尼組合世界排名14的印尼強敵..."</small>
+              <div className='verflow-hidden text-start'>
+                <div className='pb-2'>
+                  <small>{source}</small>
+                </div>
+                <div className='pb-2'>
+                  <h5>{title}</h5>
+                </div>
+                <div className='pb-2'>
+                  <small>{content}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <div className='border border-light-subtle rounded-2 h-100'>
+            <div className='p-3 h-100'>
+              <div className='img-right'>
+                <img src={img} className='rounded-2 w-100' alt="" />
+              </div>
+              <div className='verflow-hidden text-start'>
+                <div className='pb-2'>
+                  <small>{source}</small>
+                </div>
+                <div className='pb-2'>
+                  <h5>{title}</h5>
+                </div>
+                <div className='pb-2'>
+                  <small>{content}</small>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
     </div>
   </>)
 }
-
 
 //Render
 function App() {
@@ -131,12 +185,12 @@ function App() {
   ]
 
   const TopList = [
-    { name: '停車場' },{ name: '優惠中' },{ name: '新開幕' },{ name: '暢打球場' },{ name: '冷氣球館' },
+    { name: '停車場' }, { name: '優惠中' }, { name: '新開幕' }, { name: '暢打球場' }, { name: '冷氣球館' },
     { name: '免費飲水機' },
   ]
 
   const [dataAPI, setDataAPI] = useState([]);
-  //const [newsAPI, setNewsAPI] = useState([]);
+  const [newsAPI, setNewsAPI] = useState([]);
   useEffect(() => {
 
     //locationAPI
@@ -158,9 +212,13 @@ function App() {
       const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
       const newsUrl = "https://newsapi.org/v2/everything?q='羽球'";
       try {
-        const res = await axios.get(`${newsUrl}&from=2025-04-10&sortBy=relevancy&apiKey=${apiKey}`);
-        const { articles } = res.data;
-        console.log(articles);
+        const res = await axios.get(`${newsUrl}&from=2025-04-1&sortBy=relevancy&apiKey=${apiKey}`);
+        const newArr = [...res.data.articles];
+        newArr.forEach((item, i) => {
+          item.id = i + 1;
+        })
+        setNewsAPI(newArr.filter((item) => item.id <= 5));
+        console.log(newsAPI);
       } catch (error) {
         console.log(error);
       }
@@ -228,13 +286,25 @@ function App() {
               return (<BottonGroup
                 key={item.id}
                 name={item.name}>
-              </BottonGroup>
-              )
+              </BottonGroup>)
             })}
-            </div>
           </div>
         </div>
-            <Carousel ></Carousel>
+      </div>
+      <div className='container-lg'>
+        <div className='row'>
+          <div className='col'>
+            {newsAPI.map((item) => {
+              return (<Carousel
+                source={item.source.name}
+                title={item.title}
+                content={item.description}>
+                img={item.urlToImage}
+              </Carousel>)
+            })}
+          </div>
+        </div>
+      </div>
       <Footer></Footer>
     </>
   )
