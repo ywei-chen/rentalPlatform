@@ -4,6 +4,8 @@
   font-weight: weight;
   font-style: normal;
   letter-spacing: 0.1ch;
+  background: #00000010
+  ;
 }
 
 #navbar {
@@ -75,10 +77,22 @@
   font-size: smaller;
 }
 
+.carousel-control-next {
+  bottom: 1cm;
+}
+
 .news {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.carousel {
+  cursor: pointer;
+}
+
+.indicat {
+  background-color: #000000c6;
 }
 
 .img-right {

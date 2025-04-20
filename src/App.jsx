@@ -60,6 +60,9 @@ const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
       <div className='dGrid' key={key}>
         <a className='dIm1 col-sm-12'>
           <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div>
+            <span>松上羽球</span>
+          </div>
         </a>
         <a className='dIm2 col-sm-12'>
           <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
@@ -89,12 +92,16 @@ const BottonGroup = ({ name, key }) => {
 }
 
 //Carousel
-const Carousel = ({ source, title, item, content }) => {
+const Carousel = ({ source, title, item, content, forUrl }) => {
   return (<>
     <div className={item === 1 ? `carousel-item active` : `carousel-item`}>
-      <div className='border border-light-subtle rounded-2 h-100'>
+      <div className='rounded-2 border-1  border border-secondary h-100' style={{backgroundColor:'white'}}>
         <div className='p-3 h-100'>
-          <div className='verflow-hidden text-start'>
+          <div className='verflow-hidden text-start' onClick={
+            () => {
+              window.open(forUrl, '_blank');
+            }
+          }>
             <div className='newsSource pb-1'>
               <small>{source}</small>
             </div>
@@ -102,7 +109,7 @@ const Carousel = ({ source, title, item, content }) => {
               <h5>{title}</h5>
             </div>
             <div className='news pb-0'>
-            <small>{content}</small>
+              <small>{content}</small>
             </div>
           </div>
         </div>
@@ -181,7 +188,7 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <div style={{ backgroundColor: 'whitesmoke' }} className='mb-2'>
+      <div className='mb-1'>
         <div className='img-sec' style={{
           position: 'relative',
           height: '350px',
@@ -213,7 +220,7 @@ function App() {
           <div className='col'>
             <div id="carouselExampleIndicators" className="carousel slide pb-5" data-bs-ride="carousel">
               <div className="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
@@ -225,7 +232,9 @@ function App() {
                     source={item.source.name}
                     title={item.title}
                     content={item.description}
-                    item={item.id}>
+                    forUrl={item.url}
+                    item={item.id}
+                  >
                   </Carousel>)
                 })}
               </div>
