@@ -68,6 +68,19 @@
   grid-column-end: 5;
 }
 
+.newsSource {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: smaller;
+}
+
+.news {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .img-right {
   float: right;
   width: 234px;

@@ -53,16 +53,16 @@ const Footer = () => {
 }
 
 //HotRank
-const HotRank = ({ img1, img2, img3, img4, img5, img6 }) => {
+const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
   return (<>
     <div className='container-lg'>
-    <div className='h4 my-2'>TOP專區</div>
-      <div className='dGrid'>
+      <div className='h4 my-2'>TOP專區</div>
+      <div className='dGrid' key={key}>
         <a className='dIm1 col-sm-12'>
-         <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
         </a>
         <a className='dIm2 col-sm-12'>
-         <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
         </a>
         <a className='dIm3 col-sm-12'>
           <img src={img3} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
@@ -81,91 +81,32 @@ const HotRank = ({ img1, img2, img3, img4, img5, img6 }) => {
   </>)
 }
 
-const BottonGroup = ({ name }) => {
+////BottonGroup
+const BottonGroup = ({ name, key }) => {
   return (<>
-      <button type="button" className="btn btn-outline-secondary me-2 mb-2 ">{name}</button>
+    <button type="button" className="btn btn-outline-secondary me-2 mb-2" key={key}>{name}</button>
   </>)
 }
 
 //Carousel
-const Carousel =({source, title, content, img}) => {
+const Carousel = ({ source, title, item, content }) => {
   return (<>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <div className='border border-light-subtle rounded-2 h-100'>
-            <div className='p-3 h-100'>
-              <div className='img-right'>
-                <img src={img} className='rounded-2 w-100' alt="" />
-              </div>
-              <div className='verflow-hidden text-start'>
-                <div className='pb-2'>
-                  <small>{source}</small>
-                </div>
-                <div className='pb-2'>
-                  <h5>{title}</h5>
-                </div>
-                <div className='pb-2'>
-                  <small>{content}</small>
-                </div>
-              </div>
+    <div className={item === 1 ? `carousel-item active` : `carousel-item`}>
+      <div className='border border-light-subtle rounded-2 h-100'>
+        <div className='p-3 h-100'>
+          <div className='verflow-hidden text-start'>
+            <div className='newsSource pb-1'>
+              <small>{source}</small>
             </div>
-          </div>
-        </div>
-        <div className="carousel-item">
-          <div className='border border-light-subtle rounded-2 h-100'>
-            <div className='p-3 h-100'>
-              <div className='img-right'>
-                <img src={img} className='rounded-2 w-100' alt="" />
-              </div>
-              <div className='verflow-hidden text-start'>
-                <div className='pb-2'>
-                  <small>{source}</small>
-                </div>
-                <div className='pb-2'>
-                  <h5>{title}</h5>
-                </div>
-                <div className='pb-2'>
-                  <small>{content}</small>
-                </div>
-              </div>
+            <div className='news pb-1'>
+              <h5>{title}</h5>
             </div>
-          </div>
-        </div>
-        <div className="carousel-item">
-          <div className='border border-light-subtle rounded-2 h-100'>
-            <div className='p-3 h-100'>
-              <div className='img-right'>
-                <img src={img} className='rounded-2 w-100' alt="" />
-              </div>
-              <div className='verflow-hidden text-start'>
-                <div className='pb-2'>
-                  <small>{source}</small>
-                </div>
-                <div className='pb-2'>
-                  <h5>{title}</h5>
-                </div>
-                <div className='pb-2'>
-                  <small>{content}</small>
-                </div>
-              </div>
+            <div className='news pb-0'>
+            <small>{content}</small>
             </div>
           </div>
         </div>
       </div>
-      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
     </div>
   </>)
 }
@@ -210,9 +151,9 @@ function App() {
     //newsAPI
     (async () => {
       const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
-      const newsUrl = "https://newsapi.org/v2/everything?q='羽球'";
+      const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
       try {
-        const res = await axios.get(`${newsUrl}&from=2025-04-1&sortBy=relevancy&apiKey=${apiKey}`);
+        const res = await axios.get(`${newsUrl}&from=2025-03-30&sortBy=relevancy&apiKey=${apiKey}`);
         const newArr = [...res.data.articles];
         newArr.forEach((item, i) => {
           item.id = i + 1;
@@ -240,7 +181,7 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <div style={{ backgroundColor: 'whitesmoke' }} className='mb-5'>
+      <div style={{ backgroundColor: 'whitesmoke' }} className='mb-2'>
         <div className='img-sec' style={{
           position: 'relative',
           height: '350px',
@@ -267,6 +208,39 @@ function App() {
           <button type="button" className="btn btn-outline-dark">搜尋</button>
         </div>
       </div>
+      <div className='container-lg'>
+        <div className='row'>
+          <div className='col'>
+            <div id="carouselExampleIndicators" className="carousel slide pb-5" data-bs-ride="carousel">
+              <div className="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+              </div>
+              <div className="carousel-inner">
+                {newsAPI.map((item) => {
+                  return (<Carousel
+                    source={item.source.name}
+                    title={item.title}
+                    content={item.description}
+                    item={item.id}>
+                  </Carousel>)
+                })}
+              </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       {RankList.map((item) => {
         return (<HotRank
           key={item.id}
@@ -287,20 +261,6 @@ function App() {
                 key={item.id}
                 name={item.name}>
               </BottonGroup>)
-            })}
-          </div>
-        </div>
-      </div>
-      <div className='container-lg'>
-        <div className='row'>
-          <div className='col'>
-            {newsAPI.map((item) => {
-              return (<Carousel
-                source={item.source.name}
-                title={item.title}
-                content={item.description}>
-                img={item.urlToImage}
-              </Carousel>)
             })}
           </div>
         </div>
