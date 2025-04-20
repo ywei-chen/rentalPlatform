@@ -60,24 +60,39 @@ const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
       <div className='dGrid' key={key}>
         <a className='dIm1 col-sm-12'>
           <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
-          <div>
+          <div className='textfont rounded-3'>
             <span>松上羽球</span>
           </div>
         </a>
         <a className='dIm2 col-sm-12'>
           <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div className='textfont rounded-3'>
+            <span>優勢羽球</span>
+          </div>
         </a>
         <a className='dIm3 col-sm-12'>
           <img src={img3} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div className='textfont rounded-3'>
+            <span>勁拍羽球</span>
+          </div>
         </a>
         <a className='dIm4 col-sm-12'>
           <img src={img4} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div className='textfont rounded-3'>
+            <span>超強羽球</span>
+          </div>
         </a>
         <a className='dIm5 col-sm-12'>
           <img src={img5} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div className='textfont rounded-3'>
+            <span>羽利羽球</span>
+          </div>
         </a>
         <a className='dIm6 col-sm-12'>
           <img src={img6} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <div className='textfont rounded-3'>
+            <span >神農羽球</span>
+          </div>
         </a>
       </div>
     </div>
@@ -220,11 +235,11 @@ function App() {
           <div className='col'>
             <div id="carouselExampleIndicators" className="carousel slide pb-5" data-bs-ride="carousel">
               <div className="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" id='indicat' data-bs-target="#carouselExampleIndicators" className="active" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" id='indicat' data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" id='indicat' data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" id='indicat' data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" id='indicat' data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
               </div>
               <div className="carousel-inner">
                 {newsAPI.map((item) => {
