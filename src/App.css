@@ -30,6 +30,23 @@
   margin-right: 10px;
 }
 
+.img-sec {
+  position: relative;
+  height: 350px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url('./assets/bg6.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#checkBox {
+  width: 150px;
+  text-align: center;
+}
+
 .dGrid {
   display: grid;
   width: 100vw;
@@ -138,7 +155,13 @@
   transform: translate(-50%, -50%);
   white-space: nowrap;
   color: aliceblue;
+}
 
+.textfont:hover {
+  outline: none;
+  outline-offset: 0;
+  background-color: #ece1e113;
+  text-decoration: none;
 }
 
 .footer {

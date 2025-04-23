@@ -1,6 +1,5 @@
 import axios from 'axios';
 import focus from './assets/FocusLogo.png';
-import background from './assets/bg6.jpg'
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -203,31 +202,24 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <div className='mb-1'>
-        <div className='img-sec' style={{
-          position: 'relative',
-          height: '350px',
-          width: '100%',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundImage: `url(${background})`
-        }}>
-        </div>
-        <div className="container-fluid d-flex justify-content-center align-items-center py-3">
-          <select className="form-select me-3" style={{ width: '200px' }}>
-            <option style={{ display: 'none' }}>城市區域</option>
-            {dataAPI.map((item) => {
-              return (<option value={item.name} key={item.id}>{item.name}</option>)
-            })}
-          </select>
-          <select className="form-select me-3" style={{ width: '330px' }}>
-            <option style={{ display: 'none' }}>球館名稱</option>
-            <option value="1">優勢羽球館</option>
-            <option value="2">勁拍羽球館</option>
-            <option value="3">超強羽球館</option>
-            <option value="4">羽利羽球館</option>
-          </select>
-          <button type="button" className="btn btn-outline-dark">搜尋</button>
+      <div className='mb-5'>
+        <div className='img-sec'>
+          <div className="container-lg d-flex justify-content-center align-items-center py-3">
+            <select id="checkBox" className="form-select me-3" >
+              <option style={{ display: 'none' }}>城市區域</option>
+              {dataAPI.map((item) => {
+                return (<option value={item.name} key={item.id}>{item.name}</option>)
+              })}
+            </select>
+            <select id="checkBox" className="form-select me-3">
+              <option style={{ display: 'none' }}>球館名稱</option>
+              <option value="1">優勢羽球館</option>
+              <option value="2">勁拍羽球館</option>
+              <option value="3">超強羽球館</option>
+              <option value="4">羽利羽球館</option>
+            </select>
+            <button type="button" className="btn btn-outline-dark">搜尋</button>
+          </div>
         </div>
       </div>
       <div className='container-lg'>
