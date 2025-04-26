@@ -32,7 +32,7 @@ const NavBar = () => {
 //Footer
 const Footer = () => {
   return (<>
-    <footer className="bg-dark py-4 pt-3 mt-5">
+    <footer className="py-4 pt-3 mt-5">
       <div className="footer container d-flex justify-content-center my-3">
         <div className="me-3">©Cpoyright 2024 KaneC. 專題用途</div>
         <div>
@@ -54,6 +54,7 @@ const Footer = () => {
 //HotRank
 const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
   return (<>
+  <div className='container-fluid wave'>
     <div className='container-lg'>
       <div className='h4 my-2'>TOP專區</div>
       <div className='dGrid' key={key}>
@@ -95,13 +96,14 @@ const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
         </a>
       </div>
     </div>
+    </div>
   </>)
 }
 
 ////BottonGroup
 const BottonGroup = ({ name, key }) => {
   return (<>
-    <button type="button" className="btn btn-outline-secondary me-2 mb-2" key={key}>{name}</button>
+    <button type="button" className="btn btn-outline-dark me-2 mb-2" key={key}>{name}</button>
   </>)
 }
 
@@ -174,7 +176,7 @@ function App() {
       const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
       const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
       try {
-        const res = await axios.get(`${newsUrl}&from=2025-03-30&sortBy=relevancy&apiKey=${apiKey}`);
+        const res = await axios.get(`${newsUrl}&from=2025-04-10&sortBy=relevancy&apiKey=${apiKey}`);
         const newArr = [...res.data.articles];
         newArr.forEach((item, i) => {
           item.id = i + 1;
@@ -269,16 +271,28 @@ function App() {
           img6={item.pic6}>
         </HotRank>)
       })}
-      <div className='container-lg'>
-        <div className='row'>
-          <div className='col'>
-            {TopList.map((item) => {
-              return (<BottonGroup
-                key={item.id}
-                name={item.name}>
-              </BottonGroup>)
-            })}
+      <div className='container-fluid wavedown'>
+        <div className='container-lg'>
+          <div className='row'>
+            <div className='col'>
+              {TopList.map((item) => {
+                return (<BottonGroup
+                  key={item.id}
+                  name={item.name}>
+                </BottonGroup>)
+              })}
+            </div>
           </div>
+        </div>
+      </div>
+      <div className='container-fluid wavedown'>
+        <div className='marqContainer d-flex'>
+          <a className='marq'>
+            <img className='marImg' src='./src/assets/court-7.jpg' alt='' />
+          </a>
+          <a  className='marq'>
+            <img className='marImg' src='./src/assets/court-7.jpg' alt='' />
+          </a>
         </div>
       </div>
       <Footer></Footer>
