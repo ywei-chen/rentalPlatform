@@ -32,7 +32,7 @@ const NavBar = () => {
 //Footer
 const Footer = () => {
   return (<>
-    <footer className="py-4 pt-3 mt-5">
+    <footer className="py-4">
       <div className="footer container d-flex justify-content-center my-3">
         <div className="me-3">©Cpoyright 2024 KaneC. 專題用途</div>
         <div>
@@ -54,48 +54,46 @@ const Footer = () => {
 //HotRank
 const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
   return (<>
-  <div className='container-fluid wave'>
     <div className='container-lg'>
       <div className='h4 my-2'>TOP專區</div>
       <div className='dGrid' key={key}>
-        <a className='dIm1 col-sm-12'>
+        <a className='dIm1'>
           <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span>松上羽球</span>
           </div>
         </a>
-        <a className='dIm2 col-sm-12'>
+        <a className='dIm2'>
           <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span>優勢羽球</span>
           </div>
         </a>
-        <a className='dIm3 col-sm-12'>
+        <a className='dIm3'>
           <img src={img3} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span>勁拍羽球</span>
           </div>
         </a>
-        <a className='dIm4 col-sm-12'>
+        <a className='dIm4'>
           <img src={img4} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span>超強羽球</span>
           </div>
         </a>
-        <a className='dIm5 col-sm-12'>
+        <a className='dIm5'>
           <img src={img5} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span>羽利羽球</span>
           </div>
         </a>
-        <a className='dIm6 col-sm-12'>
+        <a className='dIm6'>
           <img src={img6} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
           <div className='textfont rounded-3'>
             <span >神農羽球</span>
           </div>
         </a>
       </div>
-    </div>
     </div>
   </>)
 }
@@ -111,7 +109,7 @@ const BottonGroup = ({ name, key }) => {
 const Carousel = ({ source, title, item, content, forUrl }) => {
   return (<>
     <div className={item === 1 ? `carousel-item active` : `carousel-item`}>
-      <div className='rounded-2 border-1  border border-secondary h-100' style={{backgroundColor:'white'}}>
+      <div className='rounded-2 border-1  border border-secondary h-100' style={{ backgroundColor: 'white' }}>
         <div className='p-3 h-100'>
           <div className='verflow-hidden text-start' onClick={
             () => {
@@ -271,28 +269,55 @@ function App() {
           img6={item.pic6}>
         </HotRank>)
       })}
-      <div className='container-fluid wavedown'>
-        <div className='container-lg'>
-          <div className='row'>
-            <div className='col'>
-              {TopList.map((item) => {
-                return (<BottonGroup
-                  key={item.id}
-                  name={item.name}>
-                </BottonGroup>)
-              })}
-            </div>
+      <div className='container-lg'>
+        <div className='row'>
+          <div className='col'>
+            {TopList.map((item) => {
+              return (<BottonGroup
+                key={item.id}
+                name={item.name}>
+              </BottonGroup>)
+            })}
           </div>
         </div>
       </div>
-      <div className='container-fluid wavedown'>
-        <div className='marqContainer d-flex'>
-          <a className='marq'>
-            <img className='marImg' src='./src/assets/court-7.jpg' alt='' />
-          </a>
-          <a  className='marq'>
-            <img className='marImg' src='./src/assets/court-7.jpg' alt='' />
-          </a>
+      <div className='container-fluid'>
+        <div className='wave' />
+        <div className='marq-infinite wavedown'>
+          <div className='marq-item'>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-1.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-2.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-3.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-4.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-5.jpg' alt='' />
+            </a>
+          </div>
+          <div className='marq-item'>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-1.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-2.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-3.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-4.jpg' alt='' />
+            </a>
+            <a className='marq-container'>
+              <img className='marq-img' src='./src/assets/court-5.jpg' alt='' />
+            </a>
+          </div>
         </div>
       </div>
       <Footer></Footer>

@@ -8,9 +8,10 @@
 }
 
 .wave{
-  width: 100%;
+  width: 100vw;
   height: 100%;
-  --c: #fff7f2;
+  padding-bottom: 100px;
+  --c: #f5ece6;
   --w1: radial-gradient(100% 57% at top ,#0000 100%,var(--c) 100.5%) no-repeat;
   --w2: radial-gradient(100% 57% at bottom, var(--c) 100%,#0000 100.5%) no-repeat;
   background: var(--w1),var(--w2),var(--w1),var(--w2);
@@ -24,22 +25,54 @@
   100%{background-position-x:  0%, 100%, 200%, 300%}
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 .wavedown {
-  background-color:#fff7f2;
+  background-color:#f5ece6;
   width: 100%;
-  height: 100%
+  height: 100%;
+  padding: 100px 0px;
 }
 
-.marqContainer {
-
+.marq-infinite {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
-.marq {
-
+.marq-item {
+  display: flex;
 }
 
-.marImg {
-  
+.marq-container {
+  width: 344px;
+  height: 214px;
+  margin-right: 24px;
+  overflow-x: hidden;
+}
+
+.marq-infinite .marq-item {
+  animation: marquee 15s linear infinite;
+  cursor: pointer;
+}
+
+.marq-infinite:hover .marq-item {
+  animation-play-state: paused;
+}
+
+.marq-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 #navbar {
@@ -55,6 +88,136 @@
       flex-basis: auto;
       justify-content: end;
       margin: 0 20px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .dGrid {
+    display: grid;
+    width: 100vw;
+    max-width: 100%;
+    padding: 1.75rem 0;
+    grid-gap: 28px;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: 180px 150px;
+  }
+
+  .dIm1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  
+  }
+  
+  .dIm2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  
+  }
+  
+  .dIm3 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm4 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm5 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm6 {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dGrid {
+    display: grid;
+    width: 100vw;
+    max-width: 100%;
+    padding: 1.25rem 0;
+    grid-gap: 8px;
+    grid-template-columns: auto auto;
+    grid-template-rows: unset;
+  }
+
+  .dIm1 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  
+  }
+  
+  .dIm2 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  
+  }
+  
+  .dIm3 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm4 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm5 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .dIm6 {
+    grid-column-start: unset;
+    grid-column-end: unset;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
   }
 }
 
@@ -79,66 +242,6 @@
 #checkBox {
   width: 150px;
   text-align: center;
-}
-
-.dGrid {
-  display: grid;
-  width: 100vw;
-  max-width: 100%;
-  padding: 1.75rem 0;
-  grid-gap: 28px;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: 180px 150px;
-}
-
-.dIm1 {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-
-}
-
-.dIm2 {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-
-}
-
-.dIm3 {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.dIm4 {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.dIm5 {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.dIm6 {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
 }
 
 .newsSource {
@@ -189,6 +292,10 @@
   transform: translate(-50%, -50%);
   white-space: nowrap;
   color: aliceblue;
+}
+
+.textfont {
+  transition: all .3s 0s ease;
 }
 
 .textfont:hover {
