@@ -55,7 +55,7 @@ const Footer = () => {
 const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
   return (<>
     <div className='container-lg'>
-      <div className='h4 my-2'>TOP專區</div>
+      <div className='h4 my-2'>最受歡迎球館</div>
       <div className='dGrid' key={key}>
         <a className='dIm1'>
           <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
@@ -204,21 +204,31 @@ function App() {
       <NavBar></NavBar>
       <div className='mb-5'>
         <div className='img-sec'>
-          <div className="container-lg d-flex justify-content-center align-items-center py-3">
-            <select id="checkBox" className="form-select me-3" >
-              <option style={{ display: 'none' }}>城市區域</option>
-              {dataAPI.map((item) => {
-                return (<option value={item.name} key={item.id}>{item.name}</option>)
-              })}
-            </select>
-            <select id="checkBox" className="form-select me-3">
-              <option style={{ display: 'none' }}>球館名稱</option>
-              <option value="1">優勢羽球館</option>
-              <option value="2">勁拍羽球館</option>
-              <option value="3">超強羽球館</option>
-              <option value="4">羽利羽球館</option>
-            </select>
-            <button type="button" className="btn btn-outline-dark">搜尋</button>
+          <div className="container-lg checkContainer">
+            <div className='checkBlock'>
+              <div className='checkBox-building'>
+                <i class="fa-solid fa-building"></i>
+                <select id="checkBox" className="checkBox" >
+                  <option style={{ display: 'none' }}>城市區域</option>
+                  {dataAPI.map((item) => {
+                    return (<option value={item.name} key={item.id}>{item.name}</option>)
+                  })}
+                </select>
+              </div>
+              <div className='divider'></div>
+              <div className='checkBox-house'>
+                <i class="fa-solid fa-house"></i>
+                <select id="checkBox" className="checkBox">
+                  <option style={{ display: 'none' }}>球館名稱</option>
+                  <option value="1">優勢羽球</option>
+                  <option value="2">勁拍羽球</option>
+                  <option value="3">超強羽球</option>
+                  <option value="4">羽利羽球</option>
+                </select>
+              </div>
+              <div className='divider'></div>
+              <button type="button" className="button">搜尋</button>
+            </div>
           </div>
         </div>
       </div>

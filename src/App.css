@@ -7,19 +7,6 @@
   background: #feffff;
 }
 
-.wave{
-  width: 100vw;
-  height: 100%;
-  padding-bottom: 100px;
-  --c: #f5ece6;
-  --w1: radial-gradient(100% 57% at top ,#0000 100%,var(--c) 100.5%) no-repeat;
-  --w2: radial-gradient(100% 57% at bottom, var(--c) 100%,#0000 100.5%) no-repeat;
-  background: var(--w1),var(--w2),var(--w1),var(--w2);
-  background-position-x: -200%, -100%, 0%, 100%;
-  background-position-y: 100%;
-  background-size: 50.5% 100%;
-  animation: m 3s infinite linear;
-}
 @keyframes m {
   0%  {background-position-x:-200%, -100%, 0%, 100%}
   100%{background-position-x:  0%, 100%, 200%, 300%}
@@ -34,13 +21,6 @@
   }
 }
 
-.wavedown {
-  background-color:#f5ece6;
-  width: 100%;
-  height: 100%;
-  padding: 100px 0px;
-}
-
 .marq-infinite {
   display: flex;
   align-items: center;
@@ -50,13 +30,6 @@
 
 .marq-item {
   display: flex;
-}
-
-.marq-container {
-  width: 344px;
-  height: 214px;
-  margin-right: 24px;
-  overflow-x: hidden;
 }
 
 .marq-infinite .marq-item {
@@ -82,14 +55,6 @@
   z-index: 999;
 }
 
-@media (min-width: 992px) {
-  .navbar-expand-lg .navbar-collapse {
-      display: flex;
-      flex-basis: auto;
-      justify-content: end;
-      margin: 0 20px;
-  }
-}
 
 @media screen and (min-width: 601px) {
   .dGrid {
@@ -151,9 +116,89 @@
     cursor: pointer;
     text-decoration: none;
   }
+
+  .marq-container {
+    width: 344px;
+    height: 214px;
+    margin-right: 24px;
+    overflow-x: hidden;
+  }
+
+  .wavedown {
+    background-color:#f5ece6;
+    width: 100%;
+    height: 100%;
+    padding: 50px 0px 70px 0px;
+  }
+
+  .wave{
+    width: 100vw;
+    height: 100%;
+    padding-bottom: 100px;
+    --c: #f5ece6;
+    --w1: radial-gradient(100% 57% at top ,#0000 100%,var(--c) 100.5%) no-repeat;
+    --w2: radial-gradient(100% 57% at bottom, var(--c) 100%,#0000 100.5%) no-repeat;
+    background: var(--w1),var(--w2),var(--w1),var(--w2);
+    background-position-x: -200%, -100%, 0%, 100%;
+    background-position-y: 100%;
+    background-size: 50.5% 100%;
+    animation: m 3s infinite linear;
+  }
+
+  .checkContainer {
+    display: flex;
+    justify-content: center;
+    align-items:center;    
+  }
+
+  .checkBlock {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px solid #adb5bd;
+    height: 70px;    
+  }
+
+  .checkBox {
+    height: 40px;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+    width: 80px;
+    text-align: center;
+  }
+
+  .checkBox-building , .checkBox-house , .button {
+    margin: 0 auto;
+  }
+
+  .fa-solid {
+    padding: 5px;
+  }
+
+  .button {
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background-color: black;
+    width: 130px;
+    transition: all .5s 0s ease;
+  }
+
+  .divider {
+    display: block;
+    height: 27px;
+    border-left: 1px solid rgb(185, 176, 176);
+    margin: 0 11px;
+  }
 }
 
 @media screen and (max-width: 600px) {
+
   .dGrid {
     display: grid;
     width: 100vw;
@@ -219,6 +264,76 @@
     cursor: pointer;
     text-decoration: none;
   }
+
+  .marq-container {
+    width: 180px;
+    height: 150px;
+    margin-right: 10px;
+    overflow-x: hidden;
+  }
+
+  .wavedown {
+    background-color:#f5ece6;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0px 40px 0px;
+  }
+
+  .wave{
+    width: 100vw;
+    height: 100%;
+    padding-bottom: 50px;
+    --c: #f5ece6;
+    --w1: radial-gradient(100% 57% at top ,#0000 100%,var(--c) 100.5%) no-repeat;
+    --w2: radial-gradient(100% 57% at bottom, var(--c) 100%,#0000 100.5%) no-repeat;
+    background: var(--w1),var(--w2),var(--w1),var(--w2);
+    background-position-x: -200%, -100%, 0%, 100%;
+    background-position-y: 100%;
+    background-size: 50.5% 100%;
+    animation: m 3s infinite linear;
+  }
+
+  .checkContainer { 
+    margin: 0px auto; 
+  }
+
+  .checkBox {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 0px;
+    text-align: center;
+  }
+
+  .checkBox-building , .checkBox-house {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0px auto 10px auto;
+  }
+
+  .fa-solid {
+    margin: 0 2ch
+  }
+
+  .button {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    margin: 0px auto 10px auto;
+  }
+
+  .divider {
+    display: none;
+  }
 }
 
 .logoFocus {
@@ -237,11 +352,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#checkBox {
-  width: 150px;
-  text-align: center;
 }
 
 .newsSource {
