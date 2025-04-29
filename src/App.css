@@ -427,10 +427,13 @@ body {
   background-color: #f2f4f7;
   height: 300px;
   width: 100%;
+  text-align: center;
+
 }
 
 .kk {
   padding: 100px 0px 30px;
+  text-align: center;
 }
 
 .footer {

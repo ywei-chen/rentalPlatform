@@ -34,7 +34,7 @@ const Footer = () => {
   return (<>
     <footer className="py-4">
       <div className="footer container d-flex justify-content-center my-3">
-        <div className="me-3">©Cpoyright 2024 KaneC. 專題用途</div>
+        <div className="me-3"><small>©Cpoyright 2024 KaneC. 專題用途</small></div>
         <div>
           <a href="#" className="footer ext-decoration-none me-1">
             <i className="fab fa-instagram"></i>
