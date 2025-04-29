@@ -291,7 +291,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div className='container-fluid'>
+      <div className='container-lg'>
         <div className='wave' />
         <div className='marq-infinite wavedown'>
           <div className='marq-item'>
@@ -329,6 +329,44 @@ function App() {
             </a>
           </div>
         </div>
+      </div>
+      <div className='container-lg mm'>
+        <div className='row my-5'>
+            <h4 className='mb-2'>輕鬆使用福克斯平台</h4>
+            <h6>簡單三步驟，快速完成場地預訂！</h6>
+        </div>
+        <div className='row my-5 d-flex'>
+          <div className='col-4 d-flex justify-content-center align-items-center'>
+            <i className="fa-solid fa-bell fa-2xl me-3"></i>
+            <div>
+              <h6 className='mb-3'>線上預定場地</h6>
+              <small>在網站上尋找合適空間 確認好租用時段 30 秒輕鬆完成預訂。</small>
+            </div>
+          </div>
+          <div className='col-4 d-flex justify-content-center align-items-center'>
+            <i className="fa-solid fa-calendar fa-2xl me-3"></i>
+            <div>
+              <h6 className='mb-3'>專屬密碼進出空間</h6>
+              <small>透過訂單顯示的專屬密碼，即可在租用時段內自由進出使用場地。</small>
+            </div>
+          </div>
+          <div className='col-4 d-flex justify-content-center align-items-center'>
+            <i className="fa-solid fa-face-smile fa-2xl me-3"></i>
+            <div>
+              <h6 className='mb-3'>免費修改與取消預訂</h6>
+              <small>預訂開始時間的 48 小時前，都能回到網站無條件修改或取消訂單。</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='container-fluid ll'>
+        <div>
+          <div className='kk'>
+          <h5>立刻預訂屬於你的美好時光</h5>
+          <small className='mb-3'>在專屬的時間與空間裡，盡情揮灑無限的創造力</small>
+          </div>
+        </div>
+        <button className='button'>前往瀏覽球館</button>
       </div>
       <Footer></Footer>
     </>
