@@ -207,7 +207,7 @@ function App() {
           <div className="container-lg checkContainer">
             <div className='checkBlock'>
               <div className='checkBox-building'>
-                <i class="fa-solid fa-building"></i>
+                <i className="fa-solid fa-building"></i>
                 <select id="checkBox" className="checkBox" >
                   <option style={{ display: 'none' }}>城市區域</option>
                   {dataAPI.map((item) => {
@@ -217,7 +217,7 @@ function App() {
               </div>
               <div className='divider'></div>
               <div className='checkBox-house'>
-                <i class="fa-solid fa-house"></i>
+                <i className="fa-solid fa-house"></i>
                 <select id="checkBox" className="checkBox">
                   <option style={{ display: 'none' }}>球館名稱</option>
                   <option value="1">優勢羽球</option>
