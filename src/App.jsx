@@ -137,12 +137,12 @@ function App() {
   const RankList = [
     {
       name: 'TOP專區',
-      pic1: './assets/court-7.jpg',
-      pic2: './assets/court-8.jpg',
-      pic3: './assets/court-9.jpg',
-      pic4: './assets/court-10.jpg',
-      pic5: './assets/court-11.jpg',
-      pic6: './assets/court-12.jpg'
+      pic1: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-7.jpg?raw=true',
+      pic2: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-8.jpg?raw=true',
+      pic3: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-9.jpg?raw=true',
+      pic4: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-10.jpg?raw=true',
+      pic5: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-11.jpg?raw=true',
+      pic6: 'https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-12.jpg?raw=true'
     }
   ]
 
@@ -296,36 +296,36 @@ function App() {
         <div className='marq-infinite wavedown'>
           <div className='marq-item'>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-1.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-1.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-2.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-2.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-3.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-3.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-4.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-4.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-5.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-5.jpg?' alt='' />
             </a>
           </div>
           <div className='marq-item'>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-1.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-1.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-2.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-2.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-3.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-3.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-4.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-4.jpg?' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./assets/court-5.jpg' alt='' />
+              <img className='marq-img' src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/court-5.jpg?' alt='' />
             </a>
           </div>
         </div>
