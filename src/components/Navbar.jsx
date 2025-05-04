@@ -5,7 +5,7 @@ export default function NavBar() {
         <nav className="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
             <div className="container-fluid">
                 <div className="logoFocus">
-                    <img src='./src/assets/FocusLogo.png' className="img-fluid object-fit-cover" alt="#" />
+                    <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/FocusLogo.png' className="img-fluid object-fit-cover" alt="#" />
                 </div>
                 <a className="navbar-brand" href="#">羽毛球｜擇已所愛</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -14,7 +14,7 @@ export default function NavBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Link className='nav-link' to='/'>首頁</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo'>首頁</Link>
                         <Link className='nav-link' to='/register'>登入註冊</Link>
                         <a className="nav-link" href="#">運動場地</a>
                     </div>

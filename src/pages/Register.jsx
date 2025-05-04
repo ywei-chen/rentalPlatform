@@ -10,11 +10,11 @@ export default function Register() {
             <div className='h4 mb-4 text-center'>請輸入帳號密碼</div>
                 <div className='form-floating mb-2'>
                     <input type='email' className="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label for="floatingInput">Email address</label>
+                    <label htmlFor="floatingInput">Email address</label>
                 </div>
                 <div className="form-floating mb-2">
                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-                    <label for="floatingPassword">Password</label>
+                    <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <div className="container-fluid d-flex flex-row mb-4 pb-4">
                     <a href="#" role="button" className="me-auto text-decoration-none">忘記密碼</a>

@@ -11,7 +11,7 @@ function App() {
     <>
       <NavBar></NavBar>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/siteFalicyCRADemo' element={<Home />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </>

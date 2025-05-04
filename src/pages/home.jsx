@@ -1,8 +1,6 @@
 import axios from 'axios';
 import './homie.css';
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom'
 
 //Footer
 const Footer = () => {
@@ -113,12 +111,12 @@ const Footer = () => {
     const RankList = [
       {
         name: 'TOP專區',
-        pic1: './src/assets/court-7.jpg',
-        pic2: './src/assets/court-8.jpg',
-        pic3: './src/assets/court-9.jpg',
-        pic4: './src/assets/court-10.jpg',
-        pic5: './src/assets/court-11.jpg',
-        pic6: './src/assets/court-12.jpg'
+        pic1: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-7.jpg',
+        pic2: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-8.jpg',
+        pic3: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-9.jpg',
+        pic4: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-10.jpg',
+        pic5: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-11.jpg',
+        pic6: 'https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-12.jpg'
       }
     ]
   
@@ -270,36 +268,36 @@ return (
         <div className='marq-infinite wavedown'>
           <div className='marq-item'>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-1.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-1.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-2.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-2.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-3.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-3.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-4.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-4.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-5.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-5.jpg' alt='' />
             </a>
           </div>
           <div className='marq-item'>
-            <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-1.jpg' alt='' />
+          <a className='marq-container'>
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-1.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-2.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-2.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-3.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-3.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-4.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-4.jpg' alt='' />
             </a>
             <a className='marq-container'>
-              <img className='marq-img' src='./src/assets/court-5.jpg' alt='' />
+              <img className='marq-img' src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-5.jpg' alt='' />
             </a>
           </div>
         </div>
