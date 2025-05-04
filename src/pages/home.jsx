@@ -74,9 +74,7 @@ const Footer = () => {
   ////BottonGroup
   const BottonGroup = ({ name, key }) => {
     return (<>
-    <div className='col'>
-    <button type="button" className='btn btn-dark mb-2' key={key}>{name}</button>
-    </div>
+    <button type="button" className='btn btn-dark mb-2 me-2' key={key}>{name}</button>
     </>)
   }
   
@@ -253,8 +251,9 @@ return (
           img6={item.pic6}>
         </HotRank>)
       })}
-      <div className='container-lg'>
-        <div className='row'>
+    <div className='container-lg'>
+      <div className='row'>
+        <div className='col d-flex justify-content-start'>
           {TopList.map((item) => {
             return (<BottonGroup
               key={item.id}
@@ -262,6 +261,7 @@ return (
             </BottonGroup>)
           })}
         </div>
+      </div>
       </div>
       <div className='container-lg'>
         <div className='wave' />

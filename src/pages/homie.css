@@ -61,6 +61,12 @@
   
   
   @media screen and (min-width: 601px) {
+
+    button {
+      width: 90px;
+      font-size: 5px;
+    }
+
     .dGrid {
       display: grid;
       width: 100vw;
@@ -430,7 +436,7 @@
   }
   
   .FontDirection {
-    margin: 100px 0px;
+    margin: 100px 0px 50px 0px;
   }
   
   .endDirection {
