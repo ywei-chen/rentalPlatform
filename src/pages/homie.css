@@ -278,7 +278,7 @@
   
     .wavedown {
       background-color:#f5ece6;
-      width: 100%;
+      width: 100vw;
       height: 100%;
       padding: 20px 0px 40px 0px;
     }
