@@ -160,10 +160,11 @@
       background-color: white;
       justify-content: center;
       align-items: center;
-      width: 500px;
+      width: 600px;
       border-radius: 5px;
       border: 1px solid #adb5bd;
-      height: 70px;    
+      height: 70px;
+      text-align: center;
     }
   
     .checkBox {
@@ -202,6 +203,10 @@
   }
   
   @media screen and (max-width: 600px) {
+
+    .fontBlock {
+      margin-bottom: 50px;
+    }
   
     .dGrid {
       display: grid;
@@ -300,6 +305,10 @@
     .checkContainer { 
       margin: 0px auto; 
     }
+
+    .checkBlock {
+      text-align: center;
+    }
   
     .checkBox {
       appearance: none;
@@ -307,6 +316,7 @@
       cursor: pointer;
       margin: 0px 0px;
       text-align: center;
+      background-color: white;
     }
   
     .checkBox-building , .checkBox-house {
@@ -316,12 +326,12 @@
       height: 50px;
       background-color: white;
       border-radius: 5px;
-      width: 100%;
+      width: 180px;
       margin: 0px auto 10px auto;
     }
   
-    .fa-solid {
-      margin: 0 2ch
+    .fa-solid , .bigFont {
+      margin: 0 1ch
     }
   
     .button {
@@ -329,7 +339,7 @@
       background-color: black;
       color: white;
       border-radius: 5px;
-      width: 100%;
+      width: 180px;
       height: 50px;
       text-align: center;
       margin: 0px auto 10px auto;
@@ -419,19 +429,18 @@
     text-decoration: none;
   }
   
-  .mm {
+  .FontDirection {
     margin: 100px 0px;
   }
   
-  .ll {
+  .endDirection {
     background-color: #f2f4f7;
     height: 300px;
     width: 100%;
     text-align: center;
-  
   }
   
-  .kk {
+  .endFont {
     padding: 100px 0px 30px;
     text-align: center;
   }

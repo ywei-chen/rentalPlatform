@@ -148,7 +148,7 @@ const Footer = () => {
         const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
         const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
         try {
-          const res = await axios.get(`${newsUrl}&from=2025-04-10&sortBy=relevancy&apiKey=${apiKey}`);
+          const res = await axios.get(`${newsUrl}&from=2025-04-20&sortBy=relevancy&apiKey=${apiKey}`);
           const newArr = [...res.data.articles];
           newArr.forEach((item, i) => {
             item.id = i + 1;
@@ -302,38 +302,40 @@ return (
           </div>
         </div>
       </div>
-      <div className='container-lg mm'>
+      <div className='container-lg FontDirection'>
         <div className='row my-5'>
-          <h4 className='mb-2'>輕鬆使用福克斯平台</h4>
-          <h6>簡單三步驟，快速完成場地預訂！</h6>
+          <div className='bigFont'>
+            <h4 className='mb-2'>輕鬆使用福克斯平台</h4>
+            <h6>簡單三步驟，快速完成場地預訂！</h6>
+          </div>
         </div>
-        <div className='row my-5 d-flex'>
-          <div className='col-4 d-flex justify-content-center align-items-center'>
+        <div className='row my-5'>
+        <div className='fontBlock col-12 col-sm-4 d-flex justify-content-start align-items-center'>
             <i className="fa-solid fa-bell fa-2xl me-3"></i>
             <div>
-              <h6 className='mb-3'>線上預定場地</h6>
+              <h6 className='mb-2'>線上預定場地</h6>
               <small>在網站上尋找合適空間 確認好租用時段 30 秒輕鬆完成預訂。</small>
             </div>
           </div>
-          <div className='col-4 d-flex justify-content-center align-items-center'>
+          <div className='fontBlock col-12 col-sm-4 d-flex justify-content-start align-items-center'>
             <i className="fa-solid fa-calendar fa-2xl me-3"></i>
             <div>
-              <h6 className='mb-3'>專屬密碼進出空間</h6>
+              <h6 className='mb-2'>專屬密碼進出空間</h6>
               <small>透過訂單顯示的專屬密碼，即可在租用時段內自由進出使用場地。</small>
             </div>
           </div>
-          <div className='col-4 d-flex justify-content-center align-items-center'>
+          <div className='fontBlock col-12 col-sm-4 d-flex justify-content-start align-items-center'>
             <i className="fa-solid fa-face-smile fa-2xl me-3"></i>
             <div>
-              <h6 className='mb-3'>免費修改與取消預訂</h6>
+              <h6 className='mb-2'>免費修改與取消預訂</h6>
               <small>預訂開始時間的 48 小時前，都能回到網站無條件修改或取消訂單。</small>
             </div>
           </div>
         </div>
       </div>
-      <div className='container-fluid ll'>
-        <div className='oo'>
-          <div className='kk'>
+      <div className='container-fluid endDirection'>
+        <div>
+          <div className='endFont'>
             <h5>立刻預訂屬於你的美好時光</h5>
             <small className='mb-3'>在專屬的時間與空間裡，盡情揮灑無限的創造力</small>
           </div>
