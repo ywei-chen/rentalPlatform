@@ -74,7 +74,7 @@ const Footer = () => {
   ////BottonGroup
   const BottonGroup = ({ name, key }) => {
     return (<>
-    <button type="button" className='btn btn-dark mb-2 me-2' key={key}>{name}</button>
+    <button type="button" className='btn btn-dark mb-2 me-1' key={key}>{name}</button>
     </>)
   }
   
