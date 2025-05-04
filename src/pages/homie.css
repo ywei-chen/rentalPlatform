@@ -352,7 +352,7 @@
     width: 100%;
     background-size: cover;
     background-position: center;
-    background-image: url('./src/assets/bg6.jpg');
+    background-image: url('https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/bg6.jpg?raw=true');
     display: flex;
     justify-content: center;
     align-items: center;

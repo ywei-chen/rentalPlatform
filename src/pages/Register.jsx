@@ -5,7 +5,7 @@ export default function Register() {
         <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
             <div className="signBox">
                 <div className="logoFocus text-center my-5 pb-3 w-100">
-                    <img src='./siteFalicyCRADemo/src/assets/FocusLogo.png' className="img-fluid" alt='' />
+                    <img src='https://github.com/ywei-chen/siteFalicyCRADemo/blob/main/src/assets/bg6.jpg?raw=true' className="img-fluid" alt='' />
             </div>
             <div className='h4 mb-4 text-center'>請輸入帳號密碼</div>
                 <div className='form-floating mb-2'>
