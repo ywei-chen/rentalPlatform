@@ -254,7 +254,7 @@ return (
         </HotRank>)
       })}
     <div className='container-lg'>
-      <div className='row row-cols-2 row-cols-sm-auto'>
+      <div className='row row-cols-auto'>
           {TopList.map((item) => {
             return (<BottonGroup
               key={item.id}

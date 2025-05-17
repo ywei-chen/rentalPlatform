@@ -14,8 +14,8 @@ export default function NavBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Link className='nav-link' to='/siteFalicyCRADemo'>首頁</Link>
-                        <Link className='nav-link' to='/register'>登入註冊</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/'>首頁</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/register/'>登入註冊</Link>
                         <a className="nav-link" href="#">運動場地</a>
                     </div>
                 </div>
