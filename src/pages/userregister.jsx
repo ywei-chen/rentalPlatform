@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./regicss.css";
+import "../ui/userregister.css";
 import firebase from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 
 
 let myModal;
-export default function Register() {
+export default function Userregister() {
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const [handler, setHandler] = useState(1);
@@ -117,15 +117,15 @@ export default function Register() {
                         <h1 className="modal-title fs-5" id="exampleModalLabel">登入提示</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="modal-body">
-                        <h4>{modalContent}</h4>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        <div className="modal-body">
+                            {modalContent}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </>)
 }

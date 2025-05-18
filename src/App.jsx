@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import NavBar from './components/Navbar';
-import Register from './pages/register';
+import Userregister from './pages/userregister';
 import Home from './pages/home';
 
 //Render
@@ -12,7 +12,7 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path='/siteFalicyCRADemo/' element={<Home />} />
-        <Route path='/siteFalicyCRADemo/register/' element={<Register />} />
+        <Route path='/siteFalicyCRADemo/userregister/' element={<Userregister />} />
       </Routes>
     </>
   )

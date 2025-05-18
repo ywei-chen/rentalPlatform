@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './homie.css';
+import "../ui/home.css";
 import { useEffect, useState } from 'react';
 
 //Footer
@@ -128,7 +128,7 @@ const Footer = () => {
     const [dataAPI, setDataAPI] = useState([]);
     const [newsAPI, setNewsAPI] = useState([]);
     useEffect(() => {
-  
+      
       //locationAPI
       (async () => {
         try {
