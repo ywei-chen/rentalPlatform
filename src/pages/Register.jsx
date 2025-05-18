@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./regicss.css";
 import firebase from "../components/firebase";
+import * as bootstrap from 'bootstrap';
 
+
+let myModal;
 export default function Register() {
     const navigate = useNavigate();
+    const modalRef = useRef(null);
     const [handler, setHandler] = useState(1);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [modalContent, setModalContent] = useState('');
+
+    useEffect(() => {
+        myModal = new bootstrap.Modal(modalRef.current);
+    },[])
 
     const onClickSignIn = () => {
         var signin = document.querySelector("#signin");
@@ -27,13 +36,16 @@ export default function Register() {
 
     const showLoginError = (e) => {
         if(e.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS){
-            console.log("帳號密碼錯誤");
+            setModalContent("帳號密碼錯誤");
+            myModal.show();
         }
         else if(e.code == AuthErrorCodes.EMAIL_EXISTS){
-            console.log("帳號已註冊");
+            setModalContent("帳號已註冊");
+            myModal.show();
         }
         else{
-            console.log("登入錯誤");
+            setModalContent("登入錯誤");
+            myModal.show();
         }
     }
 
@@ -42,7 +54,8 @@ export default function Register() {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                console.log("登入成功");
+               setModalContent("登入成功");
+               myModal.show();
             })
             .catch((e) => {
                 showLoginError(e);
@@ -52,7 +65,8 @@ export default function Register() {
             const auth = getAuth(firebase);
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
-                    console.log("註冊成功");
+                    setModalContent("註冊成功");
+                    myModal.show();
                 })
                 .catch((e) => {
                     showLoginError(e);
@@ -96,6 +110,22 @@ export default function Register() {
                     <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
                 </form>
             </div>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" ref={modalRef}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">登入提示</h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <h4>{modalContent}</h4>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </>)
 }
