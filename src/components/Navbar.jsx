@@ -15,7 +15,7 @@ export default function NavBar() {
                     <div className="navbar-nav">
                         <Link className='nav-link' to='/siteFalicyCRADemo/'>首頁</Link>
                         <Link className='nav-link' to='/siteFalicyCRADemo/userregister/'>使用者登入註冊</Link>
-                        <a className="nav-link" href="#">場地主登入註冊</a>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/ownerregister/'>場地主登入註冊</Link>
                     </div>
                 </div>
             </div>
