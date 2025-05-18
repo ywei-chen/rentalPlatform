@@ -54,8 +54,12 @@ export default function Userregister() {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-               setModalContent("登入成功");
-               myModal.show();
+                setModalContent("登入成功");
+                myModal.show();
+                setTimeout(() => {
+                    myModal.hide();
+                    navigate('/siteFalicyCRADemo/');
+                }, 3000)
             })
             .catch((e) => {
                 showLoginError(e);
@@ -67,6 +71,10 @@ export default function Userregister() {
                 .then(() => {
                     setModalContent("註冊成功");
                     myModal.show();
+                    setTimeout(() => {
+                    myModal.hide();
+                    navigate('/siteFalicyCRADemo/');
+                }, 3000)
                 })
                 .catch((e) => {
                     showLoginError(e);
@@ -118,7 +126,7 @@ export default function Userregister() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div className="modal-body">
-                            {modalContent}
+                            {modalContent}，即將跳轉至首頁
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
