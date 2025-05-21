@@ -14,8 +14,9 @@ export default function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <div className="navbar-nav">
                         <Link className='nav-link' to='/siteFalicyCRADemo/'>首頁</Link>
-                        <Link className='nav-link' to='/siteFalicyCRADemo/userregister/'>使用者登入註冊</Link>
-                        <Link className='nav-link' to='/siteFalicyCRADemo/ownerregister/'>場地主登入註冊</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/userregister/'>登入/註冊</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/ownerregister/'>商家 登入/註冊</Link>
+                        <Link className='nav-link' to='/siteFalicyCRADemo/ownerpage/'>test松上</Link>
                     </div>
                 </div>
             </div>
