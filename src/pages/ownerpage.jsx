@@ -2,9 +2,9 @@ import "../ui/ownerpage.css";
 
 export default function Ownerpage() {
 
-    return (<>
-        <div className='container-lg'>
-            <div className='pictureoutline'>
+    return(<>
+    <div className='container-lg'>
+        <div className='pictureoutline'>
                 <div className="pic-1">
                     <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-1.jpg' alt=''></img>
                 </div>
@@ -12,22 +12,22 @@ export default function Ownerpage() {
                     <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-2.jpg' alt=''></img>
                 </div>
                 <div className="pic-3">
-                    <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-3.jpg' alt=''></img>
-                </div>
+                <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-3.jpg' alt=''></img>
             </div>
         </div>
+    </div>
         <div className='container-lg'>
             <div className='contextspace'>
                 <section className='storename&address'>
                     <div>
                         <div className="storename"><h1>松上羽球館</h1></div>
                         <div className="address">高雄市左營區文學路265號</div>
-                    </div>
+                    </div> 
                 </section>
                 <section className='space&picture'>
                     <div>
                         <div className="space"><h1>空間介紹</h1></div>
-                        <div className="picture"></div>
+                        <div className="picture"></div>           
                     </div>
                 </section>
                 <section className='hourtime'>
@@ -35,62 +35,62 @@ export default function Ownerpage() {
                         <div className="title"><h4>開放時段</h4></div>
                         <table>
                             <tbody>
+                               <tr>
+                                <td>週一</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週一</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週二</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週二</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週三</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週三</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週四</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週四</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週五</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週五</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週六</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                                 <tr>
-                                    <td>週六</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>週日</td>
-                                    <td>
-                                        <div>
-                                            <span>09:00 - 23:00</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <td>週日</td>
+                                <td>
+                                    <div>
+                                        <span>09:00 - 23:00</span>
+                                    </div>
+                                </td>
+                                </tr> 
                             </tbody>
                         </table>
                     </div>
@@ -105,7 +105,7 @@ export default function Ownerpage() {
                 </section>
             </div>
         </div>
-
+    
     </>)
 }
 
