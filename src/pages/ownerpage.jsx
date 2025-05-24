@@ -25,8 +25,12 @@ export default function Ownerpage() {
                         <div className="topicgraph">
                             <i className="fa-regular fa-user fa-xl"></i>
                             <div className="topicfont">松上羽球館</div>
+                            <div className="buttongroup">
+                                <button className="buttonTop">飲水機</button>
+                                <button className="buttonTop">停車場</button>
+                            </div>
                         </div>               
-                        <div className="address">高雄市左營區文學路265號</div>
+                        <div className="topicontent">高雄市左營區文學路265號</div>
                     </div> 
                 </section>
                 <section className='space&picture'>
@@ -34,13 +38,38 @@ export default function Ownerpage() {
                         <div className="topicgraph">
                             <i className="fa-regular fa-image fa-xl"></i>
                             <div className="topicfont">空間介紹</div>
-                        </div>                     
-                        <div className="picture"></div>           
+                        </div>
+                        <div className="topicontent">以下繪製的場地實際完全參考商家實體場地布置</div>               
+                        <div className="picture">
+                            <div className="courtexaple">
+                                <div>[1]</div>
+                                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+                            </div>
+                            <div className="courtexaple">
+                                <div>[2]</div>
+                                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+                            </div>
+                            <div className="courtexaple">
+                                <div>[3]</div>
+                                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+                            </div>
+                            <div className="courtexaple">
+                                <div>[4]</div>
+                                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+                            </div>
+                            <div className="courtexaple">
+                                <div>[5]</div>
+                                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+                            </div>
+                        </div>           
                     </div>
                 </section>
                 <section className='hourtime'>
                     <div>
-                        <div className="topicfont">開放時段</div>
+                        <div className="topicgraph">
+                            <i class="fa-regular fa-calendar fa-xl"></i>
+                            <div className="topicfont">開放時段</div>
+                        </div>            
                         <table>
                             <tbody>
                                <tr>
@@ -105,11 +134,6 @@ export default function Ownerpage() {
                 </section>
                 <div className='split'></div>
                 <section className='provideditem'>
-                    <div>
-                        <div className="topicfont">提供的設備服務</div>
-                        <div>飲水機</div>
-                        <div>停車場</div>
-                    </div>
                 </section>
             </div>
         </div>

@@ -51,7 +51,7 @@ img {
 }
 
 .split {
- border: 1px solid rgba(0, 0, 0, 0.8);
+ border: 1px solid rgba(232, 232, 232, 1);
 }
 
 section {
@@ -72,7 +72,7 @@ div > span {
     align-items: center;
 }
 
-.address {
+.topicontent {
     padding: 5px 0;
     font-size: medium;
     font-weight: 400;
@@ -80,4 +80,37 @@ div > span {
 
 i {
     padding-right: 10px;
+}
+
+.picture {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 0 0;
+}
+
+.courtexaple {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    height: 100%;
+    width: 50px;
+    padding-right: 15px;
+}
+
+table {
+   margin: 10px 0; 
+}
+
+.buttongroup {
+    padding: 0 5px;
+}
+
+.buttonTop {
+    margin-right: 5px;
+    height: 25px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background-color: black;
+    width: 70px;
 }
