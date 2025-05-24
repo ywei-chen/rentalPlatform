@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../ui/ownerpage.css";
+
 
 export default function Ownerpage() {
 
@@ -18,21 +20,27 @@ export default function Ownerpage() {
     </div>
         <div className='container-lg'>
             <div className='contextspace'>
-                <section className='storename&address'>
+                <section className='storenameaddress'>
                     <div>
-                        <div className="storename"><h1>松上羽球館</h1></div>
+                        <div className="topicgraph">
+                            <i className="fa-regular fa-user fa-xl"></i>
+                            <div className="topicfont">松上羽球館</div>
+                        </div>               
                         <div className="address">高雄市左營區文學路265號</div>
                     </div> 
                 </section>
                 <section className='space&picture'>
                     <div>
-                        <div className="space"><h1>空間介紹</h1></div>
+                        <div className="topicgraph">
+                            <i className="fa-regular fa-image fa-xl"></i>
+                            <div className="topicfont">空間介紹</div>
+                        </div>                     
                         <div className="picture"></div>           
                     </div>
                 </section>
                 <section className='hourtime'>
                     <div>
-                        <div className="title"><h4>開放時段</h4></div>
+                        <div className="topicfont">開放時段</div>
                         <table>
                             <tbody>
                                <tr>
@@ -98,7 +106,7 @@ export default function Ownerpage() {
                 <div className='split'></div>
                 <section className='provideditem'>
                     <div>
-                        <div className="provideditemtext"><h1>提供的設備服務</h1></div>
+                        <div className="topicfont">提供的設備服務</div>
                         <div>飲水機</div>
                         <div>停車場</div>
                     </div>

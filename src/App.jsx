@@ -5,7 +5,6 @@ import Userregister from './pages/userregister';
 import Ownerregister from './pages/ownerregister';
 import Home from './pages/home';
 import Ownerpage from './pages/ownerpage';
-
 //Render
 function App() {
   return (
