@@ -89,10 +89,15 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #e2e2e280;
+    background-color: #e2e2e2;
     height: 50px;
     border-radius: 20px;
     padding: 0 10px;
+}
+
+.inputcondition > span {
+    width: 100%;
+    cursor: pointer;
 }
 
 .buttonselect {
@@ -111,7 +116,7 @@ img {
 }
 
 .split {
- border: 1px solid rgba(232, 232, 232, 1);
+    border: 1px solid rgba(232, 232, 232, 1);
 }
 
 section {
@@ -173,4 +178,39 @@ table {
     color: white;
     background-color: black;
     width: 70px;
+}
+
+#hourRent {
+    background-color: white;
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#monthRent {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#seasonReant {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#yearRent {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+.dateselect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(232, 232, 232, 1);
+    width: 100%;
+    height: 40px;
+    margin: 10px auto;
 }

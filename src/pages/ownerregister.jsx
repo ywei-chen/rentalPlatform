@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../ui/ownerregister.css";
-import firebase from "../components/firebase";
+import { firebase } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 
 

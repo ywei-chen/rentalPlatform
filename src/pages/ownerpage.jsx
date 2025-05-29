@@ -4,6 +4,55 @@ import "../ui/ownerpage.css";
 
 export default function Ownerpage() {
 
+    const onClickhourRent = () => {
+        const hourRent = document.getElementById('hourRent');
+        const monthRent = document.getElementById('monthRent');
+        const seasonReant = document.getElementById('seasonReant');
+        const yearRent = document.getElementById('yearRent');
+
+        hourRent.style.backgroundColor = 'white';
+        monthRent.style.backgroundColor = '#e2e2e2';
+        seasonReant.style.backgroundColor = '#e2e2e2';
+        yearRent.style.backgroundColor = '#e2e2e2';
+    }
+
+    const onClickmonthRent = () => {
+        const hourRent = document.getElementById('hourRent');
+        const monthRent = document.getElementById('monthRent');
+        const seasonReant = document.getElementById('seasonReant');
+        const yearRent = document.getElementById('yearRent');
+
+        hourRent.style.backgroundColor = '#e2e2e2';
+        monthRent.style.backgroundColor = 'white';
+        seasonReant.style.backgroundColor = '#e2e2e2';
+        yearRent.style.backgroundColor = '#e2e2e2';
+    }
+
+    const onClickseasonReant = () => {
+        const hourRent = document.getElementById('hourRent');
+        const monthRent = document.getElementById('monthRent');
+        const seasonReant = document.getElementById('seasonReant');
+        const yearRent = document.getElementById('yearRent');
+
+        hourRent.style.backgroundColor = '#e2e2e2';
+        monthRent.style.backgroundColor = '#e2e2e2';
+        seasonReant.style.backgroundColor = 'white';
+        yearRent.style.backgroundColor = '#e2e2e2';
+    }
+
+    const onClickyearRent = () => {
+        const hourRent = document.getElementById('hourRent');
+        const monthRent = document.getElementById('monthRent');
+        const seasonReant = document.getElementById('seasonReant');
+        const yearRent = document.getElementById('yearRent');
+
+        hourRent.style.backgroundColor = '#e2e2e2';
+        monthRent.style.backgroundColor = '#e2e2e2';
+        seasonReant.style.backgroundColor = '#e2e2e2';
+        yearRent.style.backgroundColor = 'white';
+    }
+
+
     return (<>
         <div className='container-lg'>
             <div className='pictureoutline'>
@@ -148,14 +197,22 @@ export default function Ownerpage() {
                                 <div className="inputselect">
                                     <label className="inputscope">                                      
                                         <div className="inputcondition">
-                                            <span>時租</span>
-                                            <span>月租</span>
-                                            <span>季租</span>
-                                            <span>年租</span>
+                                            <span id="hourRent" onClick={onClickhourRent}>時租</span>
+                                            <span id="monthRent" onClick={onClickmonthRent}>月租</span>
+                                            <span id="seasonReant" onClick={onClickseasonReant}>季租</span>
+                                            <span id="yearRent" onClick={onClickyearRent}>年租</span>
                                         </div>
                                     </label>
                                 </div>
-                            <div className="timeselect"></div>
+                            <div className="hourselect">
+                                <div className="dateselect">
+                                    <i class="fa-regular fa-calendar-days fa-xs"></i>
+                                </div>
+                                <div className="dailyslesct">
+                                    <div className="date"></div>
+                                    <div className="time"></div>
+                                </div>
+                            </div>
                             <button className="buttonselect">預定</button>
                         </div>
                     </div>
