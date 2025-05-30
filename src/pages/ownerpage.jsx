@@ -1,10 +1,54 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../ui/ownerpage.css";
+import { useState } from "react";
+
+const PageHour = () => {
+    return (<>時租頁</>)
+}
+
+const PageMonth = () => {
+    return (<>月租頁</>)
+}
+
+const PageSeason = () => {
+    return (<>季租頁</>)
+}
+
+const PageYear = () => {
+    return (<>年租頁</>)
+}
 
 
 export default function Ownerpage() {
 
-    const onClickhourRent = () => {
+    const [activePage , setActivePage] = useState('pageHour');
+
+    const renderPage = () => {
+        switch(activePage){
+            case 'pageHour':
+                return (<>
+                    <PageHour></PageHour>
+                </>)
+            case 'pageMonth':
+                return (<>
+                    <PageMonth></PageMonth>
+                </>)
+            case 'pageSeason':
+                return(<>
+                    <PageSeason></PageSeason>
+                </>)
+            case 'pageYear':
+                return(<>
+                    <PageYear></PageYear>
+                </>)
+        }
+    }
+
+    const buttonColor = (page) => ({
+         backgroundColor: activePage === page ? 'white' : '#e2e2e2'
+    })
+
+    /*const onClickhourRent = () => {
         const hourRent = document.getElementById('hourRent');
         const monthRent = document.getElementById('monthRent');
         const seasonReant = document.getElementById('seasonReant');
@@ -51,7 +95,7 @@ export default function Ownerpage() {
         seasonReant.style.backgroundColor = '#e2e2e2';
         yearRent.style.backgroundColor = 'white';
     }
-
+    */
 
     return (<>
         <div className='container-lg'>
@@ -197,14 +241,15 @@ export default function Ownerpage() {
                                 <div className="inputselect">
                                     <label className="inputscope">                                      
                                         <div className="inputcondition">
-                                            <span id="hourRent" onClick={onClickhourRent}>時租</span>
-                                            <span id="monthRent" onClick={onClickmonthRent}>月租</span>
-                                            <span id="seasonReant" onClick={onClickseasonReant}>季租</span>
-                                            <span id="yearRent" onClick={onClickyearRent}>年租</span>
+                                            <span id="hourRent" style={buttonColor('pageHour')} onClick={() => setActivePage('pageHour')}>時租</span>
+                                            <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => setActivePage('pageMonth')}>月租</span>
+                                            <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => setActivePage('pageSeason')}>季租</span>
+                                            <span id="yearRent" style={buttonColor('pageYear')} onClick={() => setActivePage('pageYear')}>年租</span>
                                         </div>
                                     </label>
                                 </div>
                             <div className="hourselect">
+                                {renderPage()}
                                 <div className="dateselect">
                                     <i class="fa-regular fa-calendar-days fa-xs"></i>
                                 </div>
