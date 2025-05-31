@@ -1,10 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../ui/ownerpage.css";
-import { useState } from "react";
-
-const PageHour = () => {
-    return (<>時租頁</>)
-}
+import React, { useState, useRef, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const PageMonth = () => {
     return (<>月租頁</>)
@@ -20,14 +17,51 @@ const PageYear = () => {
 
 
 export default function Ownerpage() {
-
+    const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const [activePage , setActivePage] = useState('pageHour');
+    const [showPicker, setShowPicker] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowPicker(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+
 
     const renderPage = () => {
         switch(activePage){
             case 'pageHour':
                 return (<>
-                    <PageHour></PageHour>
+                    <div className="hourselect" ref={dropdownRef}>
+                        {showPicker && (
+                            <div className="datepicker">
+                                <DatePicker
+                                    selected={selectedDate}
+                                    onChange={(date) => {
+                                        setSelectedDate(date);
+                                        setShowPicker(false);
+                                    }}
+                                    inline
+                                />
+                            </div>
+                        )}
+                        <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
+                            <i className="fa-regular fa-calendar-days fa-lg"></i>
+                            <span>{selectedDate.toLocaleDateString()}</span>
+                            <span>{weekDays[selectedDate.getDay()]}</span>
+                        </div>
+                        <div className="dailyslesct">
+                            <div className="date"></div>
+                            <div className="time"></div>
+                        </div>
+                    </div>
                 </>)
             case 'pageMonth':
                 return (<>
@@ -47,55 +81,6 @@ export default function Ownerpage() {
     const buttonColor = (page) => ({
          backgroundColor: activePage === page ? 'white' : '#e2e2e2'
     })
-
-    /*const onClickhourRent = () => {
-        const hourRent = document.getElementById('hourRent');
-        const monthRent = document.getElementById('monthRent');
-        const seasonReant = document.getElementById('seasonReant');
-        const yearRent = document.getElementById('yearRent');
-
-        hourRent.style.backgroundColor = 'white';
-        monthRent.style.backgroundColor = '#e2e2e2';
-        seasonReant.style.backgroundColor = '#e2e2e2';
-        yearRent.style.backgroundColor = '#e2e2e2';
-    }
-
-    const onClickmonthRent = () => {
-        const hourRent = document.getElementById('hourRent');
-        const monthRent = document.getElementById('monthRent');
-        const seasonReant = document.getElementById('seasonReant');
-        const yearRent = document.getElementById('yearRent');
-
-        hourRent.style.backgroundColor = '#e2e2e2';
-        monthRent.style.backgroundColor = 'white';
-        seasonReant.style.backgroundColor = '#e2e2e2';
-        yearRent.style.backgroundColor = '#e2e2e2';
-    }
-
-    const onClickseasonReant = () => {
-        const hourRent = document.getElementById('hourRent');
-        const monthRent = document.getElementById('monthRent');
-        const seasonReant = document.getElementById('seasonReant');
-        const yearRent = document.getElementById('yearRent');
-
-        hourRent.style.backgroundColor = '#e2e2e2';
-        monthRent.style.backgroundColor = '#e2e2e2';
-        seasonReant.style.backgroundColor = 'white';
-        yearRent.style.backgroundColor = '#e2e2e2';
-    }
-
-    const onClickyearRent = () => {
-        const hourRent = document.getElementById('hourRent');
-        const monthRent = document.getElementById('monthRent');
-        const seasonReant = document.getElementById('seasonReant');
-        const yearRent = document.getElementById('yearRent');
-
-        hourRent.style.backgroundColor = '#e2e2e2';
-        monthRent.style.backgroundColor = '#e2e2e2';
-        seasonReant.style.backgroundColor = '#e2e2e2';
-        yearRent.style.backgroundColor = 'white';
-    }
-    */
 
     return (<>
         <div className='container-lg'>
@@ -161,7 +146,7 @@ export default function Ownerpage() {
                     <section className='hourtime'>
                         <div>
                             <div className="topicgraph">
-                                <i class="fa-regular fa-calendar fa-xl"></i>
+                                <i className="fa-regular fa-calendar fa-xl"></i>
                                 <div className="topicfont">開放時段</div>
                             </div>
                             <table>
@@ -248,16 +233,9 @@ export default function Ownerpage() {
                                         </div>
                                     </label>
                                 </div>
-                            <div className="hourselect">
-                                {renderPage()}
-                                <div className="dateselect">
-                                    <i class="fa-regular fa-calendar-days fa-xs"></i>
+                                <div className="renderblock">
+                                    {renderPage()}
                                 </div>
-                                <div className="dailyslesct">
-                                    <div className="date"></div>
-                                    <div className="time"></div>
-                                </div>
-                            </div>
                             <button className="buttonselect">預定</button>
                         </div>
                     </div>
