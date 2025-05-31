@@ -1,7 +1,9 @@
 import "../ui/ownerpage.css";
+import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { Dropdown } from 'react-bootstrap';
 
 const PageMonth = () => {
     return (<>月租頁</>)
@@ -18,6 +20,7 @@ const PageYear = () => {
 
 export default function Ownerpage() {
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+    const opentime = Array.from({ length: 13 }, (_, i) => `${i + 10}:00`);
     const [activePage , setActivePage] = useState('pageHour');
     const [showPicker, setShowPicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -32,8 +35,6 @@ export default function Ownerpage() {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
-
-
 
     const renderPage = () => {
         switch(activePage){
@@ -53,13 +54,43 @@ export default function Ownerpage() {
                             </div>
                         )}
                         <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
-                            <i className="fa-regular fa-calendar-days fa-lg"></i>
+                            <div className="graph1">
+                                 <i className="fa-regular fa-calendar-days fa-lg"></i>
+                            </div>
                             <span>{selectedDate.toLocaleDateString()}</span>
                             <span>{weekDays[selectedDate.getDay()]}</span>
+                            <div className="graph2">
+                                <i className={showPicker? 'fa-regular fa-square-caret-up fa-lg' : 'fa-regular fa-square-caret-down fa-lg'}></i>
+                            </div>                            
                         </div>
                         <div className="dailyslesct">
-                            <div className="date"></div>
-                            <div className="time"></div>
+                            <div className="date">
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" id="dropdown-basic">
+                                        開始時間
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>開始時間</Dropdown.Item>
+                                        {opentime.map((hour, index) => {
+                                            return (<>
+                                                <Dropdown.Item key={index}>{hour}</Dropdown.Item>
+                                            </>)
+                                        })}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+                            <div className="time">
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" id="dropdown-basic">
+                                        結束時間
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>10:00</Dropdown.Item>
+                                        <Dropdown.Item>11:00</Dropdown.Item>
+                                        <Dropdown.Item>12:00</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                         </div>
                     </div>
                 </>)
