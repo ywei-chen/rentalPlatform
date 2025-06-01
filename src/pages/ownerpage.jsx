@@ -5,6 +5,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Dropdown } from 'react-bootstrap';
 
+const PageHour = () => {
+     return (<>日租頁</>)
+}
+
 const PageMonth = () => {
     return (<>月租頁</>)
 }
@@ -20,11 +24,16 @@ const PageYear = () => {
 
 export default function Ownerpage() {
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
-    const opentime = Array.from({ length: 13 }, (_, i) => `${i + 10}:00`);
+    const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
+    const [pay , setPay] = useState(360);
     const [activePage , setActivePage] = useState('pageHour');
     const [showPicker, setShowPicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [startTime , setStartTime] = useState(null);
+    const [endTime , setEndTime] = useState(null);
     const dropdownRef = useRef(null);
+
+    const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -65,41 +74,72 @@ export default function Ownerpage() {
                         </div>
                         <div className="dailyslesct">
                             <div className="date">
-                                <Dropdown>
+                                <Dropdown onSelect={(hour) => {
+                                        setStartTime(Number(hour));
+                                        setEndTime(null);
+                                    }}>
                                     <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        開始時間
+                                        { startTime === null ? '開始時間' : `${startTime}:00`}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>開始時間</Dropdown.Item>
                                         {opentime.map((hour, index) => {
                                             return (<>
-                                                <Dropdown.Item key={index}>{hour}</Dropdown.Item>
+                                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
                                             </>)
-                                        })
-                                        
-                                        
-                                        }
+                                        })}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>
                             <div className="time">
-                                <Dropdown>
+                                <Dropdown onSelect={(hour) => {
+                                    setEndTime(Number(hour));
+                                }}>
                                     <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        結束時間
+                                        {endTime === null ? '結束時間' : `${endTime}:00`}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>10:00</Dropdown.Item>
-                                        <Dropdown.Item>11:00</Dropdown.Item>
-                                        <Dropdown.Item>12:00</Dropdown.Item>
+                                        {endTimeOption.map((hour, index) => {
+                                            return (<>
+                                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
+                                            </>)
+                                        })}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>
-                        </div>
+                        </div>       
+                        {(startTime !== null) && (endTime !== null) && (
+                            <div className="payCount">
+                                <h5>{`$${pay} x ${(endTime - startTime)}小時`}</h5>
+                                <div className="split" />
+                                <h5>{`金額總計: ${(endTime - startTime)*(pay)}元`}</h5>
+                            </div>
+                        )}
                     </div>
                 </>)
             case 'pageMonth':
                 return (<>
-                    <PageMonth></PageMonth>
+                    {showPicker && (
+                            <div className="datepicker">
+                                <DatePicker
+                                    selected={selectedDate}
+                                    onChange={(date) => {
+                                        setSelectedDate(date);
+                                        setShowPicker(false);
+                                    }}
+                                    inline
+                                />
+                            </div>
+                        )}
+                        <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
+                            <div className="graph1">
+                                 <i className="fa-regular fa-calendar-days fa-lg"></i>
+                            </div>
+                            <span>{selectedDate.toLocaleDateString()}</span>
+                            <span>{weekDays[selectedDate.getDay()]}</span>
+                            <div className="graph2">
+                                <i className={showPicker? 'fa-regular fa-square-caret-up fa-lg' : 'fa-regular fa-square-caret-down fa-lg'}></i>
+                            </div>                            
+                        </div>
                 </>)
             case 'pageSeason':
                 return(<>
@@ -253,7 +293,7 @@ export default function Ownerpage() {
                         <div className="stickyblock">
                             <div className="priceselect">
                                 <div className="pricecontent">
-                                    <span className="topicfont">$360</span>
+                                    <span className="topicfont">${pay}</span>
                                     <small>/小時</small>
                                 </div>
                                 </div>
