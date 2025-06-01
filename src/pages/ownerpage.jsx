@@ -1,153 +1,33 @@
 import "../ui/ownerpage.css";
-import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useRef, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import { Dropdown } from 'react-bootstrap';
-
-const PageHour = () => {
-     return (<>日租頁</>)
-}
-
-const PageMonth = () => {
-    return (<>月租頁</>)
-}
-
-const PageSeason = () => {
-    return (<>季租頁</>)
-}
-
-const PageYear = () => {
-    return (<>年租頁</>)
-}
+import React, { useState } from 'react';
+import HourRent from "../components/hourrent";
+import MonthRent from "../components/monthrent";
+import SeasonRent from "../components/seasonrent";
+import YearRent from "../components/yearrent";
 
 
 export default function Ownerpage() {
-    const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
-    const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
-    const [pay , setPay] = useState(360);
-    const [activePage , setActivePage] = useState('pageHour');
-    const [showPicker, setShowPicker] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [startTime , setStartTime] = useState(null);
-    const [endTime , setEndTime] = useState(null);
-    const dropdownRef = useRef(null);
-
-    const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setShowPicker(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    const [activePage, setActivePage] = useState('pageHour');
+    const [pay, setPay] = useState(360);
 
     const renderPage = () => {
         switch(activePage){
             case 'pageHour':
                 return (<>
-                    <div className="hourselect" ref={dropdownRef}>
-                        {showPicker && (
-                            <div className="datepicker">
-                                <DatePicker
-                                    selected={selectedDate}
-                                    onChange={(date) => {
-                                        setSelectedDate(date);
-                                        setShowPicker(false);
-                                    }}
-                                    inline
-                                />
-                            </div>
-                        )}
-                        <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
-                            <div className="graph1">
-                                 <i className="fa-regular fa-calendar-days fa-lg"></i>
-                            </div>
-                            <span>{selectedDate.toLocaleDateString()}</span>
-                            <span>{weekDays[selectedDate.getDay()]}</span>
-                            <div className="graph2">
-                                <i className={showPicker? 'fa-regular fa-square-caret-up fa-lg' : 'fa-regular fa-square-caret-down fa-lg'}></i>
-                            </div>                            
-                        </div>
-                        <div className="dailyslesct">
-                            <div className="date">
-                                <Dropdown onSelect={(hour) => {
-                                        setStartTime(Number(hour));
-                                        setEndTime(null);
-                                    }}>
-                                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        { startTime === null ? '開始時間' : `${startTime}:00`}
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        {opentime.map((hour, index) => {
-                                            return (<>
-                                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
-                                            </>)
-                                        })}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </div>
-                            <div className="time">
-                                <Dropdown onSelect={(hour) => {
-                                    setEndTime(Number(hour));
-                                }}>
-                                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        {endTime === null ? '結束時間' : `${endTime}:00`}
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        {endTimeOption.map((hour, index) => {
-                                            return (<>
-                                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
-                                            </>)
-                                        })}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </div>
-                        </div>       
-                        {(startTime !== null) && (endTime !== null) && (
-                            <div className="payCount">
-                                <h5>{`$${pay} x ${(endTime - startTime)}小時`}</h5>
-                                <div className="split" />
-                                <h5>{`金額總計: ${(endTime - startTime)*(pay)}元`}</h5>
-                            </div>
-                        )}
-                    </div>
+                    <HourRent pay={pay}></HourRent>
                 </>)
             case 'pageMonth':
                 return (<>
-                    {showPicker && (
-                            <div className="datepicker">
-                                <DatePicker
-                                    selected={selectedDate}
-                                    onChange={(date) => {
-                                        setSelectedDate(date);
-                                        setShowPicker(false);
-                                    }}
-                                    inline
-                                />
-                            </div>
-                        )}
-                        <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
-                            <div className="graph1">
-                                 <i className="fa-regular fa-calendar-days fa-lg"></i>
-                            </div>
-                            <span>{selectedDate.toLocaleDateString()}</span>
-                            <span>{weekDays[selectedDate.getDay()]}</span>
-                            <div className="graph2">
-                                <i className={showPicker? 'fa-regular fa-square-caret-up fa-lg' : 'fa-regular fa-square-caret-down fa-lg'}></i>
-                            </div>                            
-                        </div>
+                    <MonthRent pay={pay}></MonthRent>
                 </>)
             case 'pageSeason':
                 return(<>
-                    <PageSeason></PageSeason>
+                    <SeasonRent pay={pay}></SeasonRent>
                 </>)
             case 'pageYear':
                 return(<>
-                    <PageYear></PageYear>
+                   <YearRent pay={pay}></YearRent>
                 </>)
         }
     }
@@ -300,10 +180,22 @@ export default function Ownerpage() {
                                 <div className="inputselect">
                                     <label className="inputscope">                                      
                                         <div className="inputcondition">
-                                            <span id="hourRent" style={buttonColor('pageHour')} onClick={() => setActivePage('pageHour')}>時租</span>
-                                            <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => setActivePage('pageMonth')}>月租</span>
-                                            <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => setActivePage('pageSeason')}>季租</span>
-                                            <span id="yearRent" style={buttonColor('pageYear')} onClick={() => setActivePage('pageYear')}>年租</span>
+                                            <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
+                                                setActivePage('pageHour');
+                                                setPay(360);
+                                                }}>時租</span>
+                                            <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
+                                                setActivePage('pageMonth');
+                                                setPay(340);
+                                                }}>月租</span>
+                                            <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
+                                                setActivePage('pageSeason');
+                                                setPay(320);
+                                                }}>季租</span>
+                                            <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
+                                                setActivePage('pageYear');
+                                                setPay(300);
+                                                }}>年租</span>
                                         </div>
                                     </label>
                                 </div>
