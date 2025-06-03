@@ -1,15 +1,17 @@
+import "../ui/userregister.css";
+import * as bootstrap from 'bootstrap';
 import { useEffect, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import "../ui/userregister.css";
-import { firebase } from "../components/firebase";
-import * as bootstrap from 'bootstrap';
+import { firebase, db } from "../components/firebase";
 
 let myModal;
 export default function Userregister() {
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const [handler, setHandler] = useState(1);
+    const [name , setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalContent, setModalContent] = useState('');
@@ -35,15 +37,15 @@ export default function Userregister() {
 
     const showLoginError = (e) => {
         if(e.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS){
-            setModalContent("帳號密碼錯誤");
+            setModalContent("帳號密碼錯誤，請重新輸入");
             myModal.show();
         }
         else if(e.code == AuthErrorCodes.EMAIL_EXISTS){
-            setModalContent("帳號已註冊");
+            setModalContent("帳號已註冊，請重新輸入");
             myModal.show();
         }
         else{
-            setModalContent("登入錯誤");
+            setModalContent("登入錯誤，請重新輸入");
             myModal.show();
         }
     }
@@ -53,7 +55,7 @@ export default function Userregister() {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                setModalContent("登入成功");
+                setModalContent("登入成功，即將跳轉至首頁");
                 myModal.show();
                 setTimeout(() => {
                     myModal.hide();
@@ -67,13 +69,22 @@ export default function Userregister() {
         else if(handler == 0){
             const auth = getAuth(firebase);
             createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    return setDoc(doc(db, 'users', user.uid), {
+                        uid: user.uid,
+                        userName: name,
+                        email: user.email,
+                        creatTime: serverTimestamp()
+                    });
+                })
                 .then(() => {
-                    setModalContent("註冊成功");
+                    setModalContent("註冊成功，即將跳轉至首頁");
                     myModal.show();
                     setTimeout(() => {
-                    myModal.hide();
-                    navigate('/siteFalicyCRADemo/');
-                }, 3000)
+                        myModal.hide();
+                        navigate('/siteFalicyCRADemo/');
+                    }, 3000)
                 })
                 .catch((e) => {
                     showLoginError(e);
@@ -97,7 +108,17 @@ export default function Userregister() {
                 </div>
                 <form method="post" target="_self" onSubmit={onSubmit}>
                     <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
+                        <input type='email' className="form-control" id="floatingUserName" placeholder="Name" onChange={
+                            (e) => {
+                                setName(e.target.value);
+                                console.log(name
+                                );
+                            }
+                        }    />
+                        <label htmlFor="floatingUserName">Email address</label>
+                    </div>
+                    <div className='form-floating mb-2'>
+                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                             (e) => {
                                 setEmail(e.target.value);
                                 console.log(email);
@@ -106,7 +127,7 @@ export default function Userregister() {
                         <label htmlFor="floatingEmail">Email address</label>
                     </div>
                     <div className="form-floating mb-2">
-                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
+                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                             (e) => {
                                 setPassword(e.target.value); 
                                 console.log(password);                             
@@ -125,7 +146,7 @@ export default function Userregister() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div className="modal-body">
-                            {modalContent}，即將跳轉至首頁
+                            {modalContent}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>

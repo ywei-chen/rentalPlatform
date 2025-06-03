@@ -36,15 +36,15 @@ export default function Ownerregister() {
 
     const showLoginError = (e) => {
         if(e.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS){
-            setModalContent("帳號密碼錯誤");
+            setModalContent("帳號密碼錯誤，請重新輸入");
             myModal.show();
         }
         else if(e.code == AuthErrorCodes.EMAIL_EXISTS){
-            setModalContent("帳號已註冊");
+            setModalContent("帳號已註冊，請重新輸入");
             myModal.show();
         }
         else{
-            setModalContent("登入錯誤");
+            setModalContent("登入錯誤，請重新輸入");
             myModal.show();
         }
     }
@@ -54,7 +54,7 @@ export default function Ownerregister() {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                setModalContent("登入成功");
+                setModalContent("登入成功，即將跳轉至首頁");
                 myModal.show();
                 setTimeout(() => {
                     myModal.hide();
@@ -69,7 +69,7 @@ export default function Ownerregister() {
             const auth = getAuth(firebase);
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
-                    setModalContent("註冊成功");
+                    setModalContent("註冊成功，，即將跳轉至首頁");
                     myModal.show();
                     setTimeout(() => {
                     myModal.hide();
@@ -126,7 +126,7 @@ export default function Ownerregister() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div className="modal-body">
-                            {modalContent}，即將跳轉至首頁
+                            {modalContent}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
