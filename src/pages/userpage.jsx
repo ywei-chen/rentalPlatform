@@ -26,7 +26,12 @@ export default function Userpage() {
             <h6>Hi, {profile.userName} 歡迎回來，您的預約資訊如下:</h6>
         </div>
         <div className="split"></div>
-        <div className="bookingblock"></div>
+        <div className="bookingblock">
+            <div className="storename"></div>
+            <div className="bookstarttime"></div>
+            <div className="bookendtime"></div>
+            <button>取消</button>
+        </div>
     </>
     
   );
