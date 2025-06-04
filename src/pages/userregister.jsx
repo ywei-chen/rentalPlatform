@@ -6,6 +6,7 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firebase, db } from "../components/firebase";
 
+
 let myModal;
 export default function Userregister() {
     const navigate = useNavigate();
@@ -106,37 +107,59 @@ export default function Userregister() {
                         <h5>註冊</h5>
                     </div>
                 </div>
-                <form method="post" target="_self" onSubmit={onSubmit}>
-                    <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingUserName" placeholder="Name" onChange={
-                            (e) => {
-                                setName(e.target.value);
-                                console.log(name
-                                );
-                            }
-                        }    />
-                        <label htmlFor="floatingUserName">name</label>
-                    </div>
+                {handler ? (<form method="post" target="_self" onSubmit={onSubmit}>
                     <div className='form-floating mb-2'>
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                             (e) => {
                                 setEmail(e.target.value);
                                 console.log(email);
                             }
-                        }    />
+                        } />
                         <label htmlFor="floatingEmail">Email address</label>
                     </div>
                     <div className="form-floating mb-2">
                         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                             (e) => {
-                                setPassword(e.target.value); 
-                                console.log(password);                             
+                                setPassword(e.target.value);
+                                console.log(password);
                             }
-                        }/>
+                        } />
                         <label htmlFor="floatingPassword">Password</label>
                     </div>
-                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
-                </form>
+                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
+                </form>) :
+                    (<form method="post" target="_self" onSubmit={onSubmit}>
+                        <div className='form-floating mb-2'>
+                            <input type='name' className="form-control" id="floatingUserName" placeholder="Name" onChange={
+                                (e) => {
+                                    setName(e.target.value);
+                                    console.log(name
+                                    );
+                                }
+                            } />
+                            <label htmlFor="floatingUserName">name</label>
+                        </div>
+                        <div className='form-floating mb-2'>
+                            <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
+                                (e) => {
+                                    setEmail(e.target.value);
+                                    console.log(email);
+                                }
+                            } />
+                            <label htmlFor="floatingEmail">Email address</label>
+                        </div>
+                        <div className="form-floating mb-2">
+                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
+                                (e) => {
+                                    setPassword(e.target.value);
+                                    console.log(password);
+                                }
+                            } />
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
+                        <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
+                    </form>)
+                }
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" ref={modalRef}>
             <div className="modal-dialog">

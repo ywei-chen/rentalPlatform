@@ -4,6 +4,48 @@ import { useNavigate } from "react-router-dom";
 import "../ui/ownerregister.css";
 import { firebase } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
+import { Dropdown } from 'react-bootstrap';
+
+const WeekOpentime = () => {
+    return (
+        <div className="dailyslesct">
+            <div>Mon. </div>
+            <div className="date">
+                <Dropdown onSelect={(hour) => {
+                    setStartTime(Number(hour));
+                    setEndTime(null);
+                }}>
+                    <Dropdown.Toggle variant="" id="dropdown-basic">
+                        {startTime === null ? '開始時間' : `${startTime}:00`}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        {opentime.map((hour, index) => {
+                            return (
+                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
+                            )
+                        })}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+            <div className="time">
+                <Dropdown onSelect={(hour) => {
+                    setEndTime(Number(hour));
+                }}>
+                    <Dropdown.Toggle variant="" id="dropdown-basic">
+                        {endTime === null ? '結束時間' : `${endTime}:00`}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        {endTimeOption.map((hour, index) => {
+                            return (
+                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
+                            )
+                        })}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+        </div>
+    )
+}
 
 
 let myModal;
@@ -14,6 +56,11 @@ export default function Ownerregister() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalContent, setModalContent] = useState('');
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+    const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
+    const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
+
 
     useEffect(() => {
         myModal = new bootstrap.Modal(modalRef.current);
@@ -98,73 +145,64 @@ export default function Ownerregister() {
                 </div>
                 {handler ? (<form method="post" target="_self" onSubmit={onSubmit}>
                     <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
-                            (e) => {
-                                setEmail(e.target.value);
-                                console.log(email);
-                            }
-                        }    />
-                        <label htmlFor="floatingname">XX羽球館</label>
-                    </div>
-                    <div className='form-floating mb-2'>
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
                             (e) => {
                                 setEmail(e.target.value);
                                 console.log(email);
                             }
-                        }    />
+                        } />
                         <label htmlFor="floatingEmail">Email address</label>
                     </div>
                     <div className="form-floating mb-2">
                         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
                             (e) => {
-                                setPassword(e.target.value); 
-                                console.log(password);                             
+                                setPassword(e.target.value);
+                                console.log(password);
                             }
-                        }/>
+                        } />
                         <label htmlFor="floatingPassword">Password</label>
                     </div>
-                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
-                </form>):
-                (<form method="post" target="_self" onSubmit={onSubmit}>
-                    <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
-                            (e) => {
-                                setEmail(e.target.value);
-                                console.log(email);
-                            }
-                        }    />
-                        <label htmlFor="floatingname">XX羽球館</label>
-                    </div>
-                    <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
-                            (e) => {
-                                setEmail(e.target.value);
-                                console.log(email);
-                            }
-                        }    />
-                        <label htmlFor="floatingEmail">Email address</label>
-                    </div>
-                    <div className="form-floating mb-2">
-                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
-                            (e) => {
-                                setPassword(e.target.value); 
-                                console.log(password);                             
-                            }
-                        }/>
-                        <label htmlFor="floatingPassword">Password</label>
-                    </div>
-                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
-                </form>)               
+                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
+                </form>) :
+                    (<form method="post" target="_self" onSubmit={onSubmit}>
+                        <div className='form-floating mb-2'>
+                            <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
+                                (e) => {
+                                    setEmail(e.target.value);
+                                    console.log(email);
+                                }
+                            } />
+                            <label htmlFor="floatingname">ex: 松上羽球館</label>
+                        </div>
+                        <div className='form-floating mb-2'>
+                            <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
+                                (e) => {
+                                    setEmail(e.target.value);
+                                    console.log(email);
+                                }
+                            } />
+                            <label htmlFor="floatingEmail">Email address</label>
+                        </div>
+                        <div className="form-floating mb-2">
+                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
+                                (e) => { 
+                                    setPassword(e.target.value);
+                                    console.log(password);
+                                }
+                            } />
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
+                        <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
+                    </form>)
                 }
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" ref={modalRef}>
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="exampleModalLabel">登入提示</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">登入提示</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div className="modal-body">
                             {modalContent}
                         </div>
