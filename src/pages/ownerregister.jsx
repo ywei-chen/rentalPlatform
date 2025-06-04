@@ -50,7 +50,7 @@ export default function Ownerregister() {
     }
 
     const onSubmit = () => {
-        if (handler == 1){
+        if (handler === 1){
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
@@ -65,7 +65,7 @@ export default function Ownerregister() {
                 showLoginError(e);
             })
         }
-        else if(handler == 0){
+        else if(handler === 0){
             const auth = getAuth(firebase);
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
@@ -96,7 +96,16 @@ export default function Ownerregister() {
                         <h5>註冊</h5>
                     </div>
                 </div>
-                <form method="post" target="_self" onSubmit={onSubmit}>
+                {handler ? (<form method="post" target="_self" onSubmit={onSubmit}>
+                    <div className='form-floating mb-2'>
+                        <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
+                            (e) => {
+                                setEmail(e.target.value);
+                                console.log(email);
+                            }
+                        }    />
+                        <label htmlFor="floatingname">XX羽球館</label>
+                    </div>
                     <div className='form-floating mb-2'>
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
                             (e) => {
@@ -116,7 +125,38 @@ export default function Ownerregister() {
                         <label htmlFor="floatingPassword">Password</label>
                     </div>
                     <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
-                </form>
+                </form>):
+                (<form method="post" target="_self" onSubmit={onSubmit}>
+                    <div className='form-floating mb-2'>
+                        <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
+                            (e) => {
+                                setEmail(e.target.value);
+                                console.log(email);
+                            }
+                        }    />
+                        <label htmlFor="floatingname">XX羽球館</label>
+                    </div>
+                    <div className='form-floating mb-2'>
+                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
+                            (e) => {
+                                setEmail(e.target.value);
+                                console.log(email);
+                            }
+                        }    />
+                        <label htmlFor="floatingEmail">Email address</label>
+                    </div>
+                    <div className="form-floating mb-2">
+                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
+                            (e) => {
+                                setPassword(e.target.value); 
+                                console.log(password);                             
+                            }
+                        }/>
+                        <label htmlFor="floatingPassword">Password</label>
+                    </div>
+                    <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入": "註冊"}</button>
+                </form>)               
+                }
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" ref={modalRef}>
             <div className="modal-dialog">

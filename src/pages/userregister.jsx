@@ -115,7 +115,7 @@ export default function Userregister() {
                                 );
                             }
                         }    />
-                        <label htmlFor="floatingUserName">Email address</label>
+                        <label htmlFor="floatingUserName">name</label>
                     </div>
                     <div className='form-floating mb-2'>
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
