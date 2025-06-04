@@ -5,6 +5,7 @@ import Userregister from './pages/userregister';
 import Ownerregister from './pages/ownerregister';
 import Home from './pages/home';
 import Ownerpage from './pages/ownerpage';
+import Userpage from './pages/userpage';
 //Render
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/siteFalicyCRADemo/userregister/' element={<Userregister />} />
         <Route path='/siteFalicyCRADemo/ownerregister/' element={<Ownerregister />} />
         <Route path='/siteFalicyCRADemo/ownerpage/' element={<Ownerpage />} />
+        <Route path='/siteFalicyCRADemo/userpage/:uid' element={<Userpage />} />
       </Routes>
     </>
   )

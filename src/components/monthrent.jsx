@@ -3,7 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
-import { addDays, format } from "date-fns";
+import { addDays } from "date-fns";
 import { Dropdown } from 'react-bootstrap';
 
 export default function MonthRent({ pay }) {

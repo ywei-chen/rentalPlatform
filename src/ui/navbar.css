@@ -1,0 +1,8 @@
+.gotoblock {
+    display: flex;
+    align-items: center;
+}
+
+.gotouserpage {
+    cursor: pointer;
+}

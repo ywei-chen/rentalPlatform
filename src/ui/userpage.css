@@ -1,0 +1,20 @@
+body {
+    height: 100vh;
+}
+
+.split {
+    border: 1px solid rgba(232, 232, 232, 1);
+    margin: 20px auto;
+}
+
+.context {
+    margin: 30px 10px;
+}
+
+.bookingblock {
+    margin: 10px auto;
+    border-radius: 3px;
+    border: 1px solid rgb(56, 59, 80);
+    height: 30px;
+    width: 90%;
+}
