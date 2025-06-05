@@ -5,7 +5,6 @@ import "../ui/ownerregister.css";
 import { firebase } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 import { Dropdown } from 'react-bootstrap';
-import { isTuesday } from "date-fns";
 
 const WeekOpentime = ({day}) => {
     const [startTime, setStartTime] = useState(null);
@@ -13,7 +12,7 @@ const WeekOpentime = ({day}) => {
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
 
-    return (
+    return (<>
         <div className="dailyslesct">
             <div className="dayblock">{day}</div>
             <div className="date">
@@ -50,6 +49,8 @@ const WeekOpentime = ({day}) => {
                 </Dropdown>
             </div>
         </div>
+        <div className="split"></div>
+    </>
     )
 }
 

@@ -34,3 +34,8 @@ html, body {
     width: 50%;
     font-weight:500;
 }
+
+.split {
+    border: 1px solid rgba(232, 232, 232, 1);
+    margin: 5px auto;
+}
