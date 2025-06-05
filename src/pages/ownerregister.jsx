@@ -5,11 +5,17 @@ import "../ui/ownerregister.css";
 import { firebase } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 import { Dropdown } from 'react-bootstrap';
+import { isTuesday } from "date-fns";
 
-const WeekOpentime = () => {
+const WeekOpentime = ({day}) => {
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+    const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
+    const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
+
     return (
         <div className="dailyslesct">
-            <div>Mon. </div>
+            <div className="dayblock">{day}</div>
             <div className="date">
                 <Dropdown onSelect={(hour) => {
                     setStartTime(Number(hour));
@@ -56,11 +62,8 @@ export default function Ownerregister() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalContent, setModalContent] = useState('');
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
-    const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
-    const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
-
+    const weekDays = ['Mon.', 'Tue.' , 'Wed.' , 'Thr.' , 'Fri.' , 'Sat.' , 'Sun.'];
+    
 
     useEffect(() => {
         myModal = new bootstrap.Modal(modalRef.current);
@@ -192,8 +195,17 @@ export default function Ownerregister() {
                             } />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
+                        {
+                            weekDays.map((day, index) => {
+                                return (
+                                    <WeekOpentime day={day} key={index}></WeekOpentime>
+                                )
+                            })
+                            
+                        }
                         <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
                     </form>)
+                    
                 }
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" ref={modalRef}>

@@ -29,3 +29,8 @@ html, body {
     text-align: center;
     align-content: center;
 }
+
+.dayblock {
+    width: 50%;
+    font-weight:500;
+}
