@@ -12,45 +12,46 @@ const WeekOpentime = ({day}) => {
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
 
-    return (<>
-        <div className="dailyslesct">
-            <div className="dayblock">{day}</div>
-            <div className="date">
-                <Dropdown onSelect={(hour) => {
-                    setStartTime(Number(hour));
-                    setEndTime(null);
-                }}>
-                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                        {startTime === null ? '開始時間' : `${startTime}:00`}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        {opentime.map((hour, index) => {
-                            return (
-                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
-                            )
-                        })}
-                    </Dropdown.Menu>
-                </Dropdown>
+    return (
+        <>
+            <div className="dailyslesct">
+                <div className="dayblock">{day}</div>
+                <div className="date">
+                    <Dropdown onSelect={(hour) => {
+                        setStartTime(Number(hour));
+                        setEndTime(null);
+                    }}>
+                        <Dropdown.Toggle variant="" id={`dropdown-${day}-start`}>
+                            {startTime === null ? '開始時間' : `${startTime}:00`}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {opentime.map((hour, index) => {
+                                return (
+                                    <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
+                                )
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+                <div className="time">
+                    <Dropdown onSelect={(hour) => {
+                        setEndTime(Number(hour));
+                    }}>
+                        <Dropdown.Toggle variant="" id={`dropdown-${day}-end`}>
+                            {endTime === null ? '結束時間' : `${endTime}:00`}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {endTimeOption.map((hour, index) => {
+                                return (
+                                    <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
+                                )
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
             </div>
-            <div className="time">
-                <Dropdown onSelect={(hour) => {
-                    setEndTime(Number(hour));
-                }}>
-                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                        {endTime === null ? '結束時間' : `${endTime}:00`}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        {endTimeOption.map((hour, index) => {
-                            return (
-                                <Dropdown.Item key={index} eventKey={hour}>{hour}:00</Dropdown.Item>
-                            )
-                        })}
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
-        </div>
-        <div className="split"></div>
-    </>
+            <div className="spllit"></div>
+        </>
     )
 }
 
@@ -149,7 +150,7 @@ export default function Ownerregister() {
                 </div>
                 {handler ? (<form method="post" target="_self" onSubmit={onSubmit}>
                     <div className='form-floating mb-2'>
-                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
+                        <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                             (e) => {
                                 setEmail(e.target.value);
                                 console.log(email);
@@ -158,7 +159,7 @@ export default function Ownerregister() {
                         <label htmlFor="floatingEmail">Email address</label>
                     </div>
                     <div className="form-floating mb-2">
-                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
+                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                             (e) => {
                                 setPassword(e.target.value);
                                 console.log(password);
@@ -170,7 +171,7 @@ export default function Ownerregister() {
                 </form>) :
                     (<form method="post" target="_self" onSubmit={onSubmit}>
                         <div className='form-floating mb-2'>
-                            <input type='email' className="form-control" id="floatingName" placeholder="name" onMouseOutCapture={
+                            <input type='email' className="form-control" id="floatingName" placeholder="name" onChange={
                                 (e) => {
                                     setEmail(e.target.value);
                                     console.log(email);
@@ -179,7 +180,7 @@ export default function Ownerregister() {
                             <label htmlFor="floatingname">ex: 松上羽球館</label>
                         </div>
                         <div className='form-floating mb-2'>
-                            <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onMouseOutCapture={
+                            <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                                 (e) => {
                                     setEmail(e.target.value);
                                     console.log(email);
@@ -188,7 +189,7 @@ export default function Ownerregister() {
                             <label htmlFor="floatingEmail">Email address</label>
                         </div>
                         <div className="form-floating mb-2">
-                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onMouseOutCapture={
+                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                                 (e) => { 
                                     setPassword(e.target.value);
                                     console.log(password);
@@ -196,13 +197,15 @@ export default function Ownerregister() {
                             } />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
+                        <div className='opentimeTopic'>-營業時間-</div>
+                        <div className="spllit"></div>
                         {
                             weekDays.map((day, index) => {
                                 return (
                                     <WeekOpentime day={day} key={index}></WeekOpentime>
                                 )
                             })
-                            
+
                         }
                         <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
                     </form>)
