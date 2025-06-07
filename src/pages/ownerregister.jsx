@@ -51,27 +51,23 @@ const MoneySetting = () => {
     )
 }
 
-const CourtSetting = () => {
-    const [totalCourt, setTotalCourt] = useState(null);
-    const courtcount = Array.from({ length: 30 }, (_, i) => i + 1);
+const CourtSetting = ({ courtCount, setCourtCount }) => {
+  const courtOptions = Array.from({ length: 30 }, (_, i) => i + 1);
 
-    return (
-        <Dropdown onSelect={(item) => {
-            setTotalCourt(Number(item));
-        }}>
-            <Dropdown.Toggle className="dropdown" variant="" id='dropdown-court'>
-                {totalCourt === null ? '請選擇場地數量' : `${totalCourt}面`}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-                {courtcount.map((item, index) => {
-                    return (
-                        <Dropdown.Item key={index} eventKey={item}>{item}面</Dropdown.Item>
-                    )
-                })}
-            </Dropdown.Menu>
-        </Dropdown>
-    )
-}
+  return (
+    <Dropdown onSelect={(val) => setCourtCount(Number(val))}>
+      <Dropdown.Toggle variant="secondary" id="dropdown-courts">
+        {courtCount ? `${courtCount} 面` : '請選擇場地數量'}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {courtOptions.map((num) => (
+          <Dropdown.Item key={num} eventKey={num}>{num} 面</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+};
+
 
 const WeekOpentime = ({day}) => {
     const [startTime, setStartTime] = useState(null);
@@ -132,6 +128,7 @@ export default function Ownerregister() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalContent, setModalContent] = useState('');
+    const [courtCount, setCourtCount] = useState(1);
     const weekDays = ['Mon.', 'Tue.' , 'Wed.' , 'Thr.' , 'Fri.' , 'Sat.' , 'Sun.'];
     
 
@@ -279,7 +276,7 @@ export default function Ownerregister() {
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-場地數量-</div>
                             <div className="spllit"></div>
-                            <CourtSetting></CourtSetting>
+                            <CourtSetting courtCount={courtCount} setCourtCount={setCourtCount}></CourtSetting>
                         </div>
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-場地租金-</div>
