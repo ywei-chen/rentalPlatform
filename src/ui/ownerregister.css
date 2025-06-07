@@ -9,7 +9,12 @@ html, body {
 }
 
 .signBox {
-    min-width: 300px;
+    width: 300px;
+    height: 100%;
+    text-align: center;
+    display: flow;
+    align-items: center;
+    margin: auto;
 }
 
 .chosedBox {
@@ -58,4 +63,11 @@ html, body {
      border-radius: 4px;
      padding: 10px;
      margin: 10px auto;
+}
+
+.openslesct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
 }
