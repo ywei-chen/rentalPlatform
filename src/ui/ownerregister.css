@@ -41,8 +41,21 @@ html, body {
 }
 
 .opentimeTopic {
-    margin: 15px auto;
+    margin: 10px auto;
     font-size: large;
     font-weight: 500;
     text-align: center;
+}
+
+.dropdown {
+     border: 1px solid rgba(232, 232, 232, 1);
+     border-radius: 4px;
+     width: 100%;
+}
+
+.opentimeset {
+    border: 1px solid rgba(232, 232, 232, 1);
+     border-radius: 4px;
+     padding: 10px;
+     margin: 10px auto;
 }
