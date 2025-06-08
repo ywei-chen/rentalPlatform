@@ -21,3 +21,23 @@ body {
     height: 60px;
     width: 90%;
 }
+
+.settingChange {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.settingChange > div {
+    margin: 10px auto;
+}
+
+.revise {
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      background-color: black;
+      width: 130px;
+      transition: all .5s 0s ease;
+    }

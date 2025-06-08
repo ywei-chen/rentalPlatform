@@ -6,6 +6,7 @@ import Ownerregister from './pages/ownerregister';
 import Home from './pages/home';
 import Ownerpage from './pages/ownerpage';
 import Userpage from './pages/userpage';
+import Courtpage from './pages/courtpage';
 //Render
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/siteFalicyCRADemo/ownerregister/' element={<Ownerregister />} />
         <Route path='/siteFalicyCRADemo/ownerpage/:uid' element={<Ownerpage />} />
         <Route path='/siteFalicyCRADemo/userpage/:uid' element={<Userpage />} />
+        <Route path='/siteFalicyCRADemo/courtpage/:uid' element={<Courtpage />} />
       </Routes>
     </>
   )

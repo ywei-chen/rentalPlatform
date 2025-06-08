@@ -187,7 +187,6 @@ const AddrSet = ({county, setCounty, town, setTown,  countynamelist, countycodel
             </div>
         </div>
     )
-
 }
 
 let myModal;
@@ -377,14 +376,14 @@ export default function Ownerregister() {
                             } />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
-                        <AddrSet 
-                        county = {county}
-                        setCounty = {setCounty}
-                        town = {town}
-                        setTown = {setTown}
-                        countynamelist = {countynamelist}
-                        countycodelist = {countycodelist}
-                        setAddr = {setAddr}
+                        <AddrSet
+                            county={county}
+                            setCounty={setCounty}
+                            town={town}
+                            setTown={setTown}
+                            countynamelist={countynamelist}
+                            countycodelist={countycodelist}
+                            setAddr={setAddr}
                         ></AddrSet>
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-營業時間-</div>

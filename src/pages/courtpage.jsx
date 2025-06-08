@@ -1,15 +1,31 @@
-import "../ui/songshang.css";
+import "../ui/courtpage.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
 import HourRent from "../components/hourrent";
 import MonthRent from "../components/monthrent";
 import SeasonRent from "../components/seasonrent";
 import YearRent from "../components/yearrent";
+import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../components/firebase";
 
 
-export default function SongShang() {
+export default function Courtpage() {
+    const { uid } = useParams();
+    const [storeData, setStoreData] = useState(null);
     const [activePage, setActivePage] = useState('pageHour');
     const [pay, setPay] = useState(360);
+
+    useEffect(() => {
+        (async () => {
+            const storeRef = doc(db, "stores", uid);
+            const docSnap = await getDoc(storeRef);
+            if (docSnap.exists()) {
+                setStoreData(docSnap.data());
+            }
+        })()
+    },[uid]);
+    if (!storeData) return <div>載入中...</div>;
 
     const renderPage = () => {
         switch(activePage){
@@ -57,13 +73,13 @@ export default function SongShang() {
                         <div>
                             <div className="topicgraph">
                                 <i className="fa-regular fa-user fa-xl"></i>
-                                <div className="topicfont">松上羽球館</div>
+                                <div className="topicfont">{storeData.storename}</div>
                                 <div className="buttongroup">
                                     <button className="buttonTop">飲水機</button>
                                     <button className="buttonTop">停車場</button>
                                 </div>
                             </div>
-                            <div className="topicontent">高雄市左營區文學路265號</div>
+                            <div className="topicontent">{storeData.address}</div>
                         </div>
                     </section>
                     <section className='space&picture'>
@@ -109,7 +125,7 @@ export default function SongShang() {
                                         <td>週一</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[0].open} - ${storeData.dutytime[0].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -117,7 +133,7 @@ export default function SongShang() {
                                         <td>週二</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[1].open} - ${storeData.dutytime[1].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -125,7 +141,7 @@ export default function SongShang() {
                                         <td>週三</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[2].open} - ${storeData.dutytime[2].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -133,7 +149,7 @@ export default function SongShang() {
                                         <td>週四</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[3].open} - ${storeData.dutytime[3].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -141,7 +157,7 @@ export default function SongShang() {
                                         <td>週五</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[4].open} - ${storeData.dutytime[4].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -149,7 +165,7 @@ export default function SongShang() {
                                         <td>週六</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[5].open} - ${storeData.dutytime[5].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -157,7 +173,7 @@ export default function SongShang() {
                                         <td>週日</td>
                                         <td>
                                             <div>
-                                                <span>09:00 - 23:00</span>
+                                                <span>{`${storeData.dutytime[6].open} - ${storeData.dutytime[6].close}`}</span>
                                             </div>
                                         </td>
                                     </tr>

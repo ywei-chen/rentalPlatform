@@ -1,6 +1,9 @@
 import axios from 'axios';
 import "../ui/home.css";
 import { useEffect, useState } from 'react';
+import { db } from '../components/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 
 //Footer
 const Footer = () => {
@@ -23,19 +26,19 @@ const Footer = () => {
       </footer>
     </>)
   }
-  
+
   //HotRank
-  const HotRank = ({ img1, img2, img3, img4, img5, img6, key }) => {
+  const HotRank = ({ img1, img2, img3, img4, img5, img6, key , court }) => {
     return (<>
       <div className='container-lg'>
         <div className='h4 my-2'>最受歡迎球館</div>
         <div className='dGrid' key={key}>
-          <a className='dIm1'>
-            <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
+          <Link to={`/siteFalicyCRADemo/courtpage/${court}`} key={court} className='dIm1'>
+            <img src={img1} className='object-fit-cover rounded-3 w-100 h-100' alt={`/siteFalicyCRADemo/songshang/${court}`} />
             <div className='textfont rounded-3'>
               <span>松上羽球</span>
             </div>
-          </a>
+          </Link>
           <a className='dIm2'>
             <img src={img2} className='object-fit-cover rounded-3 w-100 h-100' alt="#" />
             <div className='textfont rounded-3'>
@@ -108,6 +111,7 @@ const Footer = () => {
   }
 
   function Home() {
+    const [court, setCourt] = useState(null);
     const RankList = [
       {
         name: 'TOP專區',
@@ -127,8 +131,21 @@ const Footer = () => {
   
     const [dataAPI, setDataAPI] = useState([]);
     const [newsAPI, setNewsAPI] = useState([]);
+
     useEffect(() => {
-      
+      (async() => {
+        const courtsRef = collection(db, "stores");
+        const q = query(courtsRef, where("storename", "==", "松上羽球館"));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0].id;
+          setCourt(doc);
+          console.log(doc);
+        }
+      })();
+    }, []);
+
+    useEffect(() => {
       //locationAPI
       (async () => {
         try {
@@ -250,7 +267,8 @@ return (
           img3={item.pic3}
           img4={item.pic4}
           img5={item.pic5}
-          img6={item.pic6}>
+          img6={item.pic6}
+          court={court}>
         </HotRank>)
       })}
     <div className='container-lg'>
