@@ -112,7 +112,6 @@ export default function Userregister() {
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                             (e) => {
                                 setEmail(e.target.value);
-                                console.log(email);
                             }
                         } />
                         <label htmlFor="floatingEmail">Email address</label>
@@ -121,7 +120,6 @@ export default function Userregister() {
                         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                             (e) => {
                                 setPassword(e.target.value);
-                                console.log(password);
                             }
                         } />
                         <label htmlFor="floatingPassword">Password</label>
@@ -133,8 +131,6 @@ export default function Userregister() {
                             <input type='name' className="form-control" id="floatingUserName" placeholder="Name" onChange={
                                 (e) => {
                                     setName(e.target.value);
-                                    console.log(name
-                                    );
                                 }
                             } />
                             <label htmlFor="floatingUserName">name</label>
@@ -143,7 +139,6 @@ export default function Userregister() {
                             <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                                 (e) => {
                                     setEmail(e.target.value);
-                                    console.log(email);
                                 }
                             } />
                             <label htmlFor="floatingEmail">Email address</label>
@@ -152,7 +147,6 @@ export default function Userregister() {
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                                 (e) => {
                                     setPassword(e.target.value);
-                                    console.log(password);
                                 }
                             } />
                             <label htmlFor="floatingPassword">Password</label>

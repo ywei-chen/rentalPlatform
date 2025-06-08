@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { Dropdown } from 'react-bootstrap';
 
 export default function Userpage() {
   const { uid } = useParams();

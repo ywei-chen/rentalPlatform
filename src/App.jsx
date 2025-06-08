@@ -15,7 +15,7 @@ function App() {
         <Route path='/siteFalicyCRADemo/' element={<Home />} />
         <Route path='/siteFalicyCRADemo/userregister/' element={<Userregister />} />
         <Route path='/siteFalicyCRADemo/ownerregister/' element={<Ownerregister />} />
-        <Route path='/siteFalicyCRADemo/ownerpage/' element={<Ownerpage />} />
+        <Route path='/siteFalicyCRADemo/ownerpage/:uid' element={<Ownerpage />} />
         <Route path='/siteFalicyCRADemo/userpage/:uid' element={<Userpage />} />
       </Routes>
     </>

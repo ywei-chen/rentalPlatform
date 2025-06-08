@@ -14,18 +14,27 @@ export default function NavBar() {
         const auth = getAuth(firebase);
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const docSnap = await getDoc(doc(db, "users", user.uid));
-                if (docSnap.exists()) {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                const ownerDoc = await getDoc(doc(db, "stores", user.uid));
+                if (userDoc.exists()) {
                     setUserName({
                         uid: user.uid,
-                        name: docSnap.data().userName,
+                        name: userDoc.data().userName,
+                        role: 'user'
                     });
+                } else if (ownerDoc.exists()) {
+                    setUserName({
+                        uid: user.uid,
+                        name: ownerDoc.data().userName,
+                        role: 'store'
+                    });
+                } else {
+                    setUserName(null);
                 }
             } else {
                 setUserName(null);
             }
         });
-
         return () => unsubscribe();
     }, []);
 
@@ -61,8 +70,12 @@ export default function NavBar() {
                             <Nav className="my-auto">
                                 <Nav.Link as={Link} onClick={handleLogout}>登出</Nav.Link>
                                 <Nav.Link as={Link} to="/siteFalicyCRADemo/">首頁</Nav.Link>
-                                <Nav.Link as={Link} to={`/siteFalicyCRADemo/userpage/${userName.uid}`}>個人頁面</Nav.Link>
-                                <Nav.Link as={Link} to="/siteFalicyCRADemo/ownerpage/">test松上</Nav.Link>
+                                {userName.role === 'user' && (
+                                    <Nav.Link as={Link} to={`/siteFalicyCRADemo/userpage/${userName.uid}`}>個人頁面</Nav.Link>
+                                )}
+                                {userName.role === 'store' && (
+                                    <Nav.Link as={Link} to={`/siteFalicyCRADemo/ownerpage/${userName.uid}`}>商家頁面</Nav.Link>
+                                )}
                             </Nav>
                         </Navbar.Collapse>
                     </>
@@ -80,7 +93,6 @@ export default function NavBar() {
                                         <Nav.Link as={Link} to="/siteFalicyCRADemo/">首頁</Nav.Link>
                                         <Nav.Link as={Link} to="/siteFalicyCRADemo/userregister/">登入/註冊</Nav.Link>
                                         <Nav.Link as={Link} to="/siteFalicyCRADemo/ownerregister/">商家登入/註冊</Nav.Link>
-                                        <Nav.Link as={Link} to="/siteFalicyCRADemo/ownerpage/">test松上</Nav.Link>
                                     </Nav>
                                 </Navbar.Collapse>
                             </>         

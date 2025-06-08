@@ -9,7 +9,7 @@ import * as bootstrap from 'bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
-const MoneySetting = ({money , setMoney}) => {
+const MoneySetting = ({setMoney}) => {
     const handleChange = (key, value) => {
         setMoney(prev => ({ ...prev, [key]: Number(value) }));
     };
@@ -17,7 +17,7 @@ const MoneySetting = ({money , setMoney}) => {
     return (
         <>
             <div className='form-floating mb-2'>
-                <input type='money' className="form-control" id="floatinghour" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatinghour" placeholder="money" onChange={
                     (e) => {
                         handleChange('hour', e.target.value);
                     }
@@ -25,7 +25,7 @@ const MoneySetting = ({money , setMoney}) => {
                 <label htmlFor="floatinghour">時租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
-                <input type='money' className="form-control" id="floatingmonths" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatingmonths" placeholder="money" onChange={
                     (e) => {
                         handleChange('months', e.target.value);
                     }
@@ -33,7 +33,7 @@ const MoneySetting = ({money , setMoney}) => {
                 <label htmlFor="floatingmonths">月租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
-                <input type='money' className="form-control" id="floatingseason" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatingseason" placeholder="money" onChange={
                     (e) => {
                         handleChange('season', e.target.value);
                     }
@@ -41,7 +41,7 @@ const MoneySetting = ({money , setMoney}) => {
                 <label htmlFor="floatingseason">季租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
-                <input type='money' className="form-control" id="floatingyear" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatingyear" placeholder="money" onChange={
                     (e) => {
                          handleChange('year', e.target.value);
                     }
@@ -126,35 +126,73 @@ const WeekOpentime = ({ weekOpenTimeList, setWeekOpenTimeList }) => {
         </>
     )
 }
-const AddrSet = () => {
-    const [county, setCounty] = useState('');
-    const [town , setTown] = useState('');
+const AddrSet = ({county, setCounty, town, setTown,  countynamelist, countycodelist, setAddr}) => {
+    const [townList, setTownList] = useState([]);
     const parser = new XMLParser();
 
-    const fetchCounty = () => {
-        axios.get('https://api.nlsc.gov.tw/other/ListCounty/')
-            .then((response) => {
-                const jasonData = parser.parse(response.data);
-                console.log(jasonData);
-            })
+    const handleCountyChange = async (selectedCountyName) => {
+        setCounty(selectedCountyName);
+
+        const selectedCounty = countycodelist.find(item => item.countyname === selectedCountyName);
+        if (!selectedCounty) return;
+
+        const countycode = selectedCounty.countycode;
+
+        try {
+            const response = await axios.get(`https://api.nlsc.gov.tw/other/ListTown/${countycode}`);
+            const jsonData = parser.parse(response.data);
+            const townCodeList = jsonData.townItems.townItem;
+            const townNamelist = townCodeList.map(item => item.townname);
+            setTownList(townNamelist);
+            setTown('');
+        } catch (error) {
+            console.error("錯誤", error);
+        }
     }
 
-    const fetchTown = () => {
-        axios.get('https://api.nlsc.gov.tw/other/ListTown/B')
-        .then((response) => {
-            const jasonData = parser.parse(response.data);
-            console.log(jasonData);
-        })
-    }
+    return (
+        <div className="opentimeset">
+            <div className='opentimeTopic'>-球場地址-</div>
+            <Dropdown onSelect={handleCountyChange}>
+                <Dropdown.Toggle className="dropdown" variant="" id="dropdown-county">
+                    {county || '請選擇縣市'}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {countynamelist.map((item, index) => {
+                        return (
+                            <Dropdown.Item key={index} eventKey={item}>{item}</Dropdown.Item>
+                        )
+                    })}
+                </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown onSelect={(val) => setTown(val)}>
+                <Dropdown.Toggle className="dropdown" variant="" id="dropdown-town">
+                    {town || '請選擇鄉鎮市區'}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {townList.map((item, index) => {
+                        return (
+                            <Dropdown.Item key={index} eventKey={item}>{item}</Dropdown.Item>
+                        )
+                    })}
+                </Dropdown.Menu>
+            </Dropdown>
+            <div className='form-floating mb-2'>
+                <input type='address' className="form-control" id="floatingaddr" placeholder="address" onChange={
+                    (e) => {
+                        setAddr(e.target.value);
+                    }
+                } />
+                <label htmlFor="floatingmonths">鼎中路726號4樓</label>
+            </div>
+        </div>
+    )
 
-    return(<>
-        {fetchCounty()}
-        {fetchTown()}
-    </>)
 }
 
 let myModal;
 export default function Ownerregister() {
+    const parser = new XMLParser();
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const [handler, setHandler] = useState(1);
@@ -163,6 +201,11 @@ export default function Ownerregister() {
     const [password, setPassword] = useState('');
     const [modalContent, setModalContent] = useState('');
     const [courtCount, setCourtCount] = useState(null);
+    const [county, setCounty] = useState('');
+    const [town , setTown] = useState('');
+    const [addr, setAddr] = useState('');
+    const [countynamelist , setCountynamelist] = useState([]);
+    const [countycodelist , setCountycodelist] = useState([]);
     const [money, setMoney] = useState({
         hour: 0,
         months: 0,
@@ -183,6 +226,21 @@ export default function Ownerregister() {
     useEffect(() => {
         myModal = new bootstrap.Modal(modalRef.current);
     }, [])
+
+    useEffect(() => {
+      (async () => {
+        const response = await axios.get('https://api.nlsc.gov.tw/other/ListCounty/');
+          const jasonData = parser.parse(response.data);
+          const countyItems = jasonData.countyItems.countyItem;
+          const countyItem = countyItems.map(({ countycode, countyname }) => ({
+              countycode,
+              countyname
+          }));
+          const countyname = countyItem.map(item => item.countyname);
+          setCountycodelist(countyItem);
+          setCountynamelist(countyname);
+       })()
+    },[])
 
     const onClickSignIn = () => {
         var signin = document.querySelector("#signin");
@@ -214,7 +272,8 @@ export default function Ownerregister() {
         }
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+         e.preventDefault();
         if (handler === 1) {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
@@ -239,6 +298,7 @@ export default function Ownerregister() {
                         uid: store.uid,
                         storename: name,
                         email: store.email,
+                        address: county + town + addr,
                         rent: money,
                         court: courtCount,
                         dutytime: weekOpenTimeList,
@@ -278,7 +338,6 @@ export default function Ownerregister() {
                         <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                             (e) => {
                                 setEmail(e.target.value);
-                                console.log(email);
                             }
                         } />
                         <label htmlFor="floatingEmail">Email address</label>
@@ -287,7 +346,6 @@ export default function Ownerregister() {
                         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                             (e) => {
                                 setPassword(e.target.value);
-                                console.log(password);
                             }
                         } />
                         <label htmlFor="floatingPassword">Password</label>
@@ -299,7 +357,6 @@ export default function Ownerregister() {
                             <input type='name' className="form-control" id="floatingName" placeholder="name" onChange={
                                 (e) => {
                                     setName(e.target.value);
-                                    console.log(name);
                                 }
                             } />
                             <label htmlFor="floatingname">ex: 松上羽球館</label>
@@ -308,7 +365,6 @@ export default function Ownerregister() {
                             <input type='email' className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={
                                 (e) => {
                                     setEmail(e.target.value);
-                                    console.log(email);
                                 }
                             } />
                             <label htmlFor="floatingEmail">Email address</label>
@@ -317,12 +373,19 @@ export default function Ownerregister() {
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={
                                 (e) => {
                                     setPassword(e.target.value);
-                                    console.log(password);
                                 }
                             } />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
-                        <AddrSet></AddrSet>
+                        <AddrSet 
+                        county = {county}
+                        setCounty = {setCounty}
+                        town = {town}
+                        setTown = {setTown}
+                        countynamelist = {countynamelist}
+                        countycodelist = {countycodelist}
+                        setAddr = {setAddr}
+                        ></AddrSet>
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-營業時間-</div>
                             <div className="spllit"></div>
@@ -336,7 +399,7 @@ export default function Ownerregister() {
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-場地租金-</div>
                             <div className="spllit"></div>
-                            <MoneySetting money={money} setMoney={setMoney}></MoneySetting>
+                            <MoneySetting setMoney={setMoney}></MoneySetting>
                         </div>
 
                         <button type="button" className="btn btn-lg btn-dark w-100 mt-5" onClick={onSubmit}>{handler ? "登入" : "註冊"}</button>
