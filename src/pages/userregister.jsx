@@ -76,7 +76,7 @@ export default function Userregister() {
                         uid: user.uid,
                         userName: name,
                         email: user.email,
-                        creatTime: serverTimestamp()
+                        createTime: serverTimestamp()
                     });
                 })
                 .then(() => {

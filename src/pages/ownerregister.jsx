@@ -1,10 +1,13 @@
+import "../ui/ownerregister.css";
+import axios from "axios";
+import { XMLParser } from "fast-xml-parser";
 import { useEffect, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "../ui/ownerregister.css";
-import { firebase } from "../components/firebase";
+import { firebase, db } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 import { Dropdown } from 'react-bootstrap';
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 const MoneySetting = ({money , setMoney}) => {
     const handleChange = (key, value) => {
@@ -49,7 +52,6 @@ const MoneySetting = ({money , setMoney}) => {
 
     )
 }
-
 const CourtSetting = ({ courtCount, setCourtCount }) => {
     const courtOptions = Array.from({ length: 30 }, (_, i) => i + 1);
 
@@ -66,8 +68,6 @@ const CourtSetting = ({ courtCount, setCourtCount }) => {
         </Dropdown>
     );
 };
-
-
 const WeekOpentime = ({ weekOpenTimeList, setWeekOpenTimeList }) => {
     const weekDays = ['Mon.', 'Tue.', 'Wed.', 'Thr.', 'Fri.', 'Sat.', 'Sun.'];
     const changetime = (dayIndex, timeType, value) => {
@@ -126,7 +126,32 @@ const WeekOpentime = ({ weekOpenTimeList, setWeekOpenTimeList }) => {
         </>
     )
 }
+const AddrSet = () => {
+    const [county, setCounty] = useState('');
+    const [town , setTown] = useState('');
+    const parser = new XMLParser();
 
+    const fetchCounty = () => {
+        axios.get('https://api.nlsc.gov.tw/other/ListCounty/')
+            .then((response) => {
+                const jasonData = parser.parse(response.data);
+                console.log(jasonData);
+            })
+    }
+
+    const fetchTown = () => {
+        axios.get('https://api.nlsc.gov.tw/other/ListTown/B')
+        .then((response) => {
+            const jasonData = parser.parse(response.data);
+            console.log(jasonData);
+        })
+    }
+
+    return(<>
+        {fetchCounty()}
+        {fetchTown()}
+    </>)
+}
 
 let myModal;
 export default function Ownerregister() {
@@ -208,8 +233,20 @@ export default function Ownerregister() {
         else if (handler === 0) {
             const auth = getAuth(firebase);
             createUserWithEmailAndPassword(auth, email, password)
+                .then((storeCredential) => {
+                    const store = storeCredential.user;
+                    return setDoc(doc(db, 'stores', store.uid), {
+                        uid: store.uid,
+                        storename: name,
+                        email: store.email,
+                        rent: money,
+                        court: courtCount,
+                        dutytime: weekOpenTimeList,
+                        createTime: serverTimestamp()
+                    });
+                })
                 .then(() => {
-                    setModalContent("註冊成功，，即將跳轉至首頁");
+                    setModalContent("註冊成功，即將跳轉至首頁");
                     myModal.show();
                     setTimeout(() => {
                         myModal.hide();
@@ -285,6 +322,7 @@ export default function Ownerregister() {
                             } />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
+                        <AddrSet></AddrSet>
                         <div className="opentimeset">
                             <div className='opentimeTopic'>-營業時間-</div>
                             <div className="spllit"></div>
