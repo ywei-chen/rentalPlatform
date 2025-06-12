@@ -1,4 +1,5 @@
-import "../ui/ownerpage.css"
+import "../ui/ownerpage.css";
+import Footer from "../components/footer";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 import { useParams } from "react-router-dom";
@@ -268,7 +269,7 @@ export default function Ownerpage() {
         </div>
         <button className="revise" onClick={onSubmit}>送出修改</button>
         <div className="split"></div>
-
+        <Footer></Footer>
     </>
 
     );

@@ -4,28 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../components/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-
-//Footer
-const Footer = () => {
-    return (<>
-      <footer className="py-4">
-        <div className="footer container d-flex justify-content-center my-3">
-          <div className="me-3"><small>©Cpoyright 2024 KaneC. 專題用途</small></div>
-          <div>
-            <a href="#" className="footer ext-decoration-none me-1">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="footer text-decoration-none me-1">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="footer text-decoration-none me-1">
-              <i className="fab fa-twitter"></i>
-            </a>
-          </div>
-        </div>
-      </footer>
-    </>)
-  }
+import Footer from '../components/footer';
 
   //HotRank
   const HotRank = ({ img1, img2, img3, img4, img5, img6, key , court }) => {
@@ -165,7 +144,7 @@ const Footer = () => {
         const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
         const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
         try {
-          const res = await axios.get(`${newsUrl}&from=2025-05-10&sortBy=relevancy&apiKey=${apiKey}`);
+          const res = await axios.get(`${newsUrl}&from=2025-05-30&sortBy=relevancy&apiKey=${apiKey}`);
           const newArr = [...res.data.articles];
           newArr.forEach((item, i) => {
             item.id = i + 1;
@@ -364,6 +343,5 @@ return (
     </>
   )
 }
-
 
 export default Home

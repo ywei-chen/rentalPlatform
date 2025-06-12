@@ -1,5 +1,6 @@
 import "../ui/courtpage.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from "../components/footer";
 import HourRent from "../components/hourrent";
 import MonthRent from "../components/monthrent";
 import SeasonRent from "../components/seasonrent";
@@ -14,14 +15,16 @@ export default function Courtpage() {
     const { uid } = useParams();
     const [storeData, setStoreData] = useState(null);
     const [activePage, setActivePage] = useState('pageHour');
-    const [pay, setPay] = useState(360);
+    const [pay, setPay] = useState(null);
 
     useEffect(() => {
         (async () => {
             const storeRef = doc(db, "stores", uid);
             const docSnap = await getDoc(storeRef);
             if (docSnap.exists()) {
-                setStoreData(docSnap.data());
+                const data = docSnap.data();
+                setStoreData(data);
+                setPay(data.rent.hour);
             }
         })()
     },[uid]);
@@ -189,7 +192,7 @@ export default function Courtpage() {
                         <div className="stickyblock">
                             <div className="priceselect">
                                 <div className="pricecontent">
-                                    <span className="topicfont">${pay}</span>
+                                    <span className="topicfont">{pay}</span>
                                     <small>/小時</small>
                                 </div>
                                 </div>
@@ -198,19 +201,19 @@ export default function Courtpage() {
                                         <div className="inputcondition">
                                             <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
                                                 setActivePage('pageHour');
-                                                setPay(360);
+                                                setPay(storeData.rent.hour);
                                                 }}>時租</span>
                                             <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
                                                 setActivePage('pageMonth');
-                                                setPay(340);
+                                                setPay(storeData.rent.months);
                                                 }}>月租</span>
                                             <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
                                                 setActivePage('pageSeason');
-                                                setPay(320);
+                                                setPay(storeData.rent.season);
                                                 }}>季租</span>
                                             <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
                                                 setActivePage('pageYear');
-                                                setPay(300);
+                                                setPay(storeData.rent.year);
                                                 }}>年租</span>
                                         </div>
                                     </label>
@@ -223,9 +226,8 @@ export default function Courtpage() {
                     </div>
                 </div>
             </div>
-            <div className='split'></div>
         </div>
-
+        <Footer></Footer>
     </>)
 }
 
