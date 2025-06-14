@@ -7,11 +7,10 @@ import SeasonRent from "../components/seasonrent";
 import YearRent from "../components/yearrent";
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db, firebase } from "../components/firebase";
-import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useBookingData } from "../components/bookingStore";
-import { set } from "date-fns";
 
 const Courtcounty = ({ item }) => {
     return (
@@ -31,7 +30,8 @@ export default function Courtpage() {
     const [activePage, setActivePage] = useState('pageHour');
     const [pay, setPay] = useState(null);
     const [user, setUser] = useState(null);
-    const { setBooking, rentType, bookingCourt, totalCourt, price, bookingDate, bookingStartTime, setTotalCourt, bookingEndTime } = useBookingData();
+    const [loading, setLoading] = useState(false);
+    const { setBooking, rentType, bookingCourt, totalCourt, totalPrice, bookingDate, bookingStartTime, setTotalCourt, bookingEndTime } = useBookingData();
 
     useEffect(() => {
         (async () => {
@@ -48,15 +48,57 @@ export default function Courtpage() {
 
     useEffect(() => {
         const auth = getAuth(firebase);
-        const unsubsctibe = onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
         })
+
+        return () => unsubscribe();
     }, [user])
 
+    const isTimeOverlap = (startA, endA, startB, endB) => {
+        if (endA <= startB || startA >= endB){
+            return false;
+        }
+        return true;
+    }
 
     const handleBooking = async() => {
+        if(loading) return;
+        setLoading(true)
+
         if (!user) {
             alert('請先登入才可以預定');
+            setLoading(false);
+            return;
+        }
+
+        const bookingQuery = query(
+            collection(db, 'bookings'),
+            where('StoreID', '==', uid),
+            where('bookingDate', '==', bookingDate)
+        );
+
+        const querySnapshot = await getDocs(bookingQuery);
+        let isConflict = false;
+
+        querySnapshot.forEach((doc) => {
+            const existingBooking = doc.data();
+            console.log('2',existingBooking);
+            const hasoverlapCourt = existingBooking.bookingCourt.some(court => bookingCourt.includes(court));
+            if(hasoverlapCourt){
+                if (isTimeOverlap(
+                    bookingStartTime,
+                    bookingEndTime,
+                    existingBooking.bookingStartTime,
+                    existingBooking.bookingEndTime
+                )) {
+                    isConflict = true;
+                }
+            }
+        });
+
+        if (isConflict) {
+            alert('預約失敗：該時間已有人預約');
             return;
         }
 
@@ -64,7 +106,7 @@ export default function Courtpage() {
             userID: user.uid,
             StoreID: uid,
             rentType,
-            price,
+            totalPrice,
             bookingDate,
             bookingCourt,
             bookingStartTime,
@@ -77,6 +119,8 @@ export default function Courtpage() {
             alert('預約成功');
         } catch (error) {
             alert('預約失敗');
+        } finally {
+            setLoading(false);
         }
 
     }
@@ -262,7 +306,7 @@ export default function Courtpage() {
                             <div className="renderblock">
                                 {renderPage()}
                             </div>
-                            <button className="buttonselect" onClick={handleBooking}>預定</button>
+                            <button className="buttonselect" onClick={handleBooking}> {loading ? '預約中...' : '預定'}</button>
                         </div>
                     </div>
                 </div>

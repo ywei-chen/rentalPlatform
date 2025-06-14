@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Dropdown } from 'react-bootstrap';
 import { useBookingData } from "./bookingStore";
+import { format } from "date-fns";
 
 const CourtcountyButton = ({ item, isSelected, onClick }) => {
     return (
@@ -53,9 +54,13 @@ export default function HourRent({pay}) {
 
       useEffect(() => {
         if (totalPrice > 0) {
-            setBooking({ totalPrice });  // 設置 totalPrice 到 bookingStore
+            setBooking({ totalPrice });
         }
     }, [totalPrice]);
+
+    useEffect(() => {
+        setBooking({ bookingDate: format(selectedDate, 'yyyy-MM-dd')});
+    },[])
 
     return (<>
         <div className="hourselect" ref={dropdownRef}>
@@ -66,7 +71,7 @@ export default function HourRent({pay}) {
                         onChange={(date) => {
                             setSelectedDate(date);
                             setShowPicker(false);
-                            setBooking({ bookingDate: date})
+                            setBooking({ bookingDate: format(date, 'yyyy-MM-dd')});
                         }}
                         inline
                     />
