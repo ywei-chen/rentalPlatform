@@ -7,8 +7,22 @@ import SeasonRent from "../components/seasonrent";
 import YearRent from "../components/yearrent";
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../components/firebase";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { db, firebase } from "../components/firebase";
+import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import { useBookingData } from "../components/bookingStore";
+import { set } from "date-fns";
+
+const Courtcounty = ({ item }) => {
+    return (
+        <div className="col-2 text-center">
+            <div>
+                <div >[{item}]</div>
+                <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
+            </div>
+        </div>
+    )
+}
 
 
 export default function Courtpage() {
@@ -16,6 +30,8 @@ export default function Courtpage() {
     const [storeData, setStoreData] = useState(null);
     const [activePage, setActivePage] = useState('pageHour');
     const [pay, setPay] = useState(null);
+    const [user, setUser] = useState(null);
+    const { setBooking, rentType, bookingCourt, totalCourt, price, bookingDate, bookingStartTime, setTotalCourt, bookingEndTime } = useBookingData();
 
     useEffect(() => {
         (async () => {
@@ -25,13 +41,50 @@ export default function Courtpage() {
                 const data = docSnap.data();
                 setStoreData(data);
                 setPay(data.rent.hour);
+                setTotalCourt(data.court)
             }
         })()
-    },[uid]);
+    }, [uid]);
+
+    useEffect(() => {
+        const auth = getAuth(firebase);
+        const unsubsctibe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        })
+    }, [user])
+
+
+    const handleBooking = async() => {
+        if (!user) {
+            alert('請先登入才可以預定');
+            return;
+        }
+
+        const bookingData = {
+            userID: user.uid,
+            StoreID: uid,
+            rentType,
+            price,
+            bookingDate,
+            bookingCourt,
+            bookingStartTime,
+            bookingEndTime,
+            createdAt: new Date()
+        };
+
+        try {
+            const docRef = await addDoc(collection(db, 'bookings'), bookingData);
+            alert('預約成功');
+        } catch (error) {
+            alert('預約失敗');
+        }
+
+    }
+
     if (!storeData) return <div>載入中...</div>;
 
     const renderPage = () => {
-        switch(activePage){
+        switch (activePage) {
             case 'pageHour':
                 return (<>
                     <HourRent pay={pay}></HourRent>
@@ -41,18 +94,18 @@ export default function Courtpage() {
                     <MonthRent pay={pay}></MonthRent>
                 </>)
             case 'pageSeason':
-                return(<>
+                return (<>
                     <SeasonRent pay={pay}></SeasonRent>
                 </>)
             case 'pageYear':
-                return(<>
-                   <YearRent pay={pay}></YearRent>
+                return (<>
+                    <YearRent pay={pay}></YearRent>
                 </>)
         }
     }
 
     const buttonColor = (page) => ({
-         backgroundColor: activePage === page ? 'white' : '#e2e2e2'
+        backgroundColor: activePage === page ? 'white' : '#e2e2e2'
     })
 
     return (<>
@@ -91,28 +144,12 @@ export default function Courtpage() {
                                 <i className="fa-regular fa-image fa-xl"></i>
                                 <div className="topicfont">空間介紹</div>
                             </div>
-                            <div className="topicontent">以下繪製的場地實際完全參考商家實體場地布置</div>
-                            <div className="picture">
-                                <div className="courtexaple">
-                                    <div>[1]</div>
-                                    <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
-                                </div>
-                                <div className="courtexaple">
-                                    <div>[2]</div>
-                                    <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
-                                </div>
-                                <div className="courtexaple">
-                                    <div>[3]</div>
-                                    <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
-                                </div>
-                                <div className="courtexaple">
-                                    <div>[4]</div>
-                                    <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
-                                </div>
-                                <div className="courtexaple">
-                                    <div>[5]</div>
-                                    <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
-                                </div>
+                            <div className="row me-3 mt-2">
+                                {totalCourt.map((item, index) => {
+                                    return(
+                                        <Courtcounty item= {item} key ={index}></Courtcounty>
+                                    )
+                                })}
                             </div>
                         </div>
                     </section>
@@ -195,33 +232,37 @@ export default function Courtpage() {
                                     <span className="topicfont">{pay}</span>
                                     <small>/小時</small>
                                 </div>
-                                </div>
-                                <div className="inputselect">
-                                    <label className="inputscope">                                      
-                                        <div className="inputcondition">
-                                            <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
-                                                setActivePage('pageHour');
-                                                setPay(storeData.rent.hour);
-                                                }}>時租</span>
-                                            <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
-                                                setActivePage('pageMonth');
-                                                setPay(storeData.rent.months);
-                                                }}>月租</span>
-                                            <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
-                                                setActivePage('pageSeason');
-                                                setPay(storeData.rent.season);
-                                                }}>季租</span>
-                                            <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
-                                                setActivePage('pageYear');
-                                                setPay(storeData.rent.year);
-                                                }}>年租</span>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div className="renderblock">
-                                    {renderPage()}
-                                </div>
-                            <button className="buttonselect">預定</button>
+                            </div>
+                            <div className="inputselect">
+                                <label className="inputscope">
+                                    <div className="inputcondition">
+                                        <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
+                                            setActivePage('pageHour');
+                                            setPay(storeData.rent.hour);
+                                            setBooking({ rentType: 'hour'});
+                                        }}>時租</span>
+                                        <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
+                                            setActivePage('pageMonth');
+                                            setPay(storeData.rent.months);
+                                            setBooking({ rentType: 'month'});
+                                        }}>月租</span>
+                                        <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
+                                            setActivePage('pageSeason');
+                                            setPay(storeData.rent.season);
+                                            setBooking({ rentType: 'season'});
+                                        }}>季租</span>
+                                        <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
+                                            setActivePage('pageYear');
+                                            setPay(storeData.rent.year);
+                                            setBooking({ rentType: 'year'});
+                                        }}>年租</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div className="renderblock">
+                                {renderPage()}
+                            </div>
+                            <button className="buttonselect" onClick={handleBooking}>預定</button>
                         </div>
                     </div>
                 </div>
