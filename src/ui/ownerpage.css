@@ -11,15 +11,15 @@ body {
     margin: 30px 10px;
 }
 
-.bookingblock {
+.bookblock {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     margin: 10px auto;
     border-radius: 3px;
     border: 1px solid rgba(61, 63, 86, 0.5);
     height: 60px;
-    width: 90%;
+    width: 80%;
 }
 
 .settingChange {

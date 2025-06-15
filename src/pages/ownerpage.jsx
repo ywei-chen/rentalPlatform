@@ -5,9 +5,8 @@ import { XMLParser } from "fast-xml-parser";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { Dropdown } from 'react-bootstrap';
-import { updateDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const MoneySetting = ({ setMoney }) => {
     const handleChange = (key, value) => {
@@ -180,6 +179,9 @@ export default function Ownerpage() {
     const [county, setCounty] = useState('');
     const [town, setTown] = useState('');
     const [addr, setAddr] = useState('');
+    const [bookings, setBookings] = useState([]);
+    const [usersMap, setUsersMap] = useState({});
+    const [loading, setLoading] = useState(true);
     const [countynamelist, setCountynamelist] = useState([]);
     const [countycodelist, setCountycodelist] = useState([]);
     const [weekOpenTimeList, setWeekOpenTimeList] = useState([
@@ -219,7 +221,28 @@ export default function Ownerpage() {
             if (docSnap.exists()) {
                 setProfile(docSnap.data());
             }
+            const bookingRef = collection(db, 'bookings');
+            const q = query(bookingRef, where('StoreID', '==', uid));
+            const querySnapshot = await getDocs(q);
+            const bookingList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            console.log(bookingList);
+            setBookings(bookingList);
+
+            const userUids = [...new Set(bookingList.map(b => b.userID))];
+
+            let userNameMap =  {};
+            for (const userUid of userUids) {
+                const userDoc = await getDoc(doc(db, 'users', userUid));
+                if (userDoc.exists()) {
+                    userNameMap[userUid] = userDoc.data().userName;
+                } else {
+                    userNameMap[userUid] = "未知使用者";
+                }
+            }
+            setUsersMap(userNameMap);
+            setLoading(false);
         };
+
         fetchProfile();
     }, [uid]);
 
@@ -238,7 +261,37 @@ export default function Ownerpage() {
         })()
     }, [])
 
-    if (!profile) return <div>載入中...</div>;
+    const handleCancel = async (bookingId, date) => {
+        if (!window.confirm('確定要取消這筆預約嗎？')) return;
+
+        try {
+            const bookingRef = doc(db, 'bookings', bookingId);
+            const bookingSnap = await getDoc(bookingRef);
+            if (bookingSnap.exists()) {
+                let currentData = bookingSnap.data();
+
+                const updatedDates = currentData.bookingDate.filter(d => d !== date);
+
+                if (updatedDates.length > 0) {
+                    await updateDoc(bookingRef, { bookingDate: updatedDates });
+                } else {
+                    await deleteDoc(bookingRef);
+                }
+
+                setBookings(prev => prev.map(b => {
+                    if (b.id === bookingId) {
+                        return { ...b, bookingDate: b.bookingDate.filter(d => d !== date) };
+                    }
+                    return b;
+                }).filter(b => b.bookingDate.length > 0));
+            }
+        } catch (error) {
+            alert('取消失敗');
+        }
+    }
+
+    if (!profile) return <div>載入中使用者資料...</div>;
+    if (loading) return <div>載入中預約資訊...</div>;
 
     return (<>
         <div className="context">
@@ -267,8 +320,24 @@ export default function Ownerpage() {
                 ></AddrSet>
             </div>
         </div>
-        <button className="revise" onClick={onSubmit}>送出修改</button>
+        <div className="text-end mx-5">
+            <button className="revise" onClick={onSubmit}>送出修改</button>
+        </div>
         <div className="split"></div>
+        <div className="booking">
+            {bookings.map(booking => (
+                booking.bookingDate.map((date, index) => (
+                    <div className="bookblock" key={`${booking.id}-${index}`}>
+                        <div className="storename me-2">{usersMap[booking.userID] || '未知商家'}</div>
+                        <div className="bookdate me-2">預約日期：{date}</div>
+                        <div className="bookstarttime">{`預約時間：${booking.bookingStartTime}:00 - ${booking.bookingEndTime}:00`}</div>
+                        <div className="text-end">
+                            <button className="buttonend" onClick={() => handleCancel(booking.id, date)}>取消預約</button>
+                        </div>
+                    </div>
+                ))
+            ))}
+        </div>
         <Footer></Footer>
     </>
 

@@ -1,7 +1,7 @@
 import "../ui/ownerpage.css";
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Dropdown } from 'react-bootstrap';
 import { useBookingData } from "./bookingStore";
@@ -27,7 +27,7 @@ const CourtcountyButton = ({ item, isSelected, onClick }) => {
 
 
 
-export default function HourRent({pay}) {
+export default function HourRent({ pay }) {
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const [showPicker, setShowPicker] = useState(false);
@@ -52,7 +52,7 @@ export default function HourRent({pay}) {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-      useEffect(() => {
+    useEffect(() => {
         if (totalPrice > 0) {
             setBooking({ totalPrice });
         }
@@ -60,7 +60,7 @@ export default function HourRent({pay}) {
 
     useEffect(() => {
         setBooking({ bookingDate: format(selectedDate, 'yyyy-MM-dd')});
-    },[])
+    },[]);
 
     return (<>
         <div className="hourselect" ref={dropdownRef}>

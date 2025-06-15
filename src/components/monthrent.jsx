@@ -1,21 +1,51 @@
 import "../ui/ownerpage.css";
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { addDays } from "date-fns";
 import { Dropdown } from 'react-bootstrap';
+import { useBookingData } from "./bookingStore";
+import { format } from "date-fns";
+
+const CourtcountyButton = ({ item, isSelected, onClick }) => {
+    return (
+        <button
+            className="col-2 text-center border-0 h-100"
+            onClick={onClick}
+            style={{ backgroundColor: isSelected ? '#dcdcdc' : 'transparent' }}
+        >
+            <div>
+                <div>[{item}]</div>
+                <img
+                    src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png"
+                    alt=""
+                />
+            </div>
+        </button>
+    )
+}
+
+
 
 export default function MonthRent({ pay }) {
+    const initialDate = new Date();
+    initialDate.setHours(0, 0, 0, 0);
     const totalDays = 28;
+    const totalTimes = 5;
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const [showPicker, setShowPicker] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(initialDate);
     const [endDate, setEndDate] = useState(addDays(selectedDate, totalDays));
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const dropdownRef = useRef(null);
+    const { setBooking, bookingCourt, totalCourt, bookingDate,toggleBookingCourt } = useBookingData();
+
+    const isTimeSelected = (startTime !== null && endTime !== null);
+    const totalHours = endTime && startTime ? (endTime - startTime) : 0;
+    const totalPrice = bookingCourt.length > 0 && totalHours > 0 ? (totalHours * pay * bookingCourt.length) : 0;
     const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
 
     const handleStartDateChange = (date) => {
@@ -34,6 +64,24 @@ export default function MonthRent({ pay }) {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        setBooking({ rentType: 'month' });
+    }, [setBooking]);
+
+    useEffect(() => {
+        if (totalPrice > 0) {
+            setBooking({ totalPrice });
+        }
+    },  [totalPrice, setBooking]);
+
+    useEffect(() => {
+        let generatedDates = [];
+        for (let i = 0; i < totalTimes; i++) {
+            generatedDates.push(addDays(selectedDate, i * 7));
+        }
+        setBooking({ bookingDate: generatedDates.map(d => format(d, 'yyyy-MM-dd')) });
+    }, [selectedDate]);
 
     return (<>
         <div className="hourselect" ref={dropdownRef}>
@@ -59,8 +107,10 @@ export default function MonthRent({ pay }) {
             <div className="dailyslesct">
                 <div className="date">
                     <Dropdown onSelect={(hour) => {
-                        setStartTime(Number(hour));
+                        const selected = Number(hour);
+                        setStartTime(selected);
                         setEndTime(null);
+                        setBooking({ bookingStartTime: selected, bookingEndTime: null });
                     }}>
                         <Dropdown.Toggle variant="" id="dropdown-basic">
                             {startTime === null ? '開始時間' : `${startTime}:00`}
@@ -76,7 +126,9 @@ export default function MonthRent({ pay }) {
                 </div>
                 <div className="time">
                     <Dropdown onSelect={(hour) => {
-                        setEndTime(Number(hour));
+                        const selected = Number(hour);
+                        setEndTime(selected);
+                        setBooking({ bookingEndTime: selected });
                     }}>
                         <Dropdown.Toggle variant="" id="dropdown-basic">
                             {endTime === null ? '結束時間' : `${endTime}:00`}
@@ -91,22 +143,37 @@ export default function MonthRent({ pay }) {
                     </Dropdown>
                 </div>
             </div>
-        </div>
-        {endDate && startTime && endTime && (
-            <div>
-                <div className="dateselect">
-                    <div className="graph1">
-                        <i className="fa-regular fa-calendar-days fa-lg"></i>
+             {endDate && isTimeSelected && (
+                    <div className="dateselect">
+                        <div className="graph1">
+                            <i className="fa-regular fa-calendar-days fa-lg"></i>
+                        </div>
+                        <span>{endDate.toLocaleDateString()}</span>
+                        <span>{weekDays[endDate.getDay()]}</span>
+                        <div className="graph2">
+                            <i className="fa-regular fa-calendar-check fa-lg"></i>
+                        </div>
                     </div>
-                    <span>{endDate.toLocaleDateString()}</span>
-                    <span>{weekDays[endDate.getDay()]}</span>
+                )}
+            {isTimeSelected && (
+                <div className="row me-3 mt-2">
+                    {totalCourt.map((item, index) => (
+                        <CourtcountyButton
+                            item={item}
+                            key={index}
+                            isSelected={bookingCourt.includes(item)}
+                            onClick={() => toggleBookingCourt(item)}
+                        />
+                    ))}
                 </div>
+            )}
+            {bookingCourt.length > 0 && (
                 <div className="payCount">
-                    <h5>{`$${pay} x ${(endTime - startTime)}小時 x 4次`}</h5>
+                    <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 5次`}</h5>
                     <div className="split" />
-                    <h5>{`金額總計: ${(endTime - startTime) * (pay) *4}元`}</h5>
+                    <h5>{`金額總計: ${totalPrice*totalTimes} 元`}</h5>
                 </div>
-            </div>
-        )}
+            )}
+        </div>
     </>)
 }
