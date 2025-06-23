@@ -53,7 +53,7 @@ export default function Courtpage() {
         })
 
         return () => unsubscribe();
-    }, [user])
+    }, [])
 
     const isTimeOverlap = (startA, endA, startB, endB) => {
         if (endA <= startB || startA >= endB){
@@ -99,6 +99,7 @@ export default function Courtpage() {
 
         if (isConflict) {
             alert('預約失敗：該時間已有人預約');
+            setLoading(false);
             return;
         }
 

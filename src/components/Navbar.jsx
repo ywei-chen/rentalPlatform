@@ -36,7 +36,7 @@ export default function NavBar() {
             }
         });
         return () => unsubscribe();
-    }, []);
+    }, [userName]);
 
     const handleLogout = () => {
         const auth = getAuth(firebase);

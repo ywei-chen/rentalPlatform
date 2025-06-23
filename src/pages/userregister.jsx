@@ -1,8 +1,8 @@
 import "../ui/userregister.css";
 import * as bootstrap from 'bootstrap';
 import { useEffect, useRef, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes, signOut } from "firebase/auth";
+import { setDoc, doc, getDoc,serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firebase, db } from "../components/firebase";
 
@@ -55,13 +55,22 @@ export default function Userregister() {
         if (handler == 1){
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                setModalContent("登入成功，即將跳轉至首頁");
-                myModal.show();
-                setTimeout(() => {
-                    myModal.hide();
-                    navigate('/siteFalicyCRADemo/');
-                }, 3000)
+            .then(async(userCredential) => {
+                const uid = userCredential.user.uid;
+                const userRef = doc(db, 'users', uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    setModalContent("登入成功，即將跳轉至首頁");
+                    myModal.show();
+                    setTimeout(() => {
+                        myModal.hide();
+                        navigate('/siteFalicyCRADemo/');
+                    }, 3000)
+                }else {
+                    await signOut(auth);
+                    setModalContent("此帳號無使用者授權，已強制登出");
+                    myModal.show();
+                }
             })
             .catch((e) => {
                 showLoginError(e);

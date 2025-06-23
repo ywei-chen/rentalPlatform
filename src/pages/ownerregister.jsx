@@ -2,12 +2,12 @@ import "../ui/ownerregister.css";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 import { useEffect, useRef, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthErrorCodes, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { firebase, db } from "../components/firebase";
 import * as bootstrap from 'bootstrap';
 import { Dropdown } from 'react-bootstrap';
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc, getDoc, serverTimestamp } from "firebase/firestore";
 
 const MoneySetting = ({setMoney}) => {
     const handleChange = (key, value) => {
@@ -276,13 +276,22 @@ export default function Ownerregister() {
         if (handler === 1) {
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    setModalContent("登入成功，即將跳轉至首頁");
-                    myModal.show();
-                    setTimeout(() => {
-                        myModal.hide();
-                        navigate('/siteFalicyCRADemo/');
-                    }, 3000)
+                .then(async(userCredential) => {
+                    const uid = userCredential.user.uid;
+                    const storeRef = doc(db, 'stores', uid);
+                    const storeSnap = await getDoc(storeRef);
+                    if (storeSnap.exists()) {
+                        setModalContent("登入成功，即將跳轉至首頁");
+                        myModal.show();
+                        setTimeout(() => {
+                            myModal.hide();
+                            navigate('/siteFalicyCRADemo/');
+                        }, 3000)
+                    } else {
+                        signOut(auth);
+                        setModalContent("此帳號無使用者授權，已強制登出");
+                        myModal.show();
+                    }
                 })
                 .catch((e) => {
                     showLoginError(e);
