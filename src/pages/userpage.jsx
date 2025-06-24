@@ -86,6 +86,7 @@ export default function Userpage() {
           <div className="storename me-2">{storesMap[booking.StoreID] || '未知商家'}</div>
           <div className="bookdate me-2">預約日期：{date}</div>
           <div className="bookstarttime">{`預約時間：${booking.bookingStartTime}:00 - ${booking.bookingEndTime}:00`}</div>
+          <div className="bookcourt">{`預約場地: ${booking.bookingCourt}`}</div>
           <div className="text-end">
             <button className="buttonend" onClick={() => handleCancel(booking.id, date)}>取消預約</button>
           </div>
