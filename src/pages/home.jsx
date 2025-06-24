@@ -117,10 +117,11 @@ import Footer from '../components/footer';
         const q = query(courtsRef, where("storename", "==", "松上羽球館"));
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
-          const doc = querySnapshot.docs[0].id;
-          setCourt(doc);
-          console.log(doc);
+          const data = querySnapshot.docs[0].id;
+          setCourt(data);
+          console.log(data);
         }
+        console.log(courtsRef);
       })();
     }, []);
 
