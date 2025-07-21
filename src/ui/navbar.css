@@ -1,14 +1,55 @@
-.gotoblock {
-    display: flex;
-    align-items: center;
+@media screen and (max-width: 600px) {
+    .logoNav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imgLogo {
+        object-fit: cover;
+        height: 30px;
+    }
+
+    .logoText {
+        display: none;
+    }
+
+    .loginLogo {
+        font-size: 12px;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
 }
 
-.gotouserpage {
-    cursor: pointer;
+@media screen and (max-width: 380px) {
+    .loginLogo {
+        display: none !important;
+    }
 }
 
-.navbar-expand-lg , .navbar-collapse {
-    display: flex;
-    flex-basis: auto;
-    justify-content: end;
+@media screen and (min-width: 601px) {
+    .logoNav {
+        display: flex;
+        align-items: center;
+    }
+
+    .imgLogo {
+        object-fit: cover;
+        height: 40px;
+    }
+
+    .logoText {
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    .loginLogo {
+            font-size: 12px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+    }
 }
