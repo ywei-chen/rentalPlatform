@@ -175,7 +175,7 @@ export default function Courtpage() {
                             <div className="topicgraph">
                                 <div className="topicfont">{storeData.storename}</div>
                             </div>
-                            <table className="table table-striped w-75">
+                            <table className="table table-striped">
                                 <tbody>
                                     <tr>
                                         <td>{storeData.address}</td>
@@ -189,7 +189,7 @@ export default function Courtpage() {
                             <div className="topicgraph">
                                 <div className="topicfont">空間介紹</div>
                             </div>
-                            <table className="table table-striped w-75">
+                            <table className="table table-striped">
                                 <tbody>
                                     <tr>
                                         <td>此球館共有{totalCourt.length}面場地</td>
@@ -203,7 +203,7 @@ export default function Courtpage() {
                             <div className="topicgraph">
                                 <div className="topicfont">開放時段</div>
                             </div>
-                            <table className="table table-striped w-75">
+                            <table className="table table-striped">
                                 <tbody>
                                     {["週一", "週二", "週三", "週四", "週五", "週六", "週日"].map((day, index) => (
                                         <tr key={index}>
@@ -216,6 +216,22 @@ export default function Courtpage() {
                         </div>
                     </section>
                     <section className='provideditem'>
+                        <div>
+                            <div className="topicgraph">
+                                <div className="topicfont">提供服務</div>
+                            </div>
+                            <table className="table table-striped-columns">
+                                <tbody>
+                                    <tr>
+                                        <td>停車場</td>
+                                        <td>飲水機</td>
+                                        <td>盥洗室</td>
+                                        <td>販賣機</td>
+                                        <td>有冷氣</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </div>
                 <div className="stickyspace">
