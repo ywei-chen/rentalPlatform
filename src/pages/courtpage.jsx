@@ -14,7 +14,7 @@ import { useBookingData } from "../components/bookingStore";
 
 const Courtcounty = ({ item }) => {
     return (
-        <div className="col-2 text-center">
+        <div className="col-3 text-center">
             <div>
                 <div >[{item}]</div>
                 <img src="https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court.png" alt="" />
@@ -173,95 +173,44 @@ export default function Courtpage() {
                     <section className='storenameaddress'>
                         <div>
                             <div className="topicgraph">
-                                <i className="fa-regular fa-user fa-xl"></i>
                                 <div className="topicfont">{storeData.storename}</div>
-                                <div className="buttongroup">
-                                    <button className="buttonTop">飲水機</button>
-                                    <button className="buttonTop">停車場</button>
-                                </div>
                             </div>
-                            <div className="topicontent">{storeData.address}</div>
+                            <table className="table table-striped w-75">
+                                <tbody>
+                                    <tr>
+                                        <td>{storeData.address}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
                     <section className='space&picture'>
                         <div>
                             <div className="topicgraph">
-                                <i className="fa-regular fa-image fa-xl"></i>
                                 <div className="topicfont">空間介紹</div>
                             </div>
-                            <div className="row me-3 mt-2">
-                                {totalCourt.map((item, index) => {
-                                    return(
-                                        <Courtcounty item= {item} key ={index}></Courtcounty>
-                                    )
-                                })}
-                            </div>
+                            <table className="table table-striped w-75">
+                                <tbody>
+                                    <tr>
+                                        <td>此球館共有{totalCourt.length}面場地</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
                     <section className='hourtime'>
                         <div>
                             <div className="topicgraph">
-                                <i className="fa-regular fa-calendar fa-xl"></i>
                                 <div className="topicfont">開放時段</div>
                             </div>
-                            <table>
+                            <table className="table table-striped w-75">
                                 <tbody>
-                                    <tr>
-                                        <td>週一</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[0].open} - ${storeData.dutytime[0].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週二</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[1].open} - ${storeData.dutytime[1].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週三</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[2].open} - ${storeData.dutytime[2].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週四</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[3].open} - ${storeData.dutytime[3].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週五</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[4].open} - ${storeData.dutytime[4].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週六</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[5].open} - ${storeData.dutytime[5].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>週日</td>
-                                        <td>
-                                            <div>
-                                                <span>{`${storeData.dutytime[6].open} - ${storeData.dutytime[6].close}`}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {["週一", "週二", "週三", "週四", "週五", "週六", "週日"].map((day, index) => (
+                                        <tr key={index}>
+                                            <td>{day}</td>
+                                            <td>{`${storeData.dutytime[index].open} - ${storeData.dutytime[index].close}`}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

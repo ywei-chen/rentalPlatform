@@ -1,9 +1,9 @@
-@media screen and (min-width: 921px) {
+@media screen and (min-width: 751px) {
     .pictureoutline {
         margin: 10px 0;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-template-rows: repeat(2, minmax(0, 200px));
+        grid-template-rows: 150px 150px;
         grid-gap: 10px;
         width: 100%;
     }
@@ -24,12 +24,12 @@
     }
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 750px) {
     .pictureoutline {
         margin: 10px 0;
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
-        grid-template-rows: repeat(1, minmax(0, 1fr));
+        grid-template-rows: 300px;
         grid-gap: 10px;
         width: 100%;
     }
@@ -113,6 +113,7 @@
 
 img {
     width: 100%;
+
 }
 
 .split {
@@ -129,8 +130,8 @@ div > span {
 }
 
 .topicfont {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .topicgraph {
