@@ -56,14 +56,14 @@ export default function Courtpage() {
     }, [])
 
     const isTimeOverlap = (startA, endA, startB, endB) => {
-        if (endA <= startB || startA >= endB){
+        if (endA <= startB || startA >= endB) {
             return false;
         }
         return true;
     }
 
-    const handleBooking = async() => {
-        if(loading) return;
+    const handleBooking = async () => {
+        if (loading) return;
         setLoading(true)
 
         if (!user) {
@@ -83,9 +83,9 @@ export default function Courtpage() {
 
         querySnapshot.forEach((doc) => {
             const existingBooking = doc.data();
-            console.log('2',existingBooking);
+            console.log('2', existingBooking);
             const hasoverlapCourt = existingBooking.bookingCourt.some(court => bookingCourt.includes(court));
-            if(hasoverlapCourt){
+            if (hasoverlapCourt) {
                 if (isTimeOverlap(
                     bookingStartTime,
                     bookingEndTime,
@@ -182,6 +182,15 @@ export default function Courtpage() {
                                     </tr>
                                 </tbody>
                             </table>
+                            <iframe
+                                width='100%'
+                                height="300"
+                                style={{ border: 0 }}
+                                loading="lazy"
+                                allowFullScreen
+                                referrerPolicy="no-referrer-when-downgrade"
+                                src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_TOKEN}&q=${storeData.address}`}>
+                            </iframe>
                         </div>
                     </section>
                     <section className='space&picture'>
@@ -192,7 +201,7 @@ export default function Courtpage() {
                             <table className="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <td>此球館共有{totalCourt.length}面場地</td>
+                                        <td>球館共有{totalCourt.length}面場地</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -249,22 +258,22 @@ export default function Courtpage() {
                                         <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
                                             setActivePage('pageHour');
                                             setPay(storeData.rent.hour);
-                                            setBooking({ rentType: 'hour'});
+                                            setBooking({ rentType: 'hour' });
                                         }}>時租</span>
                                         <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
                                             setActivePage('pageMonth');
                                             setPay(storeData.rent.months);
-                                            setBooking({ rentType: 'month'});
+                                            setBooking({ rentType: 'month' });
                                         }}>月租</span>
                                         <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
                                             setActivePage('pageSeason');
                                             setPay(storeData.rent.season);
-                                            setBooking({ rentType: 'season'});
+                                            setBooking({ rentType: 'season' });
                                         }}>季租</span>
                                         <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
                                             setActivePage('pageYear');
                                             setPay(storeData.rent.year);
-                                            setBooking({ rentType: 'year'});
+                                            setBooking({ rentType: 'year' });
                                         }}>年租</span>
                                     </div>
                                 </label>

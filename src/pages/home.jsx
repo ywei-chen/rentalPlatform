@@ -145,7 +145,7 @@ import Footer from '../components/footer';
         const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
         const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
         try {
-          const res = await axios.get(`${newsUrl}&from=2025-07-11&sortBy=relevancy&apiKey=${apiKey}`);
+          const res = await axios.get(`${newsUrl}&from=2025-09-25&sortBy=relevancy&apiKey=${apiKey}`);
           const newArr = [...res.data.articles];
           newArr.forEach((item, i) => {
             item.id = i + 1;
