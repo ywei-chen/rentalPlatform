@@ -242,6 +242,33 @@ export default function Courtpage() {
                             </table>
                         </div>
                     </section>
+                    <section>
+                        <div>
+                            <div className="topicgraph">
+                                <div className="topicfont">使用規範</div>
+                            </div>
+                            <ul className="mt-2">
+                                <li>遵守大樓規範，公共區域應保持輕聲細語，請勿大聲喧嘩。</li>
+                                <li>請配合準時離場，不得超時使用，且不可佔用公共空間。</li>
+                                <li>請自行清潔環境，愛惜空間內所有設備。</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <div className="split"></div>
+                    <section>
+                        <div>
+                            <div className="topicgraph">
+                                <div className="topicfont">禁止事項</div>
+                            </div>
+                            <ul className="mt-2">
+                                <li>禁止攜帶寵物入內（導盲犬則不在此限)</li>
+                                <li>禁止烹飪或使用明火之加熱設備</li>
+                                <li>禁止使用擴音設備</li>
+                                <li>禁止使用麥克風</li>
+                                <li>禁止吸菸</li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
                 <div className="stickyspace">
                     <div className="stickyscope">

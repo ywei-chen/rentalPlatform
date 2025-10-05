@@ -22,6 +22,11 @@
         object-fit: cover;
         border-radius: 5px;
     }
+
+    ul > li {
+        margin-top: 20px;
+        font-size:medium;
+    }
 }
 
 @media screen and (max-width: 750px) {
