@@ -69,6 +69,7 @@
 .stickyscope {
     position: sticky;
     text-align: center;
+    top: 50px;
 }
 
 .stickyblock {
