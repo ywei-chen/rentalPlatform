@@ -326,7 +326,7 @@ export default function Ownerpage() {
         <div className="split"></div>
         <div className="booking">
             {bookings.map(booking => (
-                booking.bookingDate.map((date, index) => (
+                booking.bookingCourt.map((date, index) => (
                     <div className="bookblock" key={`${booking.id}-${index}`}>
                         <div className="storename me-2">{usersMap[booking.userID] || '未知商家'}</div>
                         <div className="bookdate me-2">預約日期：{date}</div>

@@ -67,7 +67,7 @@ export default function Courtpage() {
         setLoading(true)
 
         if (!user) {
-            alert('請先登入才可以預定');
+            alert('請先登入才可以預訂');
             setLoading(false);
             return;
         }
@@ -308,13 +308,23 @@ export default function Courtpage() {
                             <div className="renderblock">
                                 {renderPage()}
                             </div>
-                            <button className="buttonselect" onClick={handleBooking}> {loading ? '預約中...' : '預定'}</button>
+                            <button className="buttonselect" onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div className="mobileBooking">
+            <div>
+                <span className="topicfont">{pay}</span>
+                <small>/小時</small>
+            </div>
+            <div>
+                <button className="buttonMobile">預訂</button>
+            </div>
+        </div>
         <Footer></Footer>
+         <div className="page-content-bottom-space"></div>
     </>)
 }
 

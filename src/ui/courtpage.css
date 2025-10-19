@@ -23,13 +23,13 @@
         border-radius: 5px;
     }
 
-    ul > li {
+    ul>li {
         margin-top: 20px;
-        font-size:medium;
+        font-size: medium;
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 751px) {
     .pictureoutline {
         margin: 10px 0;
         display: grid;
@@ -101,7 +101,7 @@
     padding: 0 10px;
 }
 
-.inputcondition > span {
+.inputcondition>span {
     width: 100%;
     cursor: pointer;
 }
@@ -117,9 +117,19 @@
     border: none;
 }
 
+.buttonMobile {
+    background-color: rgb(59, 138, 175);
+    color: whitesmoke;
+    font-size: 16px;
+    width: 80px;
+    cursor: pointer;
+    border-radius: 8px;
+    height: 40px;
+    border: none;
+}
+
 img {
     width: 100%;
-
 }
 
 .split {
@@ -131,7 +141,7 @@ section {
     margin: 0 0 30px 0;
 }
 
-div > span {
+div>span {
     padding: 0 10px;
 }
 
@@ -167,7 +177,7 @@ i {
 }
 
 table {
-   margin: 10px 0; 
+    margin: 10px 0;
 }
 
 .buttongroup {
@@ -227,7 +237,7 @@ table {
 .datepicker {
     position: absolute;
     top: 200px;
-    left: 30px;                               
+    left: 30px;
     z-index: 1000;
     background-color: white;
     border: 1px solid #ccc;
@@ -235,7 +245,7 @@ table {
 }
 
 .graph1 {
-    margin-left: 20px ;
+    margin-left: 20px;
 }
 
 .graph2 {
@@ -249,7 +259,8 @@ table {
     align-items: center;
 }
 
-.date , .time {
+.date,
+.time {
     border: 1px solid rgba(232, 232, 232, 1);
     width: 100%;
     border-radius: 8px;
@@ -263,11 +274,40 @@ table {
     margin: 20px auto;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (min-width: 698px) {
+    .mobileBooking {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 698px) {
     .stickyspace {
         display: none;
     }
+
+    .mobileBooking {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: rgb(242, 242, 253);
+        border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 70px;
+    }
+
     .contextspace {
         width: 100%;
+    }
+
+    .page-content-bottom-space {
+        height: 70px;
     }
 }
