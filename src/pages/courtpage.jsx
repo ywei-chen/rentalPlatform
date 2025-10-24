@@ -11,6 +11,7 @@ import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase
 import { db, firebase } from "../components/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useBookingData } from "../components/bookingStore";
+import { AnimatePresence, motion } from 'motion/react';
 
 const Courtcounty = ({ item }) => {
     return (
@@ -81,6 +82,7 @@ export default function Courtpage() {
         const querySnapshot = await getDocs(bookingQuery);
         let isConflict = false;
 
+        //用時間與場地判斷是否衝突
         querySnapshot.forEach((doc) => {
             const existingBooking = doc.data();
             console.log('2', existingBooking);
@@ -275,33 +277,56 @@ export default function Courtpage() {
                         <div className="stickyblock">
                             <div className="priceselect">
                                 <div className="pricecontent">
-                                    <span className="topicfont">{pay}</span>
+                                    <motion.span
+                                        className="topicfont"
+                                        key={pay}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    >{pay}</motion.span>
                                     <small>/小時</small>
                                 </div>
                             </div>
                             <div className="inputselect">
                                 <label className="inputscope">
                                     <div className="inputcondition">
-                                        <span id="hourRent" style={buttonColor('pageHour')} onClick={() => {
+                                        <motion.span key='pageHour' id="hourRent" style={buttonColor('pageHour')} onClick={() => {
                                             setActivePage('pageHour');
                                             setPay(storeData.rent.hour);
                                             setBooking({ rentType: 'hour' });
-                                        }}>時租</span>
-                                        <span id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
+                                        }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                        >時租</motion.span>
+                                        <motion.span key='pageMonth' id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
                                             setActivePage('pageMonth');
                                             setPay(storeData.rent.months);
                                             setBooking({ rentType: 'month' });
-                                        }}>月租</span>
-                                        <span id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
+                                        }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                        >月租</motion.span>
+                                        <motion.span key='pageSeason' id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
                                             setActivePage('pageSeason');
                                             setPay(storeData.rent.season);
                                             setBooking({ rentType: 'season' });
-                                        }}>季租</span>
-                                        <span id="yearRent" style={buttonColor('pageYear')} onClick={() => {
+                                        }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                        >季租</motion.span>
+                                        <motion.span key='pageYear' id="yearRent" style={buttonColor('pageYear')} onClick={() => {
                                             setActivePage('pageYear');
                                             setPay(storeData.rent.year);
                                             setBooking({ rentType: 'year' });
-                                        }}>年租</span>
+                                        }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                        >年租</motion.span>
                                     </div>
                                 </label>
                             </div>
@@ -324,7 +349,7 @@ export default function Courtpage() {
             </div>
         </div>
         <Footer></Footer>
-         <div className="page-content-bottom-space"></div>
+        <div className="page-content-bottom-space"></div>
     </>)
 }
 
