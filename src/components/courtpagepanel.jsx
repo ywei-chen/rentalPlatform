@@ -27,8 +27,7 @@ export default function CourtPagePanel({
                     setPay={setPay}
                     handleBooking={handleBooking}
                     setBooking={setBooking}
-                    loading={loading}
-                    renderPage={renderPage} />
+                    loading={loading} />
             </div>
 
             {/* 手機版booking RWD */}
@@ -41,8 +40,7 @@ export default function CourtPagePanel({
                     setPay={setPay}
                     handleBooking={handleBooking}
                     setBooking={setBooking}
-                    loading={loading}
-                    renderPage={renderPage} />
+                    loading={loading} />
             </div>
         </>
     )

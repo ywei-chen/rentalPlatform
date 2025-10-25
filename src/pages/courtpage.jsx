@@ -11,7 +11,8 @@ import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase
 import { db, firebase } from "../components/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useBookingData } from "../components/bookingStore";
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
+import CourtPagePanel from "../components/courtpagepanel";
 
 const Courtcounty = ({ item }) => {
     return (
@@ -130,7 +131,7 @@ export default function Courtpage() {
 
     if (!storeData) return <div>載入中...</div>;
 
-    const renderPage = () => {
+    /*const renderPage = () => {
         switch (activePage) {
             case 'pageHour':
                 return (<>
@@ -153,7 +154,7 @@ export default function Courtpage() {
 
     const buttonColor = (page) => ({
         backgroundColor: activePage === page ? 'white' : '#e2e2e2'
-    })
+    })*/
 
     return (<>
         <div className='container-lg'>
@@ -272,7 +273,7 @@ export default function Courtpage() {
                         </div>
                     </section>
                 </div>
-                <div className="stickyspace">
+                {/*<div className="stickyspace">
                     <div className="stickyscope">
                         <div className="stickyblock">
                             <div className="priceselect">
@@ -318,7 +319,7 @@ export default function Courtpage() {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ type: "spring", stiffness: 100, damping: 8 }}
                                         >季租</motion.span>
-                                        <motion.span key='pageYear' id="yearRent" style={buttonColor('pageYear')} onClick={() => {
+                                        <motion.span key={activePage} id="yearRent" style={buttonColor('pageYear')} onClick={() => {
                                             setActivePage('pageYear');
                                             setPay(storeData.rent.year);
                                             setBooking({ rentType: 'year' });
@@ -336,7 +337,17 @@ export default function Courtpage() {
                             <button className="buttonselect" onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
                         </div>
                     </div>
-                </div>
+                </div>*/}
+                <CourtPagePanel
+                    storeData={storeData}
+                    activePage={activePage}
+                    setActivePage={setActivePage}
+                    pay={pay}
+                    setPay={setPay}
+                    handleBooking={handleBooking}
+                    setBooking={setBooking}
+                    loading={loading}
+                />
             </div>
         </div>
         <div className="mobileBooking">

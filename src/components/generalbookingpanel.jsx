@@ -1,5 +1,9 @@
 import { motion } from "motion/react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../ui/generalbookingpanel.module.css';
+import HourRent from "./hourrent";
+import MonthRent from "./monthrent";
+import SeasonRent from "./seasonrent";
+import YearRent from "./yearrent";
 
 // 四種租賃選單component
 export default function GeneralBookingPanel({
@@ -10,8 +14,7 @@ export default function GeneralBookingPanel({
     setPay,
     handleBooking,
     setBooking,
-    loading,
-    renderPage }) {
+    loading }) {
 
     //renderPage函式: 帶出租賃方式的component與既定的場地單價pay
     const renderPage = () => {
@@ -60,42 +63,27 @@ export default function GeneralBookingPanel({
                     <div className="inputselect">
                         <label className="inputscope">
                             <div className="inputcondition">
-                                <motion.span key='pageHour' id="hourRent" style={buttonColor('pageHour')} onClick={() => {
-                                    setActivePage('pageHour');
-                                    setPay(storeData.rent.hour);
-                                    setBooking({ rentType: 'hour' });
-                                }}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                >時租</motion.span>
-                                <motion.span key='pageMonth' id="monthRent" style={buttonColor('pageMonth')} onClick={() => {
-                                    setActivePage('pageMonth');
-                                    setPay(storeData.rent.months);
-                                    setBooking({ rentType: 'month' });
-                                }}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                >月租</motion.span>
-                                <motion.span key='pageSeason' id="seasonReant" style={buttonColor('pageSeason')} onClick={() => {
-                                    setActivePage('pageSeason');
-                                    setPay(storeData.rent.season);
-                                    setBooking({ rentType: 'season' });
-                                }}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                >季租</motion.span>
-                                <motion.span key='pageYear' id="yearRent" style={buttonColor('pageYear')} onClick={() => {
-                                    setActivePage('pageYear');
-                                    setPay(storeData.rent.year);
-                                    setBooking({ rentType: 'year' });
-                                }}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                >年租</motion.span>
+                                {['Hour', 'Month', 'Season', 'Year'].map((type) => {
+                                    return (<>
+                                        <motion.div
+                                            key={type}
+                                            id={type}
+                                            style={buttonColor(`page${type}`)}
+                                            onClick={() => {
+                                                setActivePage(`page${type}`);
+                                                setPay(storeData.rent[type]);
+                                                setBooking({ rentType: type });
+                                            }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                        >
+                                            {type === 'Hour' ? '時租' :
+                                                type === 'Month' ? '月租' :
+                                                    type === 'Season' ? '季租' : '年租'}
+                                        </motion.div>
+                                    </>)
+                                })}
                             </div>
                         </label>
                     </div>

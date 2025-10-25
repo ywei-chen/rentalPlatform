@@ -1,0 +1,79 @@
+.stickyspace {
+    width: 40%;
+}
+
+.stickyscope {
+    position: sticky;
+    text-align: center;
+    top: 50px;
+}
+
+.stickyblock {
+    box-shadow: 0 0 4px, 0 0 14px #0000001f;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.pricecontent {
+    text-align: start;
+    padding-bottom: 15px;
+}
+
+.inputscope {
+    width: 100%;
+}
+
+.inputselect {
+    padding: 15px 0;
+}
+
+.inputcondition {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #e2e2e2;
+    height: 50px;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.inputcondition>span {
+    width: 100%;
+    cursor: pointer;
+}
+
+.buttonselect {
+    background-color: rgb(59, 138, 175);
+    color: whitesmoke;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    height: 40px;
+    border: none;
+}
+
+#hourRent {
+    background-color: white;
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#monthRent {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#seasonReant {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
+
+#yearRent {
+    border-radius: 20px;
+    height: 80%;
+    line-height: 38px;
+}
