@@ -4,7 +4,7 @@ import MonthRent from './monthrent';
 import SeasonRent from './seasonrent';
 import YearRent from './yearrent';
 
-export default function ({ isOpen }) {
+export default function MobileBookingPanel({ isOpen }) {
     return (
         <AnimatePresence>
             {isOpen && (
