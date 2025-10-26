@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import '../ui/generalbookingpanel.module.css';
+import style from '../ui/generalbookingpanel.module.css';
 import HourRent from "./hourrent";
 import MonthRent from "./monthrent";
 import SeasonRent from "./seasonrent";
@@ -44,13 +44,13 @@ export default function GeneralBookingPanel({
     })
 
     return (<>
-        <div className="stickyspace">
-            <div className="stickyscope">
-                <div className="stickyblock">
-                    <div className="priceselect">
-                        <div className="pricecontent">
+        <div className={style.stickyspace}>
+            <div className={style.stickyscope}>
+                <div className={style.stickyblock}>
+                    <div className={style.priceselect}>
+                        <div className={style.pricecontent}>
                             <motion.span
-                                className="topicfont"
+                                className={style.topicfont}
                                 key={pay}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -60,9 +60,9 @@ export default function GeneralBookingPanel({
                             <small>/小時</small>
                         </div>
                     </div>
-                    <div className="inputselect">
-                        <label className="inputscope">
-                            <div className="inputcondition">
+                    <div className={style.inputselect}>
+                        <label className={style.inputscope}>
+                            <div className={style.inputcondition}>
                                 {['Hour', 'Month', 'Season', 'Year'].map((type) => {
                                     return (<>
                                         <motion.div
@@ -87,10 +87,10 @@ export default function GeneralBookingPanel({
                             </div>
                         </label>
                     </div>
-                    <div className="renderblock">
+                    <div className={style.renderblock}>
                         {renderPage()}
                     </div>
-                    <button className="buttonselect" onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
+                    <button className={style.buttonselect} onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
                 </div>
             </div>
         </div>

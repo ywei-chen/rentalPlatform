@@ -1,17 +1,12 @@
-import "../ui/courtpage.css";
+import style from "../ui/courtpage.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from "../components/footer";
-import HourRent from "../components/hourrent";
-import MonthRent from "../components/monthrent";
-import SeasonRent from "../components/seasonrent";
-import YearRent from "../components/yearrent";
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db, firebase } from "../components/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useBookingData } from "../components/bookingStore";
-import { motion } from 'motion/react';
 import CourtPagePanel from "../components/courtpagepanel";
 
 const Courtcounty = ({ item }) => {
@@ -158,25 +153,25 @@ export default function Courtpage() {
 
     return (<>
         <div className='container-lg'>
-            <div className='pictureoutline'>
-                <div className="pic-1">
+            <div className={style.pictureoutline}>
+                <div className={style['pic-1']}>
                     <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-1.jpg' alt=''></img>
                 </div>
-                <div className="pic-2">
+                <div className={style['pic-2']}>
                     <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-2.jpg' alt=''></img>
                 </div>
-                <div className="pic-3">
+                <div className={style['pic-3']}>
                     <img src='https://raw.githubusercontent.com/ywei-chen/siteFalicyCRADemo/refs/heads/main/src/assets/court-3.jpg' alt=''></img>
                 </div>
             </div>
         </div>
         <div className='container-lg'>
-            <div className="contentsplit">
-                <div className='contextspace'>
-                    <section className='storenameaddress'>
+            <div className={style.contentsplit}>
+                <div className={style.contextspace}>
+                    <section className={style.torenameaddress}>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">{storeData.storename}</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>{storeData.storename}</div>
                             </div>
                             <table className="table table-striped">
                                 <tbody>
@@ -196,7 +191,7 @@ export default function Courtpage() {
                             </iframe>
                         </div>
                     </section>
-                    <section className='space&picture'>
+                    <section className={style['space-picture']}>
                         <div>
                             <div className="topicgraph">
                                 <div className="topicfont">空間介紹</div>
@@ -210,7 +205,7 @@ export default function Courtpage() {
                             </table>
                         </div>
                     </section>
-                    <section className='hourtime'>
+                    <section className={style.hourtime}>
                         <div>
                             <div className="topicgraph">
                                 <div className="topicfont">開放時段</div>
@@ -227,7 +222,7 @@ export default function Courtpage() {
                             </table>
                         </div>
                     </section>
-                    <section className='provideditem'>
+                    <section className={style.provideditem}>
                         <div>
                             <div className="topicgraph">
                                 <div className="topicfont">提供服務</div>
@@ -257,11 +252,11 @@ export default function Courtpage() {
                             </ul>
                         </div>
                     </section>
-                    <div className="split"></div>
+                    <div className={style.split}></div>
                     <section>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">禁止事項</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>禁止事項</div>
                             </div>
                             <ul className="mt-2">
                                 <li>禁止攜帶寵物入內（導盲犬則不在此限)</li>
@@ -360,7 +355,7 @@ export default function Courtpage() {
             </div>
         </div>
         <Footer></Footer>
-        <div className="page-content-bottom-space"></div>
+        <div className={style['page-content-bottom-space']}></div>
     </>)
 }
 
