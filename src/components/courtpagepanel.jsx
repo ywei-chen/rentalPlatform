@@ -1,6 +1,6 @@
 import GeneralBookingPanel from "./generalBookingPanel";
 import MobileBookingPanel from "./mobilebookingpanel";
-import '../ui/courtpagepanel.module.css';
+import style from '../ui/courtpagepanel.module.css';
 
 
 //CourtPagePanel用來判斷哪一種courtpage的預訂小視窗的RWD
@@ -18,7 +18,7 @@ export default function CourtPagePanel({
     return (
         <>
             {/* 桌機版booking RWD */}
-            <div className="booking-panel-desktop">
+            <div className={style['booking-panel-desktop']}>
                 <GeneralBookingPanel
                     storeData={storeData}
                     activePage={activePage}
@@ -31,7 +31,7 @@ export default function CourtPagePanel({
             </div>
 
             {/* 手機版booking RWD */}
-            <div className="booking-panel-mobile">
+            <div className={style['booking-panel-mobile']}>
                 <MobileBookingPanel
                     storeData={storeData}
                     activePage={activePage}
@@ -44,5 +44,4 @@ export default function CourtPagePanel({
             </div>
         </>
     )
-
 }

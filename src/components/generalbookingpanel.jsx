@@ -44,7 +44,6 @@ export default function GeneralBookingPanel({
     })
 
     return (<>
-        <div className={style.stickyspace}>
             <div className={style.stickyscope}>
                 <div className={style.stickyblock}>
                     <div className={style.priceselect}>
@@ -93,7 +92,6 @@ export default function GeneralBookingPanel({
                     <button className={style.buttonselect} onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
                 </div>
             </div>
-        </div>
     </>)
 
 
