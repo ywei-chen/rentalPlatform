@@ -13,7 +13,6 @@ export default function CourtPagePanel({
     handleBooking,
     setBooking,
     loading,
-    renderPage
 }) {
     return (
         <>

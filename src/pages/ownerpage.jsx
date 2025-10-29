@@ -24,12 +24,12 @@ const MoneySetting = ({ setMoney }) => {
                 <label htmlFor="floatinghour">時租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
-                <input type='text' className="form-control" id="floatingmonths" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatingmonth" placeholder="money" onChange={
                     (e) => {
-                        handleChange('months', e.target.value);
+                        handleChange('month', e.target.value);
                     }
                 } />
-                <label htmlFor="floatingmonths">月租 ex: 300</label>
+                <label htmlFor="floatingmonth">月租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
                 <input type='text' className="form-control" id="floatingseason" placeholder="money" onChange={
@@ -166,7 +166,7 @@ const AddrSet = ({ county, setCounty, town, setTown, countynamelist, countycodel
                         setAddr(e.target.value);
                     }
                 } />
-                <label htmlFor="floatingmonths">鼎中路726號4樓</label>
+                <label htmlFor="floatingmonth">鼎中路726號4樓</label>
             </div>
         </div>
     )
@@ -195,7 +195,7 @@ export default function Ownerpage() {
     ]);
     const [money, setMoney] = useState({
         hour: 0,
-        months: 0,
+        month: 0,
         season: 0,
         year: 0
     });
@@ -326,10 +326,10 @@ export default function Ownerpage() {
         <div className="split"></div>
         <div className="booking">
             {bookings.map(booking => (
-                booking.bookingCourt.map((date, index) => (
+                booking.bookingDate.map((date, index) => (
                     <div className="bookblock" key={`${booking.id}-${index}`}>
                         <div className="storename me-2">{usersMap[booking.userID] || '未知商家'}</div>
-                        <div className="bookdate me-2">預約日期：{date}</div>
+                        <div className="bookdate me-2">預約日期：{booking.bookingDate[index]}</div>
                         <div className="bookstarttime">{`預約時間：${booking.bookingStartTime}:00 - ${booking.bookingEndTime}:00`}</div>
                         <div className="bookcourt">{`預約場地: ${booking.bookingCourt}`}</div>
                         <div className="text-end">

@@ -1,0 +1,31 @@
+.datepicker {
+    position: absolute;
+    top: 200px;
+    left: 80px;
+    z-index: 1000;
+}
+
+.dateselect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.dailyslesct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+}
+
+.date,
+.time,
+.dropdownbasic {
+    width: 100%;
+}
+
+.payCount {
+    margin: 20px 0px;
+}

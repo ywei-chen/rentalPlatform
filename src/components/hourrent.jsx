@@ -1,4 +1,4 @@
-import "../ui/ownerpage.css";
+import style from '../ui/selecttype.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useRef, useEffect } from 'react';
@@ -72,9 +72,9 @@ export default function HourRent({ pay }) {
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
             >
-                <div className="hourselect" ref={dropdownRef}>
+                <div className={style.hourselect} ref={dropdownRef}>
                     {showPicker && (
-                        <div className="datepicker">
+                        <div className={style.datepicker}>
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={(date) => {
@@ -86,7 +86,7 @@ export default function HourRent({ pay }) {
                             />
                         </div>
                     )}
-                    <div className="dateselect" onClick={() => setShowPicker((prev) => !prev)}>
+                    <div className={style.dateselect} onClick={() => setShowPicker((prev) => !prev)}>
                         <div className="graph1">
                             <i className="fa-regular fa-calendar-days fa-lg"></i>
                         </div>
@@ -96,15 +96,15 @@ export default function HourRent({ pay }) {
                             <i className={showPicker ? 'fa-regular fa-square-caret-up fa-lg' : 'fa-regular fa-square-caret-down fa-lg'}></i>
                         </div>
                     </div>
-                    <div className="dailyslesct">
-                        <div className="date">
+                    <div className={style.dailyslesct}>
+                        <div className={style.date}>
                             <Dropdown onSelect={(hour) => {
                                 const selected = Number(hour);
                                 setStartTime(selected);
                                 setEndTime(null);
                                 setBooking({ bookingStartTime: selected, bookingEndTime: null });
                             }}>
-                                <Dropdown.Toggle variant="" id="dropdown-basic">
+                                <Dropdown.Toggle variant="" className={style.dropdownbasic}>
                                     {startTime === null ? '開始時間' : `${startTime}:00`}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -116,13 +116,13 @@ export default function HourRent({ pay }) {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
-                        <div className="time">
+                        <div className={style.time}>
                             <Dropdown onSelect={(hour) => {
                                 const selected = Number(hour);
                                 setEndTime(selected);
                                 setBooking({ bookingEndTime: selected });
                             }}>
-                                <Dropdown.Toggle variant="" id="dropdown-basic">
+                                <Dropdown.Toggle variant="" className={style.dropdownbasic}>
                                     {endTime === null ? '結束時間' : `${endTime}:00`}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -136,7 +136,7 @@ export default function HourRent({ pay }) {
                         </div>
                     </div>
                     {isTimeSelected && (
-                        <div className="row me-3 mt-2">
+                        <div className="row me-3 mt-2 pb-3">
                             {totalCourt.map((item, index) => (
                                 <CourtcountyButton
                                     item={item}
@@ -148,7 +148,7 @@ export default function HourRent({ pay }) {
                         </div>
                     )}
                     {bookingCourt.length > 0 && (
-                        <div className="payCount">
+                        <div className={style.payCount}>
                             <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地`}</h5>
                             <div className="split" />
                             <h5>{`金額總計: ${totalPrice} 元`}</h5>

@@ -80,19 +80,21 @@ export default function Userpage() {
       <h6>Hi, {profile.userName} 歡迎回來，您的預約資訊如下:</h6>
     </div>
     <div className="split"></div>
-    {bookings.map(booking => (
-      booking.bookingCourt.map((date, index) => (
+    {bookings.map(booking => {
+      console.log(booking);
+      return booking.bookingDate.map((date, index) => (
         <div className="bookingblock" key={`${booking.id}-${index}`}>
           <div className="storename me-2">{storesMap[booking.StoreID] || '未知商家'}</div>
-          <div className="bookdate me-2">預約日期：{booking.bookingDate}</div>
+          <div className="bookdate me-2">預約日期：{booking.bookingDate[index]}</div>
           <div className="bookstarttime">{`預約時間：${booking.bookingStartTime}:00 - ${booking.bookingEndTime}:00`}</div>
           <div className="bookcourt">{`預約場地: ${booking.bookingCourt}`}</div>
           <div className="text-end">
             <button className="buttonend" onClick={() => handleCancel(booking.id, date)}>取消預約</button>
+            
           </div>
         </div>
       ))
-    ))}
+})}
   </>
 
   );

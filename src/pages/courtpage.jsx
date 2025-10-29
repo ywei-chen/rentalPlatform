@@ -345,15 +345,6 @@ export default function Courtpage() {
                 />
             </div>
         </div>
-        <div className="mobileBooking">
-            <div>
-                <span className="topicfont">{pay}</span>
-                <small>/小時</small>
-            </div>
-            <div>
-                <button className="buttonMobile">預訂</button>
-            </div>
-        </div>
         <Footer></Footer>
         <div className={style['page-content-bottom-space']}></div>
     </>)

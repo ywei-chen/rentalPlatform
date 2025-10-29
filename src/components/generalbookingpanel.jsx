@@ -66,17 +66,18 @@ export default function GeneralBookingPanel({
                                     return (<>
                                         <motion.div
                                             key={type}
-                                            id={type}
+                                            className={style.typeselect}
                                             style={buttonColor(`page${type}`)}
                                             onClick={() => {
                                                 setActivePage(`page${type}`);
-                                                setPay(storeData.rent[type]);
+                                                setPay(storeData.rent[type.toLowerCase()]);
                                                 setBooking({ rentType: type });
                                             }}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ type: "spring", stiffness: 100, damping: 8 }}
                                         >
+                                            {console.log(storeData)}
                                             {type === 'Hour' ? '時租' :
                                                 type === 'Month' ? '月租' :
                                                     type === 'Season' ? '季租' : '年租'}
@@ -93,8 +94,4 @@ export default function GeneralBookingPanel({
                 </div>
             </div>
     </>)
-
-
-
-
 }
