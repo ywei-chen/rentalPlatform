@@ -142,7 +142,7 @@ import Footer from '../components/footer';
   
       //newsAPI
       (async () => {
-        const apiKey = '19cb610cdf2543e1ba62ed2c77363b07';
+        const apiKey = import.meta.env.VITE_NEWS_API_KEY;
         const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
         try {
           const res = await axios.get(`${newsUrl}&from=2025-09-25&sortBy=relevancy&apiKey=${apiKey}`);
