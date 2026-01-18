@@ -1,12 +1,38 @@
-# React + Vite
+# 羽球場地租借平台(修改中)
+- 自動化羽球場地租借系統，提供使用者與店家雙角色功能
+- 實作完整預約流程：選擇場地 → 選擇時段 → 確認預約
+- 支援多種租賃方案：時租、月租、季租、年租
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 技術棧
 
-Currently, two official plugins are available:
+### Front-end
+- React.js
+- Vite
+- React Router DOM
+- Zustand (狀態管理)
+- Framer Motion (動畫)
+- Bootstrap
+- CSS Modules
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Back-end
+- Firebase Authentication
+- Cloud Firestore
 
-## Expanding the ESLint configuration
+### 外部 API
+- Google Maps Embed API
+- NewsAPI
+- 內政部國土測繪中心 API (縣市鄉鎮)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 功能
+
+### 使用者
+- 註冊 / 登入
+- 瀏覽場地資訊
+- 預約場地
+- 查看預約紀錄
+
+### 店家
+- 註冊 / 登入
+- 設定場地租金
+- 設定營業時間
+- 管理預約 (取消預約)
