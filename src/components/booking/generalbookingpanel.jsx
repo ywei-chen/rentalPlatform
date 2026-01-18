@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import style from '../ui/generalbookingpanel.module.css';
-import HourRent from "./hourrent";
-import MonthRent from "./monthrent";
-import SeasonRent from "./seasonrent";
-import YearRent from "./yearrent";
+import style from '../../ui/generalbookingpanel.module.css';
+import HourRent from "./rentTypes/hourrent";
+import MonthRent from "./rentTypes/monthrent";
+import SeasonRent from "./rentTypes/seasonrent";
+import YearRent from "./rentTypes/yearrent";
 
 // 四種租賃選單component
 export default function GeneralBookingPanel({
@@ -16,7 +17,7 @@ export default function GeneralBookingPanel({
     setBooking,
     loading }) {
 
-    //renderPage函式: 帶出租賃方式的component與既定的場地單價pay
+    // 帶出租賃方式的component與既定的場地單價pay
     const renderPage = () => {
         switch (activePage) {
             case 'pageHour':
@@ -38,7 +39,7 @@ export default function GeneralBookingPanel({
         }
     }
 
-    //buttonColor物件: render選定的選單顏色並套用css
+    // render選定的選單顏色並套用css
     const buttonColor = (page) => ({
         backgroundColor: activePage === page ? 'white' : '#e2e2e2'
     })
@@ -62,28 +63,25 @@ export default function GeneralBookingPanel({
                     <div className={style.inputselect}>
                         <label className={style.inputscope}>
                             <div className={style.inputcondition}>
-                                {['Hour', 'Month', 'Season', 'Year'].map((type) => {
-                                    return (<>
-                                        <motion.div
-                                            key={type}
-                                            className={style.typeselect}
-                                            style={buttonColor(`page${type}`)}
-                                            onClick={() => {
-                                                setActivePage(`page${type}`);
-                                                setPay(storeData.rent[type.toLowerCase()]);
-                                                setBooking({ rentType: type });
-                                            }}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                        >
-                                            {console.log(storeData)}
-                                            {type === 'Hour' ? '時租' :
-                                                type === 'Month' ? '月租' :
-                                                    type === 'Season' ? '季租' : '年租'}
-                                        </motion.div>
-                                    </>)
-                                })}
+                                {['Hour', 'Month', 'Season', 'Year'].map((type) => (
+                                    <motion.div
+                                        key={type}
+                                        className={style.typeselect}
+                                        style={buttonColor(`page${type}`)}
+                                        onClick={() => {
+                                            setActivePage(`page${type}`);
+                                            setPay(storeData.rent[type.toLowerCase()]);
+                                            setBooking({ rentType: type });
+                                        }}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                    >
+                                        {type === 'Hour' ? '時租' :
+                                            type === 'Month' ? '月租' :
+                                                type === 'Season' ? '季租' : '年租'}
+                                    </motion.div>
+                                ))}
                             </div>
                         </label>
                     </div>

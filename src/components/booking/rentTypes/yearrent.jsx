@@ -1,12 +1,13 @@
-import style from '../ui/selecttype.module.css';
+import style from '../../../ui/selecttype.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { addDays } from "date-fns";
 import { Dropdown } from 'react-bootstrap';
-import { useBookingData } from "./bookingStore";
+import { useBookingData } from "../../bookingStore";
 import { format } from "date-fns";
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 
 const CourtcountyButton = ({ item, isSelected, onClick }) => {
@@ -27,13 +28,11 @@ const CourtcountyButton = ({ item, isSelected, onClick }) => {
     )
 }
 
-
-
-export default function MonthRent({ pay }) {
+export default function YearRent({ pay }) {
     const initialDate = new Date();
     initialDate.setHours(0, 0, 0, 0);
-    const totalDays = 28;
-    const totalTimes = 5;
+    const totalDays = 336;
+    const totalTimes = 49;
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const [showPicker, setShowPicker] = useState(false);
@@ -67,7 +66,7 @@ export default function MonthRent({ pay }) {
     }, []);
 
     useEffect(() => {
-        setBooking({ rentType: 'month' });
+        setBooking({ rentType: 'year' });
     }, [setBooking]);
 
     useEffect(() => {
@@ -87,7 +86,7 @@ export default function MonthRent({ pay }) {
     return (
         <AnimatePresence>
             <motion.div
-                key='monthrent'
+                key='yearrent'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
@@ -178,7 +177,7 @@ export default function MonthRent({ pay }) {
                     )}
                     {bookingCourt.length > 0 && (
                         <div className={style.payCount}>
-                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 5次`}</h5>
+                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 49次`}</h5>
                             <div className="split" />
                             <h5>{`金額總計: ${totalPrice * totalTimes} 元`}</h5>
                         </div>

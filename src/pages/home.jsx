@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../components/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-import Footer from '../components/footer';
+import Footer from '../components/common/footer';
 
   //HotRank
   const HotRank = ({ img1, img2, img3, img4, img5, img6, key , court }) => {
@@ -119,9 +119,7 @@ import Footer from '../components/footer';
         if (!querySnapshot.empty) {
           const data = querySnapshot.docs[0].id;
           setCourt(data);
-          console.log(data);
         }
-        console.log(courtsRef);
       })();
     }, []);
 
@@ -134,7 +132,6 @@ import Footer from '../components/footer';
           dataAPI.forEach((item, i) => {
             item.id = i + 1;
           });
-          console.log(dataAPI);
         } catch (error) {
           console.log(error);
         }
@@ -145,13 +142,12 @@ import Footer from '../components/footer';
         const apiKey = import.meta.env.VITE_NEWS_API_KEY;
         const newsUrl = "https://newsapi.org/v2/everything?q='羽毛球'";
         try {
-          const res = await axios.get(`${newsUrl}&from=2025-09-25&sortBy=relevancy&apiKey=${apiKey}`);
+          const res = await axios.get(`${newsUrl}&from=2026-01-01&sortBy=relevancy&apiKey=${apiKey}`);
           const newArr = [...res.data.articles];
           newArr.forEach((item, i) => {
             item.id = i + 1;
           })
           setNewsAPI(newArr.filter((item) => item.id <= 5));
-          console.log(newsAPI);
         } catch (error) {
           console.log(error);
         }
@@ -161,13 +157,11 @@ import Footer from '../components/footer';
       RankList.forEach((item, i) => {
         item.id = i + 1;
       })
-      console.log(RankList);
   
       //初始化Toplist Key值
       TopList.forEach((item, i) => {
         item.id = i + 1;
       })
-      console.log(TopList);
        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

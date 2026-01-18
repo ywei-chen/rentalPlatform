@@ -37,11 +37,11 @@ export default function Userregister() {
     }
 
     const showLoginError = (e) => {
-        if(e.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS){
+        if(e.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS){
             setModalContent("帳號密碼錯誤，請重新輸入");
             myModal.show();
         }
-        else if(e.code == AuthErrorCodes.EMAIL_EXISTS){
+        else if(e.code === AuthErrorCodes.EMAIL_EXISTS){
             setModalContent("帳號已註冊，請重新輸入");
             myModal.show();
         }
@@ -52,7 +52,7 @@ export default function Userregister() {
     }
 
     const onSubmit = () => {
-        if (handler == 1){
+        if (handler === 1){
             const auth = getAuth(firebase);
             signInWithEmailAndPassword(auth, email, password)
             .then(async(userCredential) => {

@@ -1,5 +1,5 @@
 import "../ui/ownerpage.css";
-import Footer from "../components/footer";
+import Footer from "../components/common/footer";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 import { useParams } from "react-router-dom";
@@ -287,6 +287,7 @@ export default function Ownerpage() {
             }
         } catch (error) {
             alert('取消失敗');
+            console.log(error);
         }
     }
 

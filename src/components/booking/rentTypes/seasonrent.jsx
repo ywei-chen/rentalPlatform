@@ -1,11 +1,13 @@
-import style from '../ui/selecttype.module.css';
+import style from '../../../ui/selecttype.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { addDays } from "date-fns";
 import { Dropdown } from 'react-bootstrap';
-import { useBookingData } from "./bookingStore";
+import { useBookingData } from "../../bookingStore";
 import { format } from "date-fns";
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 
 const CourtcountyButton = ({ item, isSelected, onClick }) => {
@@ -26,22 +28,32 @@ const CourtcountyButton = ({ item, isSelected, onClick }) => {
     )
 }
 
-
-
-export default function HourRent({ pay }) {
+export default function SeasonRent({ pay }) {
+    const initialDate = new Date();
+    initialDate.setHours(0, 0, 0, 0);
+    const totalDays = 84;
+    const totalTimes = 13;
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const [showPicker, setShowPicker] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(initialDate);
+    const [endDate, setEndDate] = useState(addDays(selectedDate, totalDays));
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const dropdownRef = useRef(null);
-    const { setBooking, bookingCourt, totalCourt, toggleBookingCourt } = useBookingData();
+    const { setBooking, bookingCourt, totalCourt, bookingDate, toggleBookingCourt } = useBookingData();
 
     const isTimeSelected = (startTime !== null && endTime !== null);
     const totalHours = endTime && startTime ? (endTime - startTime) : 0;
     const totalPrice = bookingCourt.length > 0 && totalHours > 0 ? (totalHours * pay * bookingCourt.length) : 0;
     const endTimeOption = opentime.filter(hour => startTime === null || hour > Number(startTime));
+
+    const handleStartDateChange = (date) => {
+        const calculatedEnd = addDays(date, totalDays);
+        setSelectedDate(date);
+        setEndDate(calculatedEnd);
+        setShowPicker(false);
+    }
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -54,19 +66,27 @@ export default function HourRent({ pay }) {
     }, []);
 
     useEffect(() => {
+        setBooking({ rentType: 'season' });
+    }, [setBooking]);
+
+    useEffect(() => {
         if (totalPrice > 0) {
             setBooking({ totalPrice });
         }
-    }, [totalPrice]);
+    }, [totalPrice, setBooking]);
 
     useEffect(() => {
-        setBooking({ bookingDate: format(selectedDate, 'yyyy-MM-dd') });
-    }, []);
+        let generatedDates = [];
+        for (let i = 0; i < totalTimes; i++) {
+            generatedDates.push(addDays(selectedDate, i * 7));
+        }
+        setBooking({ bookingDate: generatedDates.map(d => format(d, 'yyyy-MM-dd')) });
+    }, [selectedDate, setBooking]);
 
     return (
         <AnimatePresence>
             <motion.div
-                key='hourrent'
+                key='seasonrent'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
@@ -77,11 +97,7 @@ export default function HourRent({ pay }) {
                         <div className={style.datepicker}>
                             <DatePicker
                                 selected={selectedDate}
-                                onChange={(date) => {
-                                    setSelectedDate(date);
-                                    setShowPicker(false);
-                                    setBooking({ bookingDate: format(date, 'yyyy-MM-dd') });
-                                }}
+                                onChange={handleStartDateChange}
                                 inline
                             />
                         </div>
@@ -135,6 +151,18 @@ export default function HourRent({ pay }) {
                             </Dropdown>
                         </div>
                     </div>
+                    {endDate && isTimeSelected && (
+                        <div className={style.dateselect}>
+                            <div className="graph1">
+                                <i className="fa-regular fa-calendar-days fa-lg"></i>
+                            </div>
+                            <span>{endDate.toLocaleDateString()}</span>
+                            <span>{weekDays[endDate.getDay()]}</span>
+                            <div className="graph2">
+                                <i className="fa-regular fa-calendar-check fa-lg"></i>
+                            </div>
+                        </div>
+                    )}
                     {isTimeSelected && (
                         <div className="row me-3 mt-2 pb-3">
                             {totalCourt.map((item, index) => (
@@ -149,9 +177,9 @@ export default function HourRent({ pay }) {
                     )}
                     {bookingCourt.length > 0 && (
                         <div className={style.payCount}>
-                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地`}</h5>
+                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 13次`}</h5>
                             <div className="split" />
-                            <h5>{`金額總計: ${totalPrice} 元`}</h5>
+                            <h5>{`金額總計: ${totalPrice * totalTimes} 元`}</h5>
                         </div>
                     )}
                 </div>

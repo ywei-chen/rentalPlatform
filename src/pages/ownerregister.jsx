@@ -25,12 +25,12 @@ const MoneySetting = ({setMoney}) => {
                 <label htmlFor="floatinghour">時租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
-                <input type='text' className="form-control" id="floatingmonths" placeholder="money" onChange={
+                <input type='text' className="form-control" id="floatingmonth" placeholder="money" onChange={
                     (e) => {
-                        handleChange('months', e.target.value);
+                        handleChange('month', e.target.value);
                     }
                 } />
-                <label htmlFor="floatingmonths">月租 ex: 300</label>
+                <label htmlFor="floatingmonth">月租 ex: 300</label>
             </div>
             <div className='form-floating mb-2'>
                 <input type='text' className="form-control" id="floatingseason" placeholder="money" onChange={
@@ -207,7 +207,7 @@ export default function Ownerregister() {
     const [countycodelist , setCountycodelist] = useState([]);
     const [money, setMoney] = useState({
         hour: 0,
-        months: 0,
+        month: 0,
         season: 0,
         year: 0
     });

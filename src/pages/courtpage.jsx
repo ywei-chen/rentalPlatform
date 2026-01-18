@@ -1,13 +1,13 @@
 import style from "../ui/courtpage.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from "../components/footer";
+import Footer from "../components/common/footer";
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db, firebase } from "../components/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useBookingData } from "../components/bookingStore";
-import CourtPagePanel from "../components/courtpagepanel";
+import CourtPagePanel from "../components/booking/courtpagepanel";
 
 const Courtcounty = ({ item }) => {
     return (
@@ -118,6 +118,7 @@ export default function Courtpage() {
             alert('預約成功');
         } catch (error) {
             alert('預約失敗');
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -193,8 +194,8 @@ export default function Courtpage() {
                     </section>
                     <section className={style['space-picture']}>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">空間介紹</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>空間介紹</div>
                             </div>
                             <table className="table table-striped">
                                 <tbody>
@@ -207,8 +208,8 @@ export default function Courtpage() {
                     </section>
                     <section className={style.hourtime}>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">開放時段</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>開放時段</div>
                             </div>
                             <table className="table table-striped">
                                 <tbody>
@@ -224,8 +225,8 @@ export default function Courtpage() {
                     </section>
                     <section className={style.provideditem}>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">提供服務</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>提供服務</div>
                             </div>
                             <table className="table table-striped-columns">
                                 <tbody>
@@ -242,8 +243,8 @@ export default function Courtpage() {
                     </section>
                     <section>
                         <div>
-                            <div className="topicgraph">
-                                <div className="topicfont">使用規範</div>
+                            <div className={style.topicgraph}>
+                                <div className={style.topicfont}>使用規範</div>
                             </div>
                             <ul className="mt-2">
                                 <li>遵守大樓規範，公共區域應保持輕聲細語，請勿大聲喧嘩。</li>

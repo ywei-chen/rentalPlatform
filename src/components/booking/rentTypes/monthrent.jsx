@@ -1,12 +1,13 @@
-import style from '../ui/selecttype.module.css';
+import style from '../../../ui/selecttype.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { addDays } from "date-fns";
 import { Dropdown } from 'react-bootstrap';
-import { useBookingData } from "./bookingStore";
+import { useBookingData } from "../../bookingStore";
 import { format } from "date-fns";
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 
 const CourtcountyButton = ({ item, isSelected, onClick }) => {
@@ -27,11 +28,13 @@ const CourtcountyButton = ({ item, isSelected, onClick }) => {
     )
 }
 
-export default function SeasonRent({ pay }) {
+
+
+export default function MonthRent({ pay }) {
     const initialDate = new Date();
     initialDate.setHours(0, 0, 0, 0);
-    const totalDays = 84;
-    const totalTimes = 13;
+    const totalDays = 28;
+    const totalTimes = 5;
     const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
     const opentime = Array.from({ length: 13 }, (_, i) => i + 10);
     const [showPicker, setShowPicker] = useState(false);
@@ -65,7 +68,7 @@ export default function SeasonRent({ pay }) {
     }, []);
 
     useEffect(() => {
-        setBooking({ rentType: 'season' });
+        setBooking({ rentType: 'month' });
     }, [setBooking]);
 
     useEffect(() => {
@@ -85,13 +88,13 @@ export default function SeasonRent({ pay }) {
     return (
         <AnimatePresence>
             <motion.div
-                key='seasonrent'
+                key='monthrent'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
             >
-                <div lassName={style.hourselect} ref={dropdownRef}>
+                <div className={style.hourselect} ref={dropdownRef}>
                     {showPicker && (
                         <div className={style.datepicker}>
                             <DatePicker
@@ -176,7 +179,7 @@ export default function SeasonRent({ pay }) {
                     )}
                     {bookingCourt.length > 0 && (
                         <div className={style.payCount}>
-                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 13次`}</h5>
+                            <h5>{`$${pay} x ${totalHours} 小時 x ${bookingCourt.length} 個場地 x 5次`}</h5>
                             <div className="split" />
                             <h5>{`金額總計: ${totalPrice * totalTimes} 元`}</h5>
                         </div>
