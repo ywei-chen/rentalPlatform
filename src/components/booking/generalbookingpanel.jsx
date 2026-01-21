@@ -15,27 +15,20 @@ export default function GeneralBookingPanel({
     setPay,
     handleBooking,
     setBooking,
-    loading }) {
+    loading
+}) {
 
     // 帶出租賃方式的component與既定的場地單價pay
     const renderPage = () => {
         switch (activePage) {
             case 'pageHour':
-                return (<>
-                    <HourRent pay={pay}></HourRent>
-                </>)
+                return <HourRent pay={pay} />
             case 'pageMonth':
-                return (<>
-                    <MonthRent pay={pay}></MonthRent>
-                </>)
+                return <MonthRent pay={pay} />
             case 'pageSeason':
-                return (<>
-                    <SeasonRent pay={pay}></SeasonRent>
-                </>)
+                return <SeasonRent pay={pay} />
             case 'pageYear':
-                return (<>
-                    <YearRent pay={pay}></YearRent>
-                </>)
+                return <YearRent pay={pay} />
         }
     }
 
@@ -45,51 +38,51 @@ export default function GeneralBookingPanel({
     })
 
     return (<>
-            <div className={style.stickyscope}>
-                <div className={style.stickyblock}>
-                    <div className={style.priceselect}>
-                        <div className={style.pricecontent}>
-                            <motion.span
-                                className={style.topicfont}
-                                key={pay}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                            >{pay}</motion.span>
-                            <small>/小時</small>
-                        </div>
+        <div className={style.stickyscope}>
+            <div className={style.stickyblock}>
+                <div className={style.priceselect}>
+                    <div className={style.pricecontent}>
+                        <motion.span
+                            className={style.topicfont}
+                            key={pay}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >{pay}</motion.span>
+                        <small>/小時</small>
                     </div>
-                    <div className={style.inputselect}>
-                        <label className={style.inputscope}>
-                            <div className={style.inputcondition}>
-                                {['Hour', 'Month', 'Season', 'Year'].map((type) => (
-                                    <motion.div
-                                        key={type}
-                                        className={style.typeselect}
-                                        style={buttonColor(`page${type}`)}
-                                        onClick={() => {
-                                            setActivePage(`page${type}`);
-                                            setPay(storeData.rent[type.toLowerCase()]);
-                                            setBooking({ rentType: type });
-                                        }}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ type: "spring", stiffness: 100, damping: 8 }}
-                                    >
-                                        {type === 'Hour' ? '時租' :
-                                            type === 'Month' ? '月租' :
-                                                type === 'Season' ? '季租' : '年租'}
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </label>
-                    </div>
-                    <div className={style.renderblock}>
-                        {renderPage()}
-                    </div>
-                    <button className={style.buttonselect} onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
                 </div>
+                <div className={style.inputselect}>
+                    <label className={style.inputscope}>
+                        <div className={style.inputcondition}>
+                            {['Hour', 'Month', 'Season', 'Year'].map((type) => (
+                                <motion.div
+                                    key={type}
+                                    className={style.typeselect}
+                                    style={buttonColor(`page${type}`)}
+                                    onClick={() => {
+                                        setActivePage(`page${type}`);
+                                        setPay(storeData.rent[type.toLowerCase()]);
+                                        setBooking({ rentType: type });
+                                    }}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ type: "spring", stiffness: 100, damping: 8 }}
+                                >
+                                    {type === 'Hour' ? '時租' :
+                                        type === 'Month' ? '月租' :
+                                            type === 'Season' ? '季租' : '年租'}
+                                </motion.div>
+                            ))}
+                        </div>
+                    </label>
+                </div>
+                <div className={style.renderblock}>
+                    {renderPage()}
+                </div>
+                <button className={style.buttonselect} onClick={handleBooking}> {loading ? '預約中...' : '預訂'}</button>
             </div>
+        </div>
     </>)
 }
